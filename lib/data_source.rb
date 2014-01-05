@@ -20,7 +20,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
       conference_item = Nanoc3::Item.new(
         conference.acronym,
         { :title => conference.title },
-        "/browse/#{conference.webgen_location}/",
+        "/folder/#{conference.webgen_location}/",
         binary: false
       )
       items << conference_item
@@ -29,7 +29,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
         event_item = Nanoc3::Item.new(
           event.guid, # content for page
           event.attributes, # attributes for layout
-          "/browse/#{conference.webgen_location}/#{event.slug}/",
+          "/folder/#{conference.webgen_location}/page/#{event.slug}/",
           binary: false
         )
         event_item.parent = conference_item # obsolete?
