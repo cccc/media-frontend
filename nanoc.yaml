@@ -58,7 +58,7 @@ data_sources:
     # it will become “/about.html/” instead.
     allow_periods_in_identifiers: false
   -
-    type: recordings
+    type: media_backend
 
 database:
   adapter: 'sqlite3'
