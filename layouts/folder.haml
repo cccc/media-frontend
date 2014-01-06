@@ -1,0 +1,17 @@
+!!!html
+%head
+  %meta(charset="utf-8")
+  %title
+    - if @item[:conference].present?
+      = @item[:conference][:acronym]
+    - else 
+      missing conference
+  %body
+    #main
+      - if @item[:events].present?
+        - @item[:events].each do |event|
+          %a{href: "/browse/#{@item[:conference][:webgen_location]}/#{event.slug}.html"}
+            = event.title
+
+      = yield
+

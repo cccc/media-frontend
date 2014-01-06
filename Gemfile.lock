@@ -23,6 +23,7 @@ GEM
     multi_json (1.7.2)
     nanoc (3.6.7)
       cri (~> 2.3)
+    nokogiri (1.5.9)
     sqlite3 (1.3.7)
     tilt (1.3.6)
     tzinfo (0.3.37)
@@ -34,4 +35,5 @@ DEPENDENCIES
   activerecord (>= 3.0)
   haml
   nanoc
+  nokogiri
   sqlite3

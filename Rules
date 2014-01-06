@@ -17,21 +17,31 @@ compile '/stylesheet/' do
   # don’t filter or layout
 end
 
+compile '/folder/*/page/*/' do
+  layout 'page'
+end
+
+compile '/folder/*/' do
+  layout 'folder'
+end
+
+# /
 compile '*' do
-  if item.binary?
-  else
-    filter :erb
+  unless item.binary?
+    case item[:extension]
+    when 'haml'
+      filter :haml, { :ugly => true, autoclose: ['<source>'], format: :xhtml }
+      layout 'default'
+      filter :relativize_paths, :type => :html
+    else
+      nil
+    end
   end
 end
 
-compile '*.haml' do
-  if item.binary?
-    # don’t filter binary items
-  else
-    filter :haml
-    layout 'default'
-  end
-end
+#
+# Routes
+#
 
 route '/stylesheet/' do
   '/style.css'
@@ -53,6 +63,10 @@ route '/folder/*/' do
   item.identifier.sub(%r'/folder/', '/browse/') + 'index.html'
 end
 
+route '/about/' do
+  '/about.html'
+end
+
 route '*' do
   if item.binary?
     # Write item with identifier /foo/ to /foo.ext
@@ -63,4 +77,4 @@ route '*' do
   end
 end
 
-layout '*', :erb
+layout '*', :haml, {:ugly => true, :autoclose => ['<source>', '<audio>', '<video>'], format: :xhtml}
