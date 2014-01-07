@@ -12,21 +12,11 @@
     %link{href: '/assets/css/bootstrap-theme.min.css', rel: 'stylesheet'}
     %link{href: '/assets/css/styles.css', rel: 'stylesheet'}
   %body
-    %div.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
-      %div.container
-        %div.navbar-header
-          %a.navbar-brand(href='/index.html')
-            CCC-TV
-        %div.navbar-collapse.collapse
-          %a.navbar-right RSS
+    = render '/partials/navbar'
     %div.container
       = yield
 
-      %hr
-      %footer
-        %p 
-          by CCC
-          %a.footer-right(href='/about.html') About
+      = render '/partials/footer'
 
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")

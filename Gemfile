@@ -7,4 +7,5 @@ gem 'sqlite3'
 gem 'nokogiri'
 gem 'guard'
 gem 'guard-nanoc'
+gem 'adsf'
       

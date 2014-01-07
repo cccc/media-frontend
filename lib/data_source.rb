@@ -14,7 +14,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
     Conference.all.each do |conference|
       conference_item = Nanoc3::Item.new(
         "",
-        { conference: conference.attributes, events: conference.events },
+        { title: conference.acronym, conference: conference.attributes, events: conference.events },
         "/folder/#{conference.webgen_location}/",
         binary: false
       )
@@ -27,7 +27,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
         end
         event_item = Nanoc3::Item.new(
           description,
-          { event: event.attributes, recordings: event.recordings },
+          { title: event.title, event: event.attributes, recordings: event.recordings },
           "/folder/#{conference.webgen_location}/page/#{event.slug}/",
           binary: false
         )
