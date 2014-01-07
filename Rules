@@ -13,12 +13,12 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
-compile '/folder/*/page/*/' do
-  layout 'page'
-end
-
-compile '/folder/*/' do
-  layout 'folder'
+compile '/browse/*' do
+  if item[:layout].present?
+    layout item[:layout]
+  else
+    nil
+  end
 end
 
 # /
@@ -41,20 +41,12 @@ end
  
 passthrough '/assets/*'
 
-route '/folder/*/page/' do
-  # skip
-end
-
-route '/folder/*/page/*/' do
-  item.identifier.chop.sub(%r'/folder/', '/browse/').sub(%r'/page/', '/') + '.' + 'html'
-end
-
-route '/folder/' do
-  # skip
-end
-
-route '/folder/*/' do
-  item.identifier.sub(%r'/folder/', '/browse/') + 'index.html'
+route '/browse/*' do
+  if item[:layout] == 'browse-show-page'
+    item.identifier.chop + '.' + 'html'
+  else
+    item.identifier + 'index.html'
+  end
 end
 
 route '/about/' do
