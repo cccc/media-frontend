@@ -46,7 +46,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
       "",
       { 
         title: conference.acronym, layout: 'browse-show-folder',
-        conference: conference.attributes, events: conference.events
+        conference: conference, events: conference.events
       },
       get_path(conference.webgen_location),
       binary: false
@@ -62,7 +62,8 @@ class MediaBackendDataSource < Nanoc3::DataSource
       description,
       { 
         title: event.title, layout: 'browse-show-page',
-        event: event.attributes, recordings: event.recordings
+        conference: conference,
+        event: event, recordings: event.recordings
       },
       get_path(conference.webgen_location, event.slug),
       binary: false

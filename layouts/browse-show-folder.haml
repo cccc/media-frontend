@@ -15,10 +15,12 @@
     = render '/partials/navbar'
     %div.container
 
+      %ul
       - if @item[:events].present?
         - @item[:events].each do |event|
-          %a{href: "/browse/#{@item[:conference][:webgen_location]}/#{event.slug}.html"}
-            = event.title
+          %li
+            %a{href: "/browse/#{@item[:conference][:webgen_location]}/#{event.slug}.html"}
+              = event.title
 
       = yield
 

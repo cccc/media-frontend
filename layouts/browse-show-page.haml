@@ -3,7 +3,7 @@
   %head
     %meta(charset='utf-8')
     %title
-      = @item[:title]
+      = "CCC-TV - #{@item[:title]}"
     %meta{name: 'description', content: ''}
     %meta{name: 'author', content: ''}
     %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
@@ -14,6 +14,15 @@
   %body
     = render '/partials/navbar'
     %div.container
+
+      %h3
+        = @item[:event].title
+
+      %video.video{controls: 'controls', poster: @item[:event].get_poster_path, width: 640, height: 360}
+        - if @item[:recordings].present?
+          - @item[:recordings].each do |recording|
+            %source{type: recording.mime_type, src: recording.get_recording_path}
+
       = yield
 
       = render '/partials/footer'
