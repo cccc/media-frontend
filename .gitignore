@@ -1,0 +1,5 @@
+tmp/
+vendor/
+output/
+*sqlite3
+.ruby-version
