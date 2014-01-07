@@ -13,10 +13,6 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
-compile '/stylesheet/' do
-  # don’t filter or layout
-end
-
 compile '/folder/*/page/*/' do
   layout 'page'
 end
@@ -42,10 +38,8 @@ end
 #
 # Routes
 #
-
-route '/stylesheet/' do
-  '/style.css'
-end
+ 
+passthrough '/assets/*'
 
 route '/folder/*/page/' do
   # skip
