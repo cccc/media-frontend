@@ -3,7 +3,7 @@
   %head
     %meta(charset='utf-8')
     %title
-      BRO
+      CCC-TV -
       = @item[:title]
     %meta{name: 'description', content: ''}
     %meta{name: 'author', content: ''}
@@ -15,15 +15,28 @@
   %body
     = render '/partials/navbar'
     %div.container
+      %div.row
+        %div.col-md-4.col-md-offset-4
+          %div.thumbnail
+            %img{src: '/images/folder.png', alt: ''}
+            %div.caption
+              %a(href="..") ..
 
-      %ul
-        %li
-          %a(href="..") ..
-        - if @item[:folders].present?
-          - @item[:folders].each do |folder|
-            %li
-              %a(href="/browse/#{folder.location}/index.html")
-                = folder.name
+      - if @item[:folders].present?
+        - @item[:folders].each do |folder|
+          %div.row
+            %div.col-md-4.col-md-offset-4
+              %div.thumbnail
+                - if folder.conference
+                  %img{src: folder.conference.logo, alt: ''}
+                - else
+                  %img{src: '/images/folder.png', alt: ''}
+                %div.caption
+                  %a(href="/browse/#{folder.location}/index.html")
+                    = folder.name
+
+      %pre
+        = @item[:folders].to_yaml
 
       = yield
 

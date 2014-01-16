@@ -3,6 +3,7 @@
   %head
     %meta(charset='utf-8')
     %title
+      CCC-TV -
       = @item[:title]
     %meta{name: 'description', content: ''}
     %meta{name: 'author', content: ''}
@@ -15,6 +16,9 @@
     = render '/partials/navbar'
     %div.container
 
+      %h3= @item[:conference].acronym
+      %img{src: @item[:conference].logo}
+
       %ul
       - if @item[:events].present?
         - @item[:events].each do |event|
@@ -24,7 +28,10 @@
 
       %pre
         = @item[:conference].to_yaml
-      %img{src: @item[:conference].logo}
+        
+
+      %pre
+        = @item[:events].to_yaml
 
       = yield
 

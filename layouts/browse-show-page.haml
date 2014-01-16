@@ -23,6 +23,13 @@
           - @item[:recordings].each do |recording|
             %source{type: recording.mime_type, src: recording.get_recording_path}
 
+      %pre
+        = @item[:conference].to_yaml
+      %pre
+        = @item[:event].to_yaml
+      %pre
+        = @item[:recordings].to_yaml
+
       = yield
 
       = render '/partials/footer'
