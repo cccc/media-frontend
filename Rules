@@ -40,6 +40,7 @@ end
 #
  
 passthrough '/assets/*'
+passthrough '/images/*'
 
 route '/browse/*' do
   if item[:layout] == 'browse-show-page'

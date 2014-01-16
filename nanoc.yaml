@@ -61,6 +61,10 @@ data_sources:
     type: static
     items_root: /assets/
   -
+    type: static
+    items_root: /images/
+    prefix: images
+  -
     type: media_backend
 
 database:

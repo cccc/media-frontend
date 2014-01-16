@@ -22,6 +22,10 @@
             %a{href: "/browse/#{@item[:conference][:webgen_location]}/#{event.slug}.html"}
               = event.title
 
+      %pre
+        = @item[:conference].to_yaml
+      %img{src: @item[:conference].logo}
+
       = yield
 
       = render '/partials/navbar'
