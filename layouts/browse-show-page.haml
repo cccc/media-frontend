@@ -1,16 +1,10 @@
 !!! 5
 %html
   %head
-    %meta(charset='utf-8')
     %title
-      = "CCC-TV - #{@item[:title]}"
-    %meta{name: 'description', content: ''}
-    %meta{name: 'author', content: ''}
-    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
-    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
-    %link{href: '/assets/css/bootstrap.min.css', rel: 'stylesheet'}
-    %link{href: '/assets/css/bootstrap-theme.min.css', rel: 'stylesheet'}
-    %link{href: '/assets/css/styles.css', rel: 'stylesheet'}
+      CCC-TV -
+      = @item[:title]
+    = render '/partials/header'
   %body
     = render '/partials/navbar'
     %div.container
@@ -36,3 +30,4 @@
 
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")
+

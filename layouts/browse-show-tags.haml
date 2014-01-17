@@ -9,19 +9,12 @@
     = render '/partials/navbar'
     %div.container
 
-      %h3= @item[:conference].acronym
-      %img{src: @item[:conference].logo}
-
       %ul
       - if @item[:events].present?
         - @item[:events].each do |event|
           %li
-            %a{href: "/browse/#{@item[:conference][:webgen_location]}/#{event.slug}.html"}
+            %a{href: "/browse/#{event.conference.webgen_location}/#{event.slug}.html"}
               = event.title
-
-      %pre
-        = @item[:conference].to_yaml
-        
 
       %pre
         = @item[:events].to_yaml
