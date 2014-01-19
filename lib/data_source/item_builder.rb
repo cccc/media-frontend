@@ -26,6 +26,7 @@ class ItemBuilder
       description,
       { 
         title: event.title, layout: 'browse-show-page',
+        tags: event.tags.map { |t| t.strip },
         conference: event.conference,
         event: event, recordings: event.recordings
       },

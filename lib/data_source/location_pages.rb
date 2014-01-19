@@ -1,4 +1,4 @@
-class Locations
+class LocationPages
   def initialize
     @locations = Hash.new(0)
   end

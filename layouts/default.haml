@@ -16,7 +16,11 @@
     %div.container
       = yield
 
-      = render '/partials/footer'
+    %div.tag
+      - tag_cloud.each do |tag|
+        = tag
+
+    = render '/partials/footer'
 
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")

@@ -9,45 +9,32 @@ class MediaBackendDataSource < Nanoc3::DataSource
   end
 
   def items
-    tags = Hash.new { |h,k| h[k] = [] }
-
     item_builder = ItemBuilder.new
-    locations = Locations.new
+    tag_pages = TagPages.new
+    location_pages = LocationPages.new
 
     Conference.all.each do |conference|
       # conference folders
       item_builder.conference_item(conference)
-      locations.add(conference.webgen_location)
+      location_pages.add(conference.webgen_location)
 
       # event pages
       conference.events.each do |event|
         item_builder.event_item(event)
       end
 
-      collect_tags(tags, conference.events)
+      tag_pages.add(conference.events)
     end
 
-    raise "duplicate location in conferences" if locations.duplicate?
+    raise "duplicate location in conferences" if location_pages.duplicate?
 
     # build tag pages
-    tags.each { |tag, events|
-      item_builder.tag_item(tag, events)
-    }
+    tag_pages.create_items(item_builder)
 
     # build connecting folder items
-    locations.create_items(item_builder)
+    location_pages.create_items(item_builder)
 
     item_builder.items
-  end
-
-  private 
-
-  def collect_tags(tags, events)
-    events.each { |event|
-      event.tags.each { |tag|
-        tags[tag.strip] << event
-      }
-    }
   end
 
 end

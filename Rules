@@ -45,6 +45,8 @@ passthrough '/images/*'
 route '/browse/*' do
   if item[:layout] == 'browse-show-page'
     item.identifier.chop + '.' + 'html'
+  elsif  item[:layout] == 'browse-show-tags'
+    item.identifier.chop + '.' + 'html'
   else
     item.identifier + 'index.html'
   end
