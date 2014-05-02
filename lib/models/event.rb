@@ -10,7 +10,7 @@ class Event < ActiveRecord::Base
   end
 
   def poster_url
-    "/media/#{self.poster_filename}" if self.poster_filename
+    "http://static.media.ccc.de/media/#{self.poster_filename}" if self.poster_filename
   end
 
   def gif_url

@@ -28,7 +28,9 @@ class ItemBuilder
         title: event.title, layout: 'browse-show-page',
         tags: event.tags.map { |t| t.strip },
         conference: event.conference,
-        event: event, recordings: event.recordings
+        event: event, 
+        video_recordings: event.recordings.downloaded.video,
+        audio_recordings: event.recordings.downloaded.audio
       },
       get_path(event.conference.webgen_location, event.slug),
       binary: false

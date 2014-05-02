@@ -3,28 +3,67 @@
   %head
     %title
       CCC-TV -
-      = @item[:title]
+      = h @item[:title]
     = render '/partials/header'
   %body
     = render '/partials/navbar'
     %div.container
 
       %h3
-        = @item[:event].title
+        =  h @item[:event].title
+      - if @item[:event].subtitle
+        %h4
+          = h @item[:event].subtitle
 
-      %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: 640, height: 360}
-        - if @item[:recordings].present?
-          - @item[:recordings].each do |recording|
+      - if @item[:video_recordings].present?
+        - r = @item[:video_recordings].first
+        %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width(@item[:conference]), height: aspect_ratio_height(@item[:conference])}
+          - @item[:video_recordings].each do |recording|
             %source{type: recording.mime_type, src: h(recording.url)}
 
-      %pre
-        = @item[:conference].to_yaml
-      %pre
-        = @item[:event].to_yaml
-      %pre
-        = @item[:recordings].to_yaml
+      - if @item[:audio_recordings].present?
+        %audio.audio
+          - @item[:audio_recordings].each do |recording|
+            %source{type: recording.mime_type, src: h(recording.url)}
 
-      = yield
+
+      %div.meta
+        / index
+        %div.about
+          About:
+          %a{href: @item[:event].link} 
+            = h @item[:event].title
+
+          = date(@item[:event])
+
+        %div.storage
+          Directory: 
+          %a{href: @item[:conference].recordings_url}
+            = @item[:conference].recordings_path
+
+        %div.feeds
+          Folder: podcast.xml
+
+        %div.file-list
+          File list:
+          - @item[:video_recordings].each do |recording|
+            %a{href: recording.url}
+              = recording.filename
+            %a{href: recording.torrent_url}
+              = recording.filename + '.torrent'
+          - @item[:audio_recordings].each do |recording|
+            %a{href: recording.url}
+              = recording.filename
+            %a{href: recording.torrent_url}
+              = recording.filename + '.torrent'
+
+      %div.description
+
+        = yield
+
+        %ul
+          - @item[:event].persons.each do |person|
+            %li= h person
 
       = render '/partials/footer'
 

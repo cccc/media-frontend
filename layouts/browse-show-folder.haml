@@ -3,7 +3,7 @@
   %head
     %title
       CCC-TV -
-      = @item[:title]
+      = h @item[:title]
     = render '/partials/header'
   %body
     = render '/partials/navbar'
@@ -14,7 +14,7 @@
           %img{src: @item[:conference].logo}
         %div.col-md-10
           %h3= @item[:conference].acronym
-          %h2= @item[:conference].title
+          %h2= h @item[:conference].title
 
       %ul
         %li
@@ -25,23 +25,16 @@
               %img{src: h(event.gif_url)}
               %img{src: h(event.thumb_url)}
               %a{href: h(event.url)}
-                = event.title
-              = event.persons.join(', ')
-              = event.release_date || event.date
+                = h event.title
+              - if event.persons.present?
+                Persons: #{h event.persons.join(', ')}
+              = date(event)
               - recordings = event.recordings.downloaded
               - if recordings.present?
                 = recording_length_minutes(recordings.first)
+                = audio_ready_icon(recordings)
+                = video_quality_icon(recordings)
  
-      %pre
-        = @item[:events].first.recordings.to_yaml
-
-      %pre
-        = @item[:conference].to_yaml
-        
-
-      %pre
-        = @item[:events].to_yaml
-
       = yield
 
       = render '/partials/footer'
