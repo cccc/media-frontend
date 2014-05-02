@@ -1,5 +1,7 @@
 guard 'nanoc' do
-  watch('nanoc.yaml') # Change this to config.yaml if you use the old config file name
-  watch('Rules')
-  watch(%r{^(content|layouts|lib|static)/.*$})
+  watch 'nanoc.yaml'
+  watch 'Rules'
+  watch %r{\A(content|layouts|lib|static)/.*\z}
+  ignore %r{(?:4913)$}
+  #notification :off
 end
