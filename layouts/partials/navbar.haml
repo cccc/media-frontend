@@ -4,6 +4,16 @@
       %a.navbar-brand(href='/index.html')
         CCC-TV
     %div.navbar-collapse.collapse
-      %a(href="..") ..
+      %ul{class: 'nav navbar-nav'}
+        - trail = breadcrumbs_trail
+        - if trail.count > 1
+          - trail[1..-2].each_with_index do |item, i|
+            %li
+              %a{href: item.identifier}
+                = item.identifier.sub(trail[i].identifier, '')
+          %li.active
+            %a{href: trail[-1].identifier}
+              = trail[-1].identifier.sub(trail[-2].identifier, '')
+
       %a.navbar-right RSS
 
