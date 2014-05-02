@@ -9,15 +9,31 @@
     = render '/partials/navbar'
     %div.container
 
-      %h3= @item[:conference].acronym
-      %img{src: @item[:conference].logo}
+      %div.row
+        %div.col-md-2
+          %img{src: @item[:conference].logo}
+        %div.col-md-10
+          %h3= @item[:conference].acronym
+          %h2= @item[:conference].title
 
       %ul
-      - if @item[:events].present?
-        - @item[:events].each do |event|
-          %li
-            %a{href: "/browse/#{@item[:conference][:webgen_location]}/#{event.slug}.html"}
-              = event.title
+        %li
+          %a(href="..") ..
+        - if @item[:events].present?
+          - @item[:events].each do |event|
+            %li
+              %img{src: h(event.gif_url)}
+              %img{src: h(event.thumb_url)}
+              %a{href: h(event.url)}
+                = event.title
+              = event.persons.join(', ')
+              = event.release_date || event.date
+              - recordings = event.recordings.downloaded
+              - if recordings.present?
+                = recording_length_minutes(recordings.first)
+ 
+      %pre
+        = @item[:events].first.recordings.to_yaml
 
       %pre
         = @item[:conference].to_yaml

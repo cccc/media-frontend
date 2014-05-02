@@ -13,7 +13,7 @@
       - if @item[:events].present?
         - @item[:events].each do |event|
           %li
-            %a{href: "/browse/#{event.conference.webgen_location}/#{event.slug}.html"}
+            %a{href: h(event.url)}
               = event.title
 
       %pre

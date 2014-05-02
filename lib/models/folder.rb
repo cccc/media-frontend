@@ -7,4 +7,8 @@ class Folder
   def name
     File.basename @location
   end
+
+  def url
+    "/browse/#{@location}/index.html"
+  end
 end

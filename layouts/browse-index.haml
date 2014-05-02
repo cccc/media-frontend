@@ -23,14 +23,14 @@
               %div.thumbnail
                 - if folder.conference
                   %img{src: folder.conference.logo, alt: ''}
+                  %div.caption
+                    %a{href: h(folder.url)}
+                      = folder.conference.title
                 - else
                   %img{src: '/images/folder.png', alt: ''}
-                %div.caption
-                  %a(href="/browse/#{folder.location}/index.html")
-                    = folder.name
-
-      %pre
-        = @item[:folders].to_yaml
+                  %div.caption
+                    %a{href: h(folder.url)}
+                      = folder.name
 
       = yield
 

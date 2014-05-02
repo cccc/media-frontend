@@ -12,10 +12,10 @@
       %h3
         = @item[:event].title
 
-      %video.video{controls: 'controls', poster: @item[:event].get_poster_path, width: 640, height: 360}
+      %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: 640, height: 360}
         - if @item[:recordings].present?
           - @item[:recordings].each do |recording|
-            %source{type: recording.mime_type, src: recording.get_recording_path}
+            %source{type: recording.mime_type, src: h(recording.url)}
 
       %pre
         = @item[:conference].to_yaml

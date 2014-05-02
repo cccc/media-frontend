@@ -1,14 +1,11 @@
 class Recording < ActiveRecord::Base
   belongs_to :event
 
-  def get_recording_path
-    File.join get_recording_dir, self.filename
-  end
+  scope :downloaded, -> { where(state: 'downloaded') }
 
-  def get_recording_dir
+  def url
     self.folder ||= ""
-    File.join self.event.conference.get_recordings_path, self.folder
+    File.join self.event.conference.recordings_url, self.folder, self.filename
   end
-
 
 end
