@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
+unless defined? LOADED_DEFAULT_CONFIG
+  LOADED_DEFAULT_CONFIG = true
+  require 'compass'
+  Compass.add_project_configuration 'config.rb'
+end
+
 # A few helpful tips about the Rules file:
 #
 # * The string given to #compile and #route are matching patterns for
@@ -25,6 +31,8 @@ end
 compile '*' do
   unless item.binary?
     case item[:extension]
+    when /scss/
+      filter :sass, Compass.sass_engine_options
     when 'haml'
       filter :haml, { :ugly => true, autoclose: ['<source>'], format: :xhtml }
       layout 'default'
@@ -39,6 +47,19 @@ end
 # Routes
 #
  
+# _mixed.scss
+route '/assets/**/_*' do
+    nil
+end
+
+route '/assets/css/*/' do
+    if item[:extension] == 'scss'
+      item.identifier.chop + '.css' 
+    else
+      item.identifier.chop
+    end
+end
+
 passthrough '/assets/*'
 passthrough '/images/*'
 

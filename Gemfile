@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'nanoc'
 gem 'haml'
+gem 'compass'
+gem 'bootstrap-sass'
 gem 'activerecord', '>= 3.0'
 gem 'sqlite3'
 gem 'nokogiri'
