@@ -12,6 +12,12 @@
           %li
             %a
               %img{src: '/images/rss_logo.png', alt: 'Feeds', title: 'Feeds'}
+      %div.navbar-right
+        %form.navbar-form{role: 'search', action: 'http://www.duckduckgo.com/', method: 'get', id: 'duck-duck-go-search'}
+          %div.form-group
+            %input.form-control{type: 'hidden', name: 'sites', value: 'media.ccc.de'}
+            %input.form-control{type: 'text', maxlength: '255', size: '17', name: 'q'}
+          %button.btn.btn-default{type: 'submit', value: 'DuckDuckGo'} Go
 
 - trail = breadcrumbs_trail
 - if trail.count > 1
