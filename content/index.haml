@@ -1,21 +1,19 @@
 ---
-title: CCC-TV
+title: home
 ---
 
-%div.jumbotron
-  %div.container
-    %div.row
-      %div.col-md-2
-        topclip1
-      %div.col-md-2
-        topclip2
-      %div.col-md-2.offset2
-        %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
-          Browse
+%div.row
+  - Event.promoted(4).each do |event|
+    %div.col-xs-6.col-md-3
+      %a.thumbnail{href: h(event.url)}
+        %img{src: h(event.thumb_url), alt: event.title, title: event.title}
 
 %h2 CCC-TV News
 
-%h3 2014-01-16: new media
+- News.recent(10).each do |news|
+  %div.news-item
+    %h3= h news.header
+    %span= news.body
 
 TODO 
 

@@ -9,27 +9,19 @@
     = render '/partials/navbar'
     %div.container
 
-      %div.row
-        %div.col-md-4.col-md-offset-4
-          %div.thumbnail
-            %img{src: '/images/folder.png', alt: ''}
-            %div.caption
-              %a(href="..") ..
-
       - if @item[:folders].present?
-        - @item[:folders].each do |folder|
+        - @item[:folders].each_slice(4) do |folders|
           %div.row
-            %div.col-md-4.col-md-offset-4
-              %div.thumbnail
-                - if folder.conference
-                  %img{src: folder.conference.logo, alt: ''}
-                  %div.caption
-                    %a{href: h(folder.url)}
+            - folders.each do |folder|
+              %div.col-xs-6.col-md-3
+                %a.thumbnail{href: h(folder.url)}
+                  - if folder.conference
+                    %img{src: folder.conference.logo_url, alt: 'conference logo'}
+                    %div.caption
                       = folder.conference.title
-                - else
-                  %img{src: '/images/folder.png', alt: ''}
-                  %div.caption
-                    %a{href: h(folder.url)}
+                  - else
+                    %img{src: '/images/folder.png', alt: 'folder'}
+                    %div.caption
                       = folder.name
 
       = yield

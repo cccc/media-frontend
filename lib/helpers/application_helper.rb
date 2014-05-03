@@ -4,14 +4,14 @@ module ApplicationHelper
 
   def recording_length_minutes(recording)
     if recording.length.present?
-      "#{recording.length / 60}min"
+      "(#{recording.length / 60}min)"
     end
   end
 
-  def audio_ready_icon(recordings)
+  def audio_ready_icon_link(recordings)
     if recordings.audio.present?
       recording = recordings.audio.first
-      %'<a class="icon" href="#{recording.url}"><img src="/images/audio_ready_icon.png" alt="audio-only version available, too"/></a>'
+      %'<a class="audio-icon icon" href="#{recording.url}"><img src="/images/audio_ready_icon.png" alt="audio-only version available, too"/></a>'
     end
   end
 
@@ -19,9 +19,9 @@ module ApplicationHelper
     if recordings.video.present?
       recording = recordings.max { |recording| recording.width }
       if recording.width >= 1280 and recording.height >= 720
-        %'<img src="/images/hd_ready_icon.png" alt="720p resolution"/>'
+        %'<img class="icon" src="/images/hd_ready_icon.png" alt="720p resolution"/>'
       elsif recording.width >= 704 and recording.height >= 480
-        %'<img src="/images/dvd_ready_icon.png" alt="dvd resolution"/>'
+        %'<img class="icon" src="/images/dvd_ready_icon.png" alt="dvd resolution"/>'
       end
     end
   end
@@ -47,6 +47,11 @@ module ApplicationHelper
   end
 
   def date(event)
+    date = event.release_date || event.date
+    date.strftime("%Y-%m-%d") if date
+  end
+
+  def datetime(event)
     date = event.release_date || event.date
     date.strftime("%Y-%m-%d %H:%M") if date
   end

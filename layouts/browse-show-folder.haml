@@ -11,29 +11,31 @@
 
       %div.row
         %div.col-md-2
-          %img{src: @item[:conference].logo}
+          %img{src: @item[:conference].logo_url}
         %div.col-md-10
           %h3= @item[:conference].acronym
           %h2= h @item[:conference].title
 
-      %ul
-        %li
-          %a(href="..") ..
-        - if @item[:events].present?
-          - @item[:events].each do |event|
-            %li
-              %img{src: h(event.gif_url)}
-              %img{src: h(event.thumb_url)}
-              %a{href: h(event.url)}
-                = h event.title
-              - if event.persons.present?
-                Persons: #{h event.persons.join(', ')}
-              = date(event)
+      - if @item[:events].present?
+        - @item[:events].each_slice(4) do |events|
+          %div.row
+            - events.each do |event|
               - recordings = event.recordings.downloaded
-              - if recordings.present?
-                = recording_length_minutes(recordings.first)
-                = audio_ready_icon(recordings)
-                = video_quality_icon(recordings)
+              %div.col-xs-6.col-md-3
+                %div.thumbnail
+                  %a{href: h(event.url)}
+                    %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
+                  %div.icons
+                    = video_quality_icon(recordings) if recordings.present?
+                    = audio_ready_icon_link(recordings) if recordings.present?
+                  %div.caption
+                    %h3= h event.title
+                    %p
+                      - if event.persons.present?
+                        = h event.persons.join(', ')
+                      %br
+                        %span.small= date(event)
+                        %span.small= recording_length_minutes(recordings.first) if recordings.present?
  
       = yield
 
@@ -41,4 +43,5 @@
 
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")
+    %script(src="/assets/js/thumbnails.js")
 

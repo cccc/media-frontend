@@ -24,6 +24,7 @@ module TaggingHelper
 
   private
 
+  # TODO define more classes
   def css_class_by_size(n)
     'small'
   end

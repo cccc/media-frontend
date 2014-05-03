@@ -13,12 +13,25 @@
     %link{href: '/assets/css/styles.css', rel: 'stylesheet'}
   %body
     = render '/partials/navbar'
-    %div.container
-      = yield
 
-    %div.tag
-      - tag_cloud.each do |tag|
-        = tag
+    %div.container
+
+      %row
+        %div.col-md-10.top-space
+          = yield
+
+        %div.col-md-2.top-space
+          %div
+            %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
+              Browse
+          %br
+
+          %div.panel.tag-cloud
+            %div.panel-heading
+              %h3.panel-title Tags
+            %div.panel-body
+              - tag_cloud.each do |tag|
+                = tag
 
     = render '/partials/footer'
 
