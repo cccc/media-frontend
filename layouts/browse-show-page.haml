@@ -22,7 +22,7 @@
             %source{type: recording.mime_type, src: h(recording.url)}
 
       - if @item[:audio_recordings].present?
-        %audio.audio
+        %audio.audio{controls: 'true'}
           - @item[:audio_recordings].each do |recording|
             %source{type: recording.mime_type, src: h(recording.url)}
 

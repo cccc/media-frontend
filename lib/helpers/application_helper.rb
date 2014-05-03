@@ -17,7 +17,8 @@ module ApplicationHelper
 
   def video_quality_icon(recordings)
     if recordings.video.present?
-      recording = recordings.max { |recording| recording.width }
+      recording = recordings.max { |a,b| (a.width.to_i || 0) <=> (b.width.to_i || 0) }
+      return unless recording and recording.width and recording.height
       if recording.width >= 1280 and recording.height >= 720
         %'<img class="icon" src="/images/hd_ready_icon.png" alt="720p resolution"/>'
       elsif recording.width >= 704 and recording.height >= 480
