@@ -12,16 +12,16 @@ class Event < ActiveRecord::Base
   end
 
   def poster_url
-    "http://static.media.ccc.de/media/#{self.poster_filename}" if self.poster_filename
+    File.join Settings.staticURL, 'media', self.conference.images_path, self.poster_filename
   end
 
   # TODO thumbnail.js expects this to be equal thumb_url.gsub(/.jpg$/, '.gif')
   def gif_url
-    File.join 'http://static.media.ccc.de/media/', self.conference.images_path, self.gif_filename
+    File.join Settings.staticURL, 'media', self.conference.images_path, self.gif_filename
   end
 
   def thumb_url
-    File.join 'http://static.media.ccc.de/media/', self.conference.images_path, self.thumb_filename
+    File.join Settings.staticURL, 'media', self.conference.images_path, self.thumb_filename
   end
 
 end
