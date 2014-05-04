@@ -5,7 +5,7 @@ class ItemBuilder
   end
   attr_reader :items
 
-  def conference_item(conference)
+  def create_conference_item(conference)
     @items << Nanoc3::Item.new(
       "",
       { 
@@ -17,7 +17,7 @@ class ItemBuilder
     )
   end
 
-  def event_item(event)
+  def create_event_item(event)
     description = ""
     if event.description.present?
       description = event.description
@@ -40,7 +40,7 @@ class ItemBuilder
     @items << event_item
   end
 
-  def browse_item(path, childs)
+  def create_browse_item(path, childs)
     folders = []
     childs.each { |child|
       if path == '/'
@@ -65,7 +65,7 @@ class ItemBuilder
     )
   end
 
-  def tag_item(tag, events)
+  def create_tag_item(tag, events)
     @items << Nanoc3::Item.new(
       "",
       { 
@@ -73,6 +73,29 @@ class ItemBuilder
         events: events
       },
       get_path('tags', tag),
+      binary: false
+    )
+  end
+
+  def create_feed_item(content, filename)
+    identifier, extension = filename.split('.')
+    @items << Nanoc3::Item.new(
+      content,
+      { 
+        extension: extension
+      },
+      "/#{identifier}/",
+      binary: false
+    )
+  end
+
+  def create_folder_feed_item(conference, content)
+    @items << Nanoc3::Item.new(
+      content,
+      {
+        extension: 'xml'
+      },
+      get_path(conference.webgen_location, 'podcast'),
       binary: false
     )
   end

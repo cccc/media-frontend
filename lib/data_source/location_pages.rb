@@ -7,17 +7,17 @@ class LocationPages
     @locations[location] += 1
   end
 
-  def create_items(item_builder)
+  def apply(item_builder)
     locations = @locations.keys
 
     root = build_navigation_tree(locations)
     walk_navigation_paths(root, []) { |path, childs|
       # skip last node
       next if locations.include? path
-      item_builder.browse_item(path, childs)
+      item_builder.create_browse_item(path, childs)
     }
 
-    item_builder.browse_item('/', root.keys)
+    item_builder.create_browse_item('/', root.keys)
   end
 
   def duplicate?

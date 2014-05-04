@@ -2,6 +2,14 @@ module ApplicationHelper
   require 'nanoc/helpers/html_escape'
   include Nanoc::Helpers::HTMLEscape
 
+  def keywords
+    if @item[:event] and @item[:event].tags
+     [ @item[:event].tags, Settings.header['keywords']].join(', ')
+    else
+      Settings.header['keywords']
+    end
+  end
+
   def recording_length_minutes(recording)
     if recording.length.present?
       "(#{recording.length / 60}min)"

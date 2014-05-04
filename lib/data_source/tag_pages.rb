@@ -13,9 +13,9 @@ class TagPages
     }
   end
 
-  def create_items(item_builder)
+  def apply(item_builder)
     @tags.each { |tag, events|
-      item_builder.tag_item(tag, events)
+      item_builder.create_tag_item(tag, events)
     }
   end
 

@@ -5,6 +5,7 @@
       C3TV -
       = h @item[:title]
     = render '/partials/header'
+    %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed for this folder", href: "podcast.xml"}
   %body
     = render '/partials/navbar'
     %div.container

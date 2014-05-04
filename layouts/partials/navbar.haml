@@ -19,12 +19,13 @@
             %input.form-control{type: 'text', maxlength: '255', size: '17', name: 'q'}
           %button.btn.btn-default{type: 'submit', value: 'DuckDuckGo'} Go
 
-- trail = breadcrumbs_trail
-- if trail.count > 1
-  %ol.breadcrumb
-    - trail[1..-2].each_with_index do |item, i|
-      %li
-        %a{href: item.identifier}
-          = item.identifier.sub(trail[i].identifier, '').gsub('/','')
-    %li.active
-      = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
+- unless @item.identifier.starts_with? '/browse/tags'
+  - trail = breadcrumbs_trail
+  - if trail.count > 1
+    %ol.breadcrumb
+      - trail[1..-2].each_with_index do |item, i|
+        %li
+          %a{href: item.identifier}
+            = item.identifier.sub(trail[i].identifier, '').gsub('/','')
+      %li.active
+        = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')

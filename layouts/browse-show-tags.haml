@@ -16,9 +16,6 @@
             %a{href: h(event.url)}
               = event.title
 
-      %pre
-        = @item[:events].to_yaml
-
       = yield
 
       = render '/partials/footer'

@@ -1,6 +1,12 @@
 %meta(charset='utf-8')
-%meta{name: 'description', content: ''}
-%meta{name: 'author', content: ''}
+%meta{name: "robots", content: "index,follow"}
+%meta{name: 'author', content: Settings.header['author']}
+%meta{name: 'description', content: Settings.header['description']}
+%meta{name: "keywords", content: keywords}
+%meta{name: "google-site-verification", content: Settings.header['google']}
 %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
 %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
 %link{href: '/assets/css/styles.css', rel: 'stylesheet'}
+%link{rel: "alternate", type: "application/rss+xml", title: "RSS, last 100", href: "/updates.rdf"}
+%link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed of the last two years", href: "/podcast.xml"}
+%link{rel: "alternate", type: "application/rss+xml", title: "Podcast archive feed", href: "/podcast-archive.xml"}
