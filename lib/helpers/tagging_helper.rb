@@ -24,9 +24,18 @@ module TaggingHelper
 
   private
 
-  # TODO define more classes
   def css_class_by_size(n)
-    'small'
+    if n < 5
+      "xtiny"
+    elsif n < 10
+      "tiny"
+    elsif n < 50
+      "normal"
+    elsif n < 100
+      "large"
+    else
+      "xlarge"
+    end
   end
 
   def tags_hash
