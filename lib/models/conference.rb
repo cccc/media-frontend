@@ -5,10 +5,9 @@ class Conference < ActiveRecord::Base
     File.join 'http://cdn.media.ccc.de/', self.recordings_path
   end
 
-  # TODO move logos into /media folder and join self.images_path in between
   def logo_url
     if self.logo
-      "http://static.media.ccc.de/#{self.logo}"
+      File.join 'http://static.media.ccc.de/media/', self.images_path, self.logo
     else
       "http://static.media.ccc.de/images/folder.png"
     end
