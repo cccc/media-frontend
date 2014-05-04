@@ -27,40 +27,45 @@
             %source{type: recording.mime_type, src: h(recording.url)}
 
 
-      %div.meta
+      %p.meta
         / index
-        %div.about
-          About:
-          %a{href: @item[:event].link} 
-            = h @item[:event].title
+        %b About:
+        %a{href: @item[:event].link} 
+          = h @item[:event].title
 
-          = date(@item[:event])
+        from 
+        = date(@item[:event])
 
-        %div.storage
-          Directory: 
-          %a{href: @item[:conference].recordings_url}
-            = @item[:conference].recordings_path
+      %p.file-list
+        %b Directory: 
+        %a{href: @item[:conference].recordings_url}
+          = @item[:conference].recordings_path
 
-        %div.feeds
-          Folder: podcast.xml
+        %div.row
+          %ul.col-md-6
+            - @item[:video_recordings].each do |recording|
+              %li
+                %a{href: recording.url}
+                  = recording.filename
+              %li
+                %a{href: recording.torrent_url}
+                  = recording.filename + '.torrent'
+          %ul.col-md-6
+            - @item[:audio_recordings].each do |recording|
+              %li
+                %a{href: recording.url}
+                  = recording.filename
+              %li
+                %a{href: recording.torrent_url}
+                  = recording.filename + '.torrent'
 
-        %div.file-list
-          File list:
-          - @item[:video_recordings].each do |recording|
-            %a{href: recording.url}
-              = recording.filename
-            %a{href: recording.torrent_url}
-              = recording.filename + '.torrent'
-          - @item[:audio_recordings].each do |recording|
-            %a{href: recording.url}
-              = recording.filename
-            %a{href: recording.torrent_url}
-              = recording.filename + '.torrent'
-
-      %div.description
+      %p.description
 
         = yield
 
+          
+      %p.persons
+        %b Persons
         %ul
           - @item[:event].persons.each do |person|
             %li= h person
