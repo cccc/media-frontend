@@ -35,7 +35,8 @@ module ApplicationHelper
     end
   end
 
-  def aspect_ratio_width(conference, high=true)
+  def aspect_ratio_width(high=true)
+    conference = @item[:conference]
     case conference.aspect_ratio
     when /16:9/
       high ? '640' : '188'
@@ -45,7 +46,8 @@ module ApplicationHelper
     end
   end
 
-  def aspect_ratio_height(conference, high=true)
+  def aspect_ratio_height(high=true)
+    conference = @item[:conference]
     case conference.aspect_ratio
     when /16:9/
       high ? '360' : '144'

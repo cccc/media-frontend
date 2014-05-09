@@ -5,6 +5,8 @@
       C3TV -
       = h @item[:title]
     = render '/partials/header'
+    %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
+    %script{type: 'text/javascript', src: '/assets/js/mediaelement-and-player.min.js'}
   %body
     = render '/partials/navbar'
     %div.container
@@ -17,9 +19,11 @@
 
       - if @item[:video_recordings].present?
         - r = @item[:video_recordings].first
-        %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width(@item[:conference]), height: aspect_ratio_height(@item[:conference])}
+        %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
           - @item[:video_recordings].each do |recording|
             %source{type: recording.mime_type, src: h(recording.url)}
+          %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
+            %param{ name: 'allowFullScreen', value: 'true' }
 
       - if @item[:audio_recordings].present?
         %audio.audio{controls: 'true'}
@@ -36,28 +40,33 @@
         from 
         = date(@item[:event])
 
-      %p.file-list
-        %b Directory: 
-        %a{href: @item[:conference].recordings_url}
-          = @item[:conference].recordings_path
+      %div#chooser
+        %span
+          %a{href: "#", onclick: "$('.file-list').toggle()"} show file list
 
-        %div.row
-          %ul.col-md-6
-            - @item[:video_recordings].each do |recording|
-              %li
-                %a{href: recording.url}
-                  = recording.filename
-              %li
-                %a{href: recording.torrent_url}
-                  = recording.filename + '.torrent'
-          %ul.col-md-6
-            - @item[:audio_recordings].each do |recording|
-              %li
-                %a{href: recording.url}
-                  = recording.filename
-              %li
-                %a{href: recording.torrent_url}
-                  = recording.filename + '.torrent'
+      .file-list{style: "display: none"}
+        %p
+          %b Directory: 
+          %a{href: @item[:conference].recordings_url}
+            = @item[:conference].recordings_path
+
+          %div.row
+            %ul.col-md-6
+              - @item[:video_recordings].each do |recording|
+                %li
+                  %a{href: recording.url}
+                    = recording.filename
+                %li
+                  %a{href: recording.torrent_url}
+                    = recording.filename + '.torrent'
+            %ul.col-md-6
+              - @item[:audio_recordings].each do |recording|
+                %li
+                  %a{href: recording.url}
+                    = recording.filename
+                %li
+                  %a{href: recording.torrent_url}
+                    = recording.filename + '.torrent'
 
       %p.description
 
@@ -75,3 +84,11 @@
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")
 
+:javascript
+  currentPlayer = new MediaElementPlayer('video', {
+    usePluginFullScreen: true,
+
+    pluginPath: "/static/",
+    features: ['playpause','current','duration','volume', 'fullscreen'],
+    enableAutosize: true
+  });
