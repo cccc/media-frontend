@@ -14,7 +14,7 @@
         - @item[:events].each do |event|
           %li
             %a{href: h(event.url)}
-              = "#{event.congress.acronym} - #{event.title}" 
+              = "#{event.conference.acronym} - #{event.title}" 
 
       = yield
 
