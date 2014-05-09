@@ -15,17 +15,19 @@ class MediaBackendDataSource < Nanoc3::DataSource
     feed_builder = FeedBuilder.new(item_builder)
 
     Conference.all.each do |conference|
+      # event pages
+      events = conference.events.select { |event| event.recordings.downloaded.any? }
+
       # conference folders
-      item_builder.create_conference_item(conference)
+      item_builder.create_conference_item(conference, events)
       location_pages.add(conference.webgen_location)
 
-      # event pages
-      conference.events.each do |event|
+      events.each do |event|
         item_builder.create_event_item(event)
       end
 
-      tag_pages.add(conference.events)
-      feed_builder.add(conference)
+      tag_pages.add(events)
+      feed_builder.add(conference, events)
     end
 
     raise "duplicate location in conferences" if location_pages.duplicate?

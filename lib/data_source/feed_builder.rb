@@ -4,8 +4,8 @@ class FeedBuilder
     @item_builder = item_builder
   end
 
-  def add(conference)
-    xml = Feeds::PodcastGenerator.generate conference.events, config: {
+  def add(conference, events)
+    xml = Feeds::PodcastGenerator.generate events, config: {
       title: conference.title,
       channel_summary: "This feed contains all events from #{conference.acronym}"
     }

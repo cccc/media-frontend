@@ -5,12 +5,12 @@ class ItemBuilder
   end
   attr_reader :items
 
-  def create_conference_item(conference)
+  def create_conference_item(conference, events)
     @items << Nanoc3::Item.new(
       "",
       { 
         title: conference.acronym, layout: 'browse-show-folder',
-        conference: conference, events: conference.events
+        conference: conference, events: events
       },
       get_path(conference.webgen_location),
       binary: false
@@ -22,6 +22,7 @@ class ItemBuilder
     if event.description.present?
       description = event.description
     end
+
     event_item = Nanoc3::Item.new(
       description,
       { 
@@ -35,8 +36,7 @@ class ItemBuilder
       get_path(event.conference.webgen_location, event.slug),
       binary: false
     )
-    #event_item.parent = conference_item # obsolete?
-    #conference_item.children << event_item # obsolete?
+
     @items << event_item
   end
 
