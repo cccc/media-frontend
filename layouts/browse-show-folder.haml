@@ -15,7 +15,7 @@
           %img{src: @item[:conference].logo_url}
         %div.col-md-10
           %h3= @item[:conference].acronym
-          %h2= h @item[:conference].title
+          %h2= h @item[:conference].title unless @item[:conference].acronym == @item[:conference].title
 
       - if @item[:events].present?
         - @item[:events].each_slice(4) do |events|
