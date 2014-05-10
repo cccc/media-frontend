@@ -71,7 +71,7 @@ module Feeds
       def fill_item(item, event, recording)
         item.title = get_item_title(event)
         item.link = recording.url
-        item.itunes_keywords = event.try(:tags)
+        item.itunes_keywords = event.try(:tags).join(',')
         item.guid.content = recording.url
         item.guid.isPermaLink = true
         item.dc_identifier = event.guid
