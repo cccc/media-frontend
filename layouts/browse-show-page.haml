@@ -18,33 +18,41 @@
           = h @item[:event].subtitle
 
       - if @item[:video_recordings].present?
-        - r = @item[:video_recordings].first
-        %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
-          - @item[:video_recordings].each do |recording|
-            %source{type: recording.mime_type, src: h(recording.url)}
-          %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
-            %param{ name: 'allowFullScreen', value: 'true' }
+        .row.col-md-12
+          - r = @item[:video_recordings].first
+          %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
+            - @item[:video_recordings].each do |recording|
+              %source{type: recording.mime_type, src: h(recording.url)}
+            %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
+              %param{ name: 'allowFullScreen', value: 'true' }
 
       - if @item[:audio_recordings].present?
-        %audio.audio{controls: 'true'}
-          - @item[:audio_recordings].each do |recording|
-            %source{type: recording.mime_type, src: h(recording.url)}
+        .row.col-md-12
+          .audio-player{style: @item[:video_recordings].present? ? 'display: none' : ''}
+            %audio.audio{controls: 'true'}
+              - @item[:audio_recordings].each do |recording|
+                %source{type: recording.mime_type, src: h(recording.url)}
+            %span.small
+              audio only 
 
+      %span
+        %a{href: "#", onclick: "$('.file-list').toggle()"} toggle file list
+      - if @item[:audio_recordings].present? and @item[:video_recordings].present?
+        %span
+          |
+          %a{href: "#", onclick: "$('.audio-player').toggle()"} toggle audio player
 
-      %p.meta
+      %p.meta.top-space
         / index
         %b About:
         %a{href: @item[:event].link} 
           = h @item[:event].title
 
-        from 
-        = date(@item[:event])
+        %span.small
+          from 
+          = date(@item[:event])
 
-      %div#chooser
-        %span
-          %a{href: "#", onclick: "$('.file-list').toggle()"} show file list
-
-      .file-list{style: "display: none"}
+      .file-list{style: 'display: none'}
         %p
           %b Directory: 
           %a{href: @item[:conference].recordings_url}
@@ -85,10 +93,11 @@
     %script(src="/assets/js/bootstrap.min.js")
 
 :javascript
-  currentPlayer = new MediaElementPlayer('video', {
+  $('video').mediaelementplayer({
     usePluginFullScreen: true,
 
     pluginPath: "/static/",
     features: ['playpause','current','duration','volume', 'fullscreen'],
     enableAutosize: true
   });
+  $('audio').mediaelementplayer();
