@@ -6,7 +6,6 @@
       = h @item[:title]
     = render '/partials/header'
     %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
-    %script{type: 'text/javascript', src: '/assets/js/mediaelement-and-player.min.js'}
   %body
     = render '/partials/navbar'
     %div.container
@@ -89,15 +88,15 @@
 
       = render '/partials/footer'
 
-    %script(src="/assets/js/jquery.min.js")
-    %script(src="/assets/js/bootstrap.min.js")
+    %script(src='/assets/js/jquery.min.js')
+    %script(src='/assets/js/bootstrap.min.js')
+    %script(src='/assets/js/mediaelement-and-player.min.js')
 
-:javascript
-  $('video').mediaelementplayer({
-    usePluginFullScreen: true,
+    :javascript
+      $('video').mediaelementplayer({
+        usePluginFullScreen: true,
 
-    pluginPath: "/static/",
-    features: ['playpause','current','duration','volume', 'fullscreen'],
-    enableAutosize: true
-  });
-  $('audio').mediaelementplayer();
+        pluginPath: '/static/',
+        enableAutosize: true
+      });
+      $('audio').mediaelementplayer();
