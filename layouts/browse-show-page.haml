@@ -80,11 +80,12 @@
         = yield
 
           
-      %p.persons
-        %b Persons
-        %ul
-          - @item[:event].persons.each do |person|
-            %li= h person
+      - if @item[:event].persons.present?
+        %p.persons
+          %b Persons
+          %ul
+            - @item[:event].persons.each do |person|
+              %li= h person
 
       = render '/partials/footer'
 
