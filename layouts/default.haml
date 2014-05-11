@@ -15,11 +15,11 @@
 
     %div.container
 
-      %row
-        %div.col-md-10.top-space
+      .row
+        %div.col-md-9.top-space
           = yield
 
-        %div.col-md-2.top-space
+        %div.col-md-3.top-space
           %div
             %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
               Browse
@@ -32,7 +32,7 @@
               - tag_cloud.each do |tag|
                 = tag
 
-    = render '/partials/footer'
+      = render '/partials/footer'
 
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")
