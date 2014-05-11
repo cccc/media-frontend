@@ -22,13 +22,7 @@ function thumbToggle() {
             ov = new Image();
             ov.src = overlay;
             ov.id = id;
-            ov.style.position = "absolute";
-            ov.style.top = "7px";
-            ov.style.right= "30px";
-            ov.style.height = "18px";
-            ov.style.width = "18px";
-            ov.style.zIndex = "100";
-
+            ov.className = 'thumbnail-spinner';
             var myDiv = this.parentNode;
             myDiv.insertBefore(ov, myDiv.firstChild);
         }

@@ -21,13 +21,23 @@ a.navbar-brand img {
 .thumbnail .icons {
   position: absolute;
   padding: 5px;
-  top: 0;
-  left: 30px;
+  top: 5px;
+  left: 60px;
   min-width: 32px;
   min-height: 43px;
   height: auto;
   z-index: 20;
 }
+
+.thumbnail-spinner {
+  position: absolute;
+  top: 7px;
+  right: 60px;
+  height: 18px;
+  width: 18px;
+  z-index: 100;
+}
+
 
 /* Font classes - Tags */
 .tag-cloud .xtiny { font-size: 0.5em; text-decoration:none; }
