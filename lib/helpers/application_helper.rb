@@ -35,6 +35,18 @@ module ApplicationHelper
     end
   end
 
+  def flash(recordings)
+    url = recordings.select { |recording| recording.mime_type == 'video/mp4' }.first.try(:url)
+    if url.present?
+      h(url) 
+    elsif recordings.present?
+      h(recordings.first.url)
+    else
+      # :(
+      ''
+    end
+  end
+
   def aspect_ratio_width(high=true)
     conference = @item[:conference]
     case conference.aspect_ratio
