@@ -19,6 +19,7 @@
                     %img{src: folder.conference.logo_url, alt: 'conference logo'}
                     %div.caption
                       = folder.conference.title
+                      (#{Event.recorded_at(folder.conference).to_a.count})
                   - else
                     %img{src: '/images/folder.png', alt: 'folder'}
                     %div.caption

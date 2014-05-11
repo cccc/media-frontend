@@ -10,6 +10,13 @@ class Event < ActiveRecord::Base
   scope :newer, ->(date) { where("release_date > ?", date).order('release_date desc') }
   scope :older, ->(date) { where("release_date < ?", date).order('release_date desc') }
 
+  scope :recorded_at, ->(conference) {
+    joins(:recordings, :conference)
+    .where(conferences: { id: conference })
+    .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 }) 
+    .group(:"events.id")
+  }
+
   def url
     "/browse/#{self.conference.webgen_location}/#{self.slug}.html"
   end
