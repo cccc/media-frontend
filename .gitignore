@@ -6,3 +6,4 @@ output/
 nanoc.yaml
 *sql
 *.log
+.idea
