@@ -83,8 +83,8 @@ route '*' do
   if item.binary?
     # Write item with identifier /foo/ to /foo.ext
     item.identifier.chop + '.' + item[:extension]
-  elsif item[:extension] == 'xml' or item[:extension] == 'rdf'
-    # rss feeds
+  elsif item[:extension] =~ /xml|rdf|atom/
+    # atom, xml or rdf feeds
     item.identifier.chop + '.' + item[:extension]
   else
     # Write item with identifier /foo/ to /foo/index.html
