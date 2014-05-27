@@ -4,3 +4,4 @@ output/
 *sqlite3
 .ruby-version
 nanoc.yaml
+*sql
