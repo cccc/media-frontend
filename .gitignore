@@ -5,3 +5,4 @@ output/
 .ruby-version
 nanoc.yaml
 *sql
+*.log
