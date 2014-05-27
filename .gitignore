@@ -7,3 +7,4 @@ nanoc.yaml
 *sql
 *.log
 .idea
+.sass-cache
