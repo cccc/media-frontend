@@ -33,5 +33,13 @@ class FeedBuilder
       channel_summary: "This feed contains events older than two years"
     }
     @item_builder.create_feed_item(xml, 'podcast-archive.xml')
+
+    # news atom feed
+    atom_feed = Feeds::NewsFeedGenerator.generate(News.all, options: {
+        author: Settings.feeds['channel_owner'],
+        about: 'http://media.ccc.de',
+        title: 'CCC TV - NEWS',
+    })
+    @item_builder.create_feed_item(atom_feed, 'news.atom')
   end
 end
