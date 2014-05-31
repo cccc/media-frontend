@@ -47,47 +47,48 @@ end
 # Routes
 #
  
-# _mixed.scss
+# Assets
 route '/assets/**/_*' do
-    nil
+  # _mixed.scss
+  nil
 end
 
 route '/assets/css/*/' do
-    if item[:extension] == 'scss'
-      item.identifier.chop + '.css' 
-    else
-      item.identifier.chop
-    end
+  if item[:extension] == 'scss'
+    item.identifier.chop + '.css' 
+  else
+    item.identifier.chop
+  end
 end
 
 passthrough '/assets/*'
 passthrough '/images/*'
 
+# AR datasource
 route '/browse/*' do
   if item[:layout] == 'browse-show-page'
     item.identifier.chop + '.' + 'html'
   elsif item[:layout] == 'browse-show-tags'
     item.identifier.chop + '.' + 'html'
   elsif item[:extension] == 'xml'
+    # podcast.xml
     item.identifier.chop + '.' + item[:extension]
   else
     item.identifier + 'index.html'
   end
 end
 
-route '/about/' do
-  '/about.html'
-end
-
+# Content
 route '*' do
   if item.binary?
-    # Write item with identifier /foo/ to /foo.ext
     item.identifier.chop + '.' + item[:extension]
-  elsif item[:extension] =~ /xml|rdf|atom/
+  elsif %w{/about/}.include? item.identifier
+    # HAML pages in root except index.html
+    item.identifier.chop + '.html'
+  elsif %w{xml rdf atom}.include? item[:extension]
     # atom, xml or rdf feeds
     item.identifier.chop + '.' + item[:extension]
   else
-    # Write item with identifier /foo/ to /foo/index.html
     item.identifier + 'index.html'
   end
 end
