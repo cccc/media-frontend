@@ -5,15 +5,9 @@
     %title
       C3TV -
       = @item[:title]
-
-    %meta{name: 'description', content: Settings.header['description']}
-    %meta{name: 'author', content: Settings.header['author']}
-    %meta{name: 'keywords', content: Settings.header['keywords']}
-    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
-    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
-
-    %link{href: '/assets/css/styles.css', rel: 'stylesheet'}
-    %link{href: '/news.atom', rel: 'alternate', title: 'C3TV - News', type: 'application/atom+xml'}
+    = render '/partials/header'
+    %script(src="/assets/js/jquery.min.js")
+    %script(src="/assets/js/bootstrap.min.js")
   %body
     = render '/partials/navbar'
 
@@ -38,5 +32,3 @@
 
       = render '/partials/footer'
 
-    %script(src="/assets/js/jquery.min.js")
-    %script(src="/assets/js/bootstrap.min.js")
