@@ -8,8 +8,7 @@ class Recording < ActiveRecord::Base
   scope :video, -> { where(mime_type: ['video/mp4', 'video/ogg', 'video/webm']) }
 
   def url
-    self.folder ||= ""
-    File.join self.event.conference.recordings_url, self.folder, self.filename
+    File.join self.event.conference.recordings_url, self.folder || '', self.filename
   end
 
   def torrent_url
