@@ -46,6 +46,8 @@ module Feeds
             assign_item_options(item, news)
           end
         end
+
+
       end
     end
 
@@ -56,12 +58,14 @@ module Feeds
     # @param item [RSS::Maker::Atom::Feed::Items::Item]
     # @param news [News] object
     def self.assign_item_options(item, news)
-      item.updated     = Time.now.to_s
-      item.title       = news.title
-      item.id          = "#{news.id}"
-      item.description = news.body
-      item.published   = news.created_at
-      item.updated     = news.updated_at
+      item.id              = "tag:media.ccc.de,#{news.created_at.strftime('%Y-%m-%d')}:#{news.id}"
+      item.updated         = Time.now.to_s
+      item.title           = news.title
+      item.content.content = news.body
+      item.content.type    = 'html'
+      item.published       = news.created_at
+      item.updated         = news.updated_at
+      item.link            = 'http://media.ccc.de/'
     end
 
     # Assign options like a title or an author to an atom feed.
@@ -73,6 +77,12 @@ module Feeds
       feed.channel.updated = Time.now.to_s
       feed.channel.about   = options[:about]
       feed.channel.title   = options[:title]
+      feed.channel.link    = options[:feed_url]
+      feed.channel.icon    = options[:icon]
+      feed.channel.logo    = options[:logo]
+      # define feed link attributes
+      feed.channel.links.first.rel  = 'self'
+      feed.channel.links.first.type = 'application/atom+xml'
     end
   end
 end
