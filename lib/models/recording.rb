@@ -3,7 +3,7 @@ class Recording < ActiveRecord::Base
 
   HTML5 = ['audio/ogg', 'audio/mpeg', 'video/mp4', 'video/ogg', 'video/webm']
 
-  scope :downloaded, -> { where(state: 'downloaded') }
+  scope :downloaded, -> { where(state: ['downloaded', 'released']) }
   scope :audio, -> { where(mime_type: ['audio/ogg', 'audio/mpeg']) }
   scope :video, -> { where(mime_type: ['video/mp4', 'video/ogg', 'video/webm']) }
 
