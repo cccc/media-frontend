@@ -62,7 +62,7 @@ module Feeds
     <b>Video:</b><a href="#{recording.url}">#{recording.filename}</a>
 </div>
 EOF
-        item.pubDate = event.release_date || event.date
+        item.pubDate = date(event)
 
       end
 
