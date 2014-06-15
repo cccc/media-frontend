@@ -37,8 +37,11 @@ class FeedBuilder
     # news atom feed
     atom_feed = Feeds::NewsFeedGenerator.generate(News.all, options: {
         author: Settings.feeds['channel_owner'],
-        about: 'http://media.ccc.de',
+        about: 'http://media.ccc.de/',
         title: 'CCC TV - NEWS',
+        feed_url: 'http://media.ccc.de/news.atom',
+        icon: 'http://media.ccc.de/favicons.ico',
+        logo: 'http://media.ccc.de/images/tv.png'
     })
     @item_builder.create_feed_item(atom_feed, 'news.atom')
   end
