@@ -34,4 +34,8 @@ class Event < ActiveRecord::Base
     File.join Settings.staticURL, 'media', self.conference.images_path, self.thumb_filename
   end
 
+  def tags
+    read_attribute(:tags).compact
+  end
+
 end
