@@ -10,8 +10,14 @@ module ApplicationHelper
     end
   end
 
+  def recording_length(recordings)
+    return unless recordings.present?
+    recording = recordings.select { |r| r.length.present? }.first
+    recording_length_minutes(recording) unless recording.nil?
+  end
+
   def recording_length_minutes(recording)
-    if recording.length.present?
+    if recording.length > 0
       "(#{recording.length / 60}min)"
     end
   end

@@ -37,7 +37,7 @@
                         = h event.persons.join(', ')
                       %br
                         %span.small= date(event)
-                        %span.small= recording_length_minutes(recordings.first) if recordings.present?
+                        %span.small= recording_length(recordings)
  
       = yield
 
