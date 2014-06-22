@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   scope :recorded_at, ->(conference) {
     joins(:recordings, :conference)
     .where(conferences: { id: conference })
-    .where(recordings: { state: ['downloaded', 'released'], mime_type: Recording::HTML5 }) 
+    .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 }) 
     .group(:"events.id")
   }
 
