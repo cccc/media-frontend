@@ -85,7 +85,7 @@ The following data is collected and saved for an undefined duration:
     var source = $('#status-template').html();
     var template = Handlebars.compile(source);
     var target = $('#status');
-    $.get("https://api.media.ccc.de/public/mirrors", function(data,status,xhr){
+    $.get("http://api.media.ccc.de/public/mirrors", function(data,status,xhr){
       var html = template(data);
       target.html(html);
     });
