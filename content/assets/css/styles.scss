@@ -38,6 +38,29 @@ a.navbar-brand img {
   z-index: 100;
 }
 
+#sorting {
+  text-align: right;
+
+  .list {
+    float: right;
+
+    ul {
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+  }
+
+  .text {
+    padding-left: 5px;
+    display: table;
+  }
+}
+
+#top {
+  text-align: right;
+}
+
+
 
 /* Font classes - Tags */
 .tag-cloud .xtiny { font-size: 0.5em; text-decoration:none; }
@@ -45,4 +68,3 @@ a.navbar-brand img {
 .tag-cloud .normal{ font-size: 1.0em; text-decoration:none; }
 .tag-cloud .large { font-size: 1.25em; text-decoration:none; }
 .tag-cloud .xlarge { font-size: 1.5em; font-weight:bold; }
-

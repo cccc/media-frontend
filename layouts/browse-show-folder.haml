@@ -13,15 +13,28 @@
       %div.row
         %div.col-md-2
           %img{src: @item[:conference].logo_url}
-        %div.col-md-10
+        %div.col-md-6
           %h3= @item[:conference].acronym
-          - if @item[:conference_title] and not @item[:conference].acronym == @item[:conference].title
+          - if @item[:conference_title] and not item[:conference].acronym == @item[:conference].title
             %h2= h @item[:conference].title
+        #sorting.col-md-4
+          .list
+            .text
+              sort by
+            %ul.pagination.pagination-sm
+              - %w{date duration name rand()}.each do |sorting|
+                - if @item[:sorting] == sorting
+                  %li.active
+                    %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
+                - else
+                  %li
+                    %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
 
       - if @item[:events].present?
-        - @item[:events].each_slice(4) do |events|
+        -# Build event overview
+        - @item[:events].each_slice(4) do |blocks|
           %div.row
-            - events.each do |event|
+            - blocks.each do |event|
               - recordings = event.recordings.downloaded
               %div.col-xs-6.col-md-3
                 %div.thumbnail
@@ -38,12 +51,16 @@
                       %br
                         %span.small= date(event)
                         %span.small= recording_length(recordings)
- 
+
       = yield
 
-      = render '/partials/footer'
+      #top
+        #col-md-4
+          %ul.pagination.pagination-sm
+            %li
+              %a{ href: '#' } Top ↑
 
+      = render '/partials/footer'
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")
     %script(src="/assets/js/thumbnails.js")
-
