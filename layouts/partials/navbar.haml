@@ -28,7 +28,7 @@
           %a{href: item.identifier}
             = item.identifier.sub(trail[i].identifier, '').gsub('/','')
       %li.active
-        - if @item[:sorting] == ''
+        - if @item[:sorting] == '' || @item[:sorting] == nil
           = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
         - else
           = "sorted by #{trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')}"
