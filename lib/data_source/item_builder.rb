@@ -6,15 +6,18 @@ class ItemBuilder
   attr_reader :items
 
   def create_conference_item(conference, events)
-    @items << Nanoc3::Item.new(
-      "",
-      { 
-        title: conference.acronym, layout: 'browse-show-folder',
-        conference: conference, events: events
-      },
-      get_path(conference.webgen_location),
-      binary: false
-    )
+    ['', 'name', 'duration', 'rand()', 'date'].each do |sorting|
+      @items << Nanoc3::Item.new(
+        "",
+        {
+          title: conference.acronym, layout: 'browse-show-folder',
+          conference: conference, events: sorting_events(events, sorting),
+          sorting: sorting
+        },
+        get_path([conference.webgen_location, "#{sorting}"]),
+        binary: false
+      )
+    end
   end
 
   def create_event_item(event)
@@ -25,11 +28,11 @@ class ItemBuilder
 
     event_item = Nanoc3::Item.new(
       description,
-      { 
+      {
         title: event.title, layout: 'browse-show-page',
         tags: event.tags.map { |t| t.strip },
         conference: event.conference,
-        event: event, 
+        event: event,
         video_recordings: event.recordings.downloaded.video,
         audio_recordings: event.recordings.downloaded.audio
       },
@@ -56,7 +59,7 @@ class ItemBuilder
 
     @items << Nanoc3::Item.new(
       "",
-      { 
+      {
         title: path, layout: 'browse-index',
         folders: folders
       },
@@ -68,7 +71,7 @@ class ItemBuilder
   def create_tag_item(tag, events)
     @items << Nanoc3::Item.new(
       "",
-      { 
+      {
         title: tag, layout: 'browse-show-tags',
         events: events
       },
@@ -81,7 +84,7 @@ class ItemBuilder
     identifier, extension = filename.split('.')
     @items << Nanoc3::Item.new(
       content,
-      { 
+      {
         extension: extension
       },
       "/#{identifier}/",
@@ -100,12 +103,26 @@ class ItemBuilder
     )
   end
 
-  private 
+  private
 
   def get_path(*parts)
     raise "nil found in item path" if parts.any? { |p| p.nil? }
     '/browse/' + parts.join('/') + '/'
   end
 
+  def sorting_events(events, criteria)
+    case criteria
+    when 'name'
+      events.sort_by{ |e| e.title }
+    when 'duration'
+      events.sort_by{ |e| e.recordings.downloaded.first.length.nil? 0 : e.recordings.downloaded.first.length }.reverse
+    when 'rand()'
+      events.shuffle
+    when 'date'
+      events.sort_by{ |e| date(e) }
+    else
+      events
+    end
+  end
 
 end

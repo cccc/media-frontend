@@ -3,7 +3,7 @@
     %div.navbar-header
       %a.navbar-brand(href='/index.html')
         %img{src: '/images/tv.png'}
-        CCC-TV - 
+        CCC-TV -
         = @item[:title]
 
     %div.navbar-collapse.collapse
@@ -16,7 +16,7 @@
         %form.navbar-form{role: 'search', action: 'http://www.duckduckgo.com/', method: 'get', id: 'duck-duck-go-search'}
           %div.form-group
             %input.form-control{type: 'hidden', name: 'sites', value: 'media.ccc.de'}
-            %input.form-control{type: 'text', maxlength: '255', size: '17', name: 'q'}
+            %input.form-control{type: 'text', maxlength: '255', size: '17', name: 'q', placeholder: 'Search…'}
           %button.btn.btn-default{type: 'submit', value: 'DuckDuckGo'} Go
 
 - unless @item.identifier.starts_with? '/browse/tags'
@@ -28,4 +28,7 @@
           %a{href: item.identifier}
             = item.identifier.sub(trail[i].identifier, '').gsub('/','')
       %li.active
-        = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
+        - if @item[:sorting] == '' || @item[:sorting] == nil
+          = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
+        - else
+          = "sorted by #{trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')}"
