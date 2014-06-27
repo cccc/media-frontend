@@ -115,7 +115,7 @@ class ItemBuilder
     when 'name'
       events.sort_by{ |e| e.title }
     when 'duration'
-      events.sort_by{ |e| e.recordings.downloaded.first.length }.reverse
+      events.sort_by{ |e| e.recordings.downloaded.first.length.nil? 0 : e.recordings.downloaded.first.length }.reverse
     when 'rand()'
       events.shuffle
     when 'date'
