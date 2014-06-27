@@ -99,7 +99,12 @@
         usePluginFullScreen: true,
 
         pluginPath: '/assets/',
-        enableAutosize: true
+        enableAutosize: true,
+        success: function (mediaElement) {
+          mediaElement.addEventListener('playing', function () {
+            $.post("http://api.media.ccc.de/public/recordings/count", {event_id: #{@item[:event].id},src: mediaElement.src});
+          }, false);
+        }
       });
       $('audio').mediaelementplayer();
-      $.post("//api.media.ccc.de/public/events/#{@item[:event].id}/count");
+      $.post("http://api.media.ccc.de/public/events/#{@item[:event].id}/count");
