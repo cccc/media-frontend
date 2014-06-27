@@ -36,6 +36,7 @@
               audio only 
 
       %span
+        Views: #{@item[:event].view_count}
         %a{href: "#", onclick: "$('.file-list').toggle()"} toggle file list
       - if @item[:audio_recordings].present? and @item[:video_recordings].present?
         %span
