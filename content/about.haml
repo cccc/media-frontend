@@ -45,7 +45,7 @@ The following data is collected and saved for an undefined duration:
 
 %p
   :markdown
-    The website is basically a frontend for all files stored on [cdn.media.ccc.de](http://cdn.media.ccc.de).
+    The website is basically a frontend for all files stored on [cdn.media.ccc.de](//cdn.media.ccc.de).
     If you'd rather use a torrent you can append '.torrent' to any large file, this will provide a torrent with
     http seeds appropiate for your location.
 
@@ -58,7 +58,7 @@ The following data is collected and saved for an undefined duration:
 
 %p
   :markdown
-    Please see [ccc.de](http://ccc.de/de/imprint).
+    Please see [ccc.de](//ccc.de/de/imprint).
 
 %script#status-template{type: 'text/x-handlebars-template'}
   <table class="table table-striped table-condensed">
@@ -74,7 +74,7 @@ The following data is collected and saved for an undefined duration:
   <tr class='warning'>
   {{/if}}
   <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
-  <td><a href="http://www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
+  <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
   <td>{{this.last_scan }}</td>
   </tr>
   {{/each}}
@@ -85,7 +85,7 @@ The following data is collected and saved for an undefined duration:
     var source = $('#status-template').html();
     var template = Handlebars.compile(source);
     var target = $('#status');
-    $.get("http://api.media.ccc.de/public/mirrors", function(data,status,xhr){
+    $.get("//api.media.ccc.de/public/mirrors", function(data,status,xhr){
       var html = template(data);
       target.html(html);
     });
