@@ -1,6 +1,6 @@
 {
-  "cdnURL": "//cdn.media.ccc.de",
-  "staticURL": "//static.media.ccc.de",
+  "cdnURL": "http://cdn.media.ccc.de",
+  "staticURL": "http://static.media.ccc.de",
   "header": {
     "description": "Video Streaming Portal des Chaos Computer Clubs",
     "author": "CCC",
