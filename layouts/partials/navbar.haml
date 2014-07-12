@@ -29,6 +29,9 @@
             = item.identifier.sub(trail[i].identifier, '').gsub('/','')
       %li.active
         - if @item[:sorting] == '' || @item[:sorting] == nil
-          = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
+          - if trail[-1][:event].present?
+            = trail[-1][:title]
+          - else
+            = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
         - else
           = "sorted by #{trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')}"
