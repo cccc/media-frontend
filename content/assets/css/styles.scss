@@ -12,11 +12,7 @@ body {
   padding-top: 40px;
 }
 
-.footer-space {
-  margin-top: 40px;
-}
-
-/* navigartion bar */
+/* navigation bar */
 .navbar {
 
   .container-fluid {
@@ -44,10 +40,24 @@ body {
   }
 }
 
+/* footer */
+footer {
+  padding: 0.7em;
+  margin-top: 2em;
+  color: $gray-light;
+  background-color: $gray-dark;
+  text-align: center;
+}
+
 /* icons */
 .fa {
   min-width: 20px;
   font-size: 1.3em;
+}
+
+/* links */
+a.inverted {
+  color: $gray-lighter;
 }
 
 .thumbnail .icons {
