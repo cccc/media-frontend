@@ -11,7 +11,9 @@ title: home
 %h1 News
 
 - News.recent(10).each do |news|
-  %div.news-item
-    %h2= h news.header
-    %span= news.body
+  %article.news-item
+    %h2
+      %span.date= news.date_formatted
+      = news.title
+    =news.body
    

@@ -19,6 +19,11 @@ h1 {
 
 h2 {
   margin-top: 1.2em;
+  .date {
+    margin-right: 0.2em;
+    color: $brand-primary;
+    font-size: 16px;
+  }
 }
 
 p {
