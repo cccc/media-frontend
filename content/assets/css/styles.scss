@@ -2,12 +2,9 @@
 @import "variables";
 @import "bootstrap";
 
+/* main layout */
 body {
   padding-top: 50px;
-}
-
-a.navbar-brand img {
-  height: 24px;
 }
 
 .top-space {
@@ -16,6 +13,40 @@ a.navbar-brand img {
 
 .footer-space {
   margin-top: 40px;
+}
+
+/* navigartion bar */
+.navbar {
+
+  .container-fluid {
+    max-width: $container-lg;
+  }
+
+  .btn.btn-default {
+    padding: 0.2em;
+    height: 1.8em;
+    max-width: 2em;
+    &:hover {
+      color: $brand-primary;
+      background-color: #fff;
+      border-color: #fff;
+    }
+  }
+  
+  .navbar-form {
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+  }
+  
+  input {
+    height: 1.8em;
+  }
+}
+
+/* icons */
+.fa {
+  min-width: 20px;
+  font-size: 1.3em;
 }
 
 .thumbnail .icons {
