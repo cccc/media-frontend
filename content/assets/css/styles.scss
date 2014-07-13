@@ -12,11 +12,28 @@ body {
   padding-top: 40px;
 }
 
+h1 {
+  color: $gray-dark;
+  margin-bottom: -0.1em;
+}
+
+h2 {
+  margin-top: 1.2em;
+}
+
+p {
+  margin-bottom: 0.5em;
+}
+
 /* navigation bar */
 .navbar {
 
   .container-fluid {
     max-width: $container-lg;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
   }
 
   .btn.btn-default {
@@ -105,8 +122,8 @@ a.inverted {
 
 
 /* Font classes - Tags */
-.tag-cloud .xtiny { font-size: 0.5em; text-decoration:none; }
-.tag-cloud .tiny { font-size: 0.75em; font-weight:lighter; }
-.tag-cloud .normal{ font-size: 1.0em; text-decoration:none; }
-.tag-cloud .large { font-size: 1.25em; text-decoration:none; }
-.tag-cloud .xlarge { font-size: 1.5em; font-weight:bold; }
+.tag-cloud .xtiny { font-size: 0.75em; text-decoration:none; }
+.tag-cloud .tiny { font-size: 1.0em; font-weight:lighter; }
+.tag-cloud .normal{ font-size: 1.25em; text-decoration:none; }
+.tag-cloud .large { font-size: 1.5em; text-decoration:none; }
+.tag-cloud .xlarge { font-size: 1.75em; font-weight:bold; }

@@ -8,10 +8,10 @@ title: home
       %a.thumbnail{href: h(event.url)}
         %img{src: h(event.thumb_url), alt: event.title, title: event.title}
 
-%h2 CCC-TV News
+%h1 News
 
 - News.recent(10).each do |news|
   %div.news-item
-    %h3= h news.header
+    %h2= h news.header
     %span= news.body
    
