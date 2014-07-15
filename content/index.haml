@@ -2,11 +2,14 @@
 title: home
 ---
 
-%div.row
-  - Event.promoted(4).each do |event|
-    %div.col-xs-6.col-md-3
-      %a.thumbnail{href: h(event.url)}
-        %img{src: h(event.thumb_url), alt: event.title, title: event.title}
+.row
+  %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse/tags'}
+    %span.fa.fa-tags
+    Browse by tag
+    
+  %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
+    %span.fa.fa-th
+    Browse by category
 
 %h1 News
 

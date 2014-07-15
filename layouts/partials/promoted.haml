@@ -1,0 +1,8 @@
+%div.promoted
+  .titlebar
+  - Event.promoted(4).each do |event|
+    %article.item
+      %a.preview{href: h(event.url)}
+        %img{src: h(event.thumb_url), alt: event.title, title: event.title}
+      %h2.title= event.title
+      %h3.subtitle= event.subtitle
