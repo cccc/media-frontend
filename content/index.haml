@@ -2,21 +2,23 @@
 title: home
 ---
 
-.row
-  %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse/tags'}
-    %span.fa.fa-tags
-    Browse by tag
-    
-  %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
-    %span.fa.fa-th
-    Browse by category
+= render '/partials/promoted'
 
-%h1 News
+%div.container.top-space
+  .row
+    %a.btn.btn-primary.btn-lg{role: 'button', href: '/tags'}
+      %span.fa.fa-tags
+      Browse by tag
+      
+    %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
+      %span.fa.fa-th
+      Browse by category
 
-- News.recent(10).each do |news|
-  %article.news-item
-    %h2
-      %span.date= news.date_formatted
-      = news.title
-    =news.body
-   
+  %h1 News
+
+  - News.recent(10).each do |news|
+    %article.news-item
+      %h2
+        %span.date= news.date_formatted
+        = news.title
+      =news.body

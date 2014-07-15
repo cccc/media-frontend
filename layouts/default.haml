@@ -10,25 +10,7 @@
     %script(src="/assets/js/bootstrap.min.js")
   %body
     = render '/partials/navbar'
-
-    %div.container
-
-      .row
-        %div.col-md-9.top-space
-          = yield
-
-        %div.col-md-3.top-space
-          %div
-            %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
-              Browse
-          %br
-
-          %div.panel.tag-cloud
-            %div.panel-heading
-              %h3.panel-title Tags
-            %div.panel-body
-              - tag_cloud.each do |tag|
-                = tag
+    = yield
 
   = render '/partials/footer'
 

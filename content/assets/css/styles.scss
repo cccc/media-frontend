@@ -73,6 +73,7 @@ p {
   ol {
     max-width: $max-width;
     line-height: 0.9em;
+    margin-bottom: 0;
     li + li:before {
       font-family: FontAwesome;
       font-size: 9px;

@@ -19,9 +19,9 @@
           %button.btn.btn-default{type: 'submit', value: 'DuckDuckGo'}
             %span.fa.fa-search
               
-- unless @item.identifier.starts_with? '/browse/tags'
+- unless @item.identifier.include? '/tags/'
   - trail = breadcrumbs_trail
-  - if trail.count > 1
+  - if trail.count > 2 or @item.identifier.include? '/browse/'
     #breadcrumb
       %ol.container-fluid.breadcrumb
         - trail[1..-2].each_with_index do |item, i|
