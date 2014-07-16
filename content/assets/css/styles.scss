@@ -6,10 +6,15 @@
 $max-width: $container-lg;
 
 /* main layout */
+html {
+  width: 100%;
+  overflow: hidden;
+}
+
 body {
   padding-top: $navbar-height;
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .top-space {
@@ -35,13 +40,13 @@ p {
   margin-bottom: 0.5em;
 }
 
+.container, .container-fluid {
+  max-width: $max-width;
+}
+
 /* navigation bar */
 .navbar {
   border: none;
-
-  .container-fluid {
-    max-width: $max-width;
-  }
   
   .navbar-brand {
     font-size: 24px;
