@@ -282,11 +282,24 @@ a.inverted {
 
 
 /* and now for small screens: */
-@media all and (max-width: 449px) {
+@media all and (max-width: $screen-xs-max) {
 
   /* main layout */
   body {
     padding-top: 0;
+  }
+  
+  h1 {
+    font-size: 34px;
+    margin-top: 30px;
+  }
+  h2 {
+    font-size: 23px;
+  }
+  
+  /* large buttons */
+  .btn-lg, .btn-group-lg>.btn {
+    font-size: 23px;
   }
 
   /* navigation bar */
@@ -317,4 +330,17 @@ a.inverted {
     }
   }
   
+  /* promoted videos */
+  .promoted {
+    height: 230px;
+    .item {
+      height: 220px;
+    }
+    .preview {
+      height: 120px;
+    }
+    .titlebar {
+      top: 118px;
+    }
+  }
 }
