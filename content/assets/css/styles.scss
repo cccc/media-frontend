@@ -24,10 +24,11 @@ body {
 h1 {
   color: $gray-dark;
   margin-top: 60px;
+  line-height: 0.9em;
 }
 
 h1 + h2 {
-  margin-top: -0.5em;
+  margin-top: -0.2em;
 }
 
 h2 {
@@ -398,6 +399,17 @@ a.inverted {
     }
     .titlebar {
       top: 118px;
+    }
+  }
+  
+  /* tabs */
+  .nav.nav-tabs.nav-justified > li {
+    a {
+      font-size: 20px;
+      padding-top: 5px;
+    }
+    &.active > a {
+      background-color: $gray;
     }
   }
 }
