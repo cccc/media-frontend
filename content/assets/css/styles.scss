@@ -26,6 +26,10 @@ h1 {
   margin-top: 60px;
 }
 
+h1 + h2 {
+  margin-top: -0.5em;
+}
+
 h2 {
   margin-top: 1.2em;
   .date {
@@ -102,6 +106,55 @@ p {
 /* news */
 h1 + .news-item {
   margin-top: -0.5em;
+}
+
+/* recording detail site */
+.nav.nav-tabs.nav-justified {
+  margin-top: 16px;
+  font-weight: bold;
+  font-size: 24px;
+  background-color: $gray;
+  
+  & > li {
+    a {
+      padding: $padding-large-vertical 0 0 0;
+      margin-bottom: 0;
+      border: none;
+      &:hover {
+        background-color: #fff;
+      }
+      &:hover, &:focus {
+        border: none;
+      }
+    }
+    &.active > a {
+      color: white;
+      background-color: $gray-dark;
+    }
+  }
+}
+
+.tab-content {
+  background-color: $gray-dark;
+  padding: $padding-large-horizontal 0 0 0;
+  
+  #video {
+    text-align: center;
+    .video {
+      margin: auto;
+    }
+    * {
+      max-width: 100%;
+    }
+  }
+  
+  #audio * {
+    max-width: 100%;
+  }
+  
+  #download {
+    padding: $padding-large-horizontal;
+  }
 }
 
 /* footer */

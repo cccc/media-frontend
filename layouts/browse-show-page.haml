@@ -9,40 +9,64 @@
   %body
     = render '/partials/navbar'
 
-    %div.container.top-space
+    %div.container-fluid
 
-      %h3
+      %h1
         =  h @item[:event].title
       - if @item[:event].subtitle
-        %h4
+        %h2
           = h @item[:event].subtitle
 
-      - if @item[:video_recordings].present?
-        .row.col-md-12
-          - r = @item[:video_recordings].first
-          %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
-            - @item[:video_recordings].each do |recording|
-              %source{type: recording.mime_type, src: h(recording.url)}
-            %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
-              %param{ name: 'allowFullScreen', value: 'true' }
-              %param{ name: 'flashvars', value: "controls=true&file=#{flash(@item[:video_recordings])}" }
+      %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
+        %li.active
+          %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
+        %li 
+          %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
+        %li
+          %a{href: '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+          
+      .tab-content
+        #video.tab-pane.active
+          - if @item[:video_recordings].present?
+            - r = @item[:video_recordings].first
+            %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
+              - @item[:video_recordings].each do |recording|
+                %source{type: recording.mime_type, src: h(recording.url)}
+              %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
+                %param{ name: 'allowFullScreen', value: 'true' }
+                %param{ name: 'flashvars', value: "controls=true&file=#{flash(@item[:video_recordings])}" }
 
-      - if @item[:audio_recordings].present?
-        .row.col-md-12
-          .audio-player{style: @item[:video_recordings].present? ? 'display: none' : ''}
-            %audio.audio{controls: 'true'}
+        #audio.tab-pane
+          - if @item[:audio_recordings].present?
+            %audio.audio{controls: 'true', width: '100%'}
               - @item[:audio_recordings].each do |recording|
                 %source{type: recording.mime_type, src: h(recording.url)}
-            %span.small
-              audio only 
+
+        #download.tab-pane
+          %p
+            %b Directory: 
+            %a{href: @item[:conference].recordings_url}
+              = @item[:conference].recordings_path
+              
+            %ul
+              - @item[:video_recordings].each do |recording|
+                %li
+                  %a{href: recording.url}
+                    = recording.filename
+                %li
+                  %a{href: recording.torrent_url}
+                    = recording.filename + '.torrent'
+            %ul
+              - @item[:audio_recordings].each do |recording|
+                %li
+                  %a{href: recording.url}
+                    = recording.filename
+                %li
+                  %a{href: recording.torrent_url}
+                    = recording.filename + '.torrent'
 
       %span
         Views: #{@item[:event].view_count}
-        %a{href: "#", onclick: "$('.file-list').toggle()"} toggle file list
-      - if @item[:audio_recordings].present? and @item[:video_recordings].present?
-        %span
-          |
-          %a{href: "#", onclick: "$('.audio-player').toggle()"} toggle audio player
 
       %p.meta.top-space
         / index
@@ -53,30 +77,6 @@
         %span.small
           from 
           = date(@item[:event])
-
-      .file-list{style: 'display: none'}
-        %p
-          %b Directory: 
-          %a{href: @item[:conference].recordings_url}
-            = @item[:conference].recordings_path
-
-          %div.row
-            %ul.col-md-6
-              - @item[:video_recordings].each do |recording|
-                %li
-                  %a{href: recording.url}
-                    = recording.filename
-                %li
-                  %a{href: recording.torrent_url}
-                    = recording.filename + '.torrent'
-            %ul.col-md-6
-              - @item[:audio_recordings].each do |recording|
-                %li
-                  %a{href: recording.url}
-                    = recording.filename
-                %li
-                  %a{href: recording.torrent_url}
-                    = recording.filename + '.torrent'
 
       %p.description
 
