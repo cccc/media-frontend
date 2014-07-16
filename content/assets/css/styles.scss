@@ -23,7 +23,6 @@ body {
 
 h1 {
   color: $gray-dark;
-  margin-bottom: -0.5em;
   margin-top: 60px;
 }
 
@@ -98,6 +97,11 @@ p {
   .btn-lg {
     margin: $padding-small-vertical $padding-small-horizontal;
   }
+}
+
+/* news */
+h1 + .news-item {
+  margin-top: -0.5em;
 }
 
 /* footer */
