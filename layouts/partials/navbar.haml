@@ -5,12 +5,11 @@
         %img{src: '/images/tv.png'}
         ccc-tv
 
-    %ul.nav.navbar-form.navbar-right
-      %div.form-group
-        %a.form-control.btn.btn-default{href: '/podcast.xml'}
-          %span.fa.fa-rss
-        %a.form-control.btn.btn-default{href: '/about.html'}
-          %span.fa.fa-info
+    .nav.navbar-form.navbar-right.button-wrapper
+      %a.form-control.btn.btn-default{href: '/podcast.xml'}
+        %span.fa.fa-rss
+      %a.form-control.btn.btn-default{href: '/about.html'}
+        %span.fa.fa-info
     %form.navbar-form.navbar-right{role: 'search', action: '//www.duckduckgo.com/', method: 'get', id: 'duck-duck-go-search'}
       %div.form-group.input-group
         %input.form-control{type: 'hidden', name: 'sites', value: 'media.ccc.de'}

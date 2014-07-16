@@ -8,6 +8,7 @@ $max-width: $container-lg;
 /* main layout */
 body {
   padding-top: $navbar-height;
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -44,6 +45,7 @@ p {
   
   .navbar-brand {
     font-size: 24px;
+    padding: 12px 15px;
   }
 
   .btn.btn-default {
@@ -64,6 +66,7 @@ p {
   
   input {
     height: 1.8em;
+    padding-top: 6px;
   }
 }
 
@@ -271,3 +274,42 @@ a.inverted {
 .tag-cloud .normal{ font-size: 1.25em; text-decoration:none; }
 .tag-cloud .large { font-size: 1.5em; text-decoration:none; }
 .tag-cloud .xlarge { font-size: 1.75em; font-weight:bold; }
+
+
+/* and now for small screens: */
+@media all and (max-width: 449px) {
+
+  /* main layout */
+  body {
+    padding-top: 0;
+  }
+
+  /* navigation bar */
+  .navbar {
+    position: initial;
+    & > .container-fluid {
+      display: inline-table;
+      width: 100%;
+    }
+    form {
+      width: 100%;
+    }
+    .navbar-form.navbar-right:last-child {
+      margin-right: 0;
+    }
+    .navbar-header, .navbar-form {
+      padding: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      min-width: 75px;
+    }
+    .input-group {
+      margin-bottom: $padding-small-vertical;
+    }
+    .button-wrapper {
+      text-align: right;
+      margin-top: $padding-large-vertical;
+    }
+  }
+  
+}
