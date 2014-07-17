@@ -42,6 +42,11 @@ h2 {
 
 p {
   margin-bottom: 0.5em;
+  .fa {
+    display: inline;
+    color: $gray-dark;
+    font-size: 1.1em;
+  }
 }
 
 .container, .container-fluid {

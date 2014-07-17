@@ -16,6 +16,18 @@
       - if @item[:event].subtitle
         %h2
           = h @item[:event].subtitle
+      
+      - if @item[:event].persons.present?
+        %p.persons
+          - if @item[:event].persons.length == 1
+            %span.fa.fa-user
+            by
+            = @item[:event].persons[0]
+          - else
+            %span.fa.fa-group
+            by
+            - persons = @item[:event].persons[0..-3] + [@item[:event].persons[-2..-1].join(' and ')]
+            = persons.join(', ')
 
       %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
         %li.active
@@ -81,14 +93,6 @@
       %p.description
 
         = yield
-
-          
-      - if @item[:event].persons.present?
-        %p.persons
-          %b Persons
-          %ul
-            - @item[:event].persons.each do |person|
-              %li= h person
 
     = render '/partials/footer'
 
