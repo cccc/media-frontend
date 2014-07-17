@@ -9,12 +9,14 @@ $max-width: $container-lg;
 html {
   width: 100%;
   overflow: hidden;
+  overflow-y: scroll;
 }
 
 body {
   padding-top: $navbar-height;
   width: 100%;
   overflow: hidden;
+  overflow-y: initial;
 }
 
 .top-space {
