@@ -12,7 +12,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
     item_builder = ItemBuilder.new
     tag_pages = TagPages.new
     location_pages = LocationPages.new
-    feed_builder = FeedBuilder.new(item_builder)
+    #feed_builder = FeedBuilder.new(item_builder)
 
     Conference.all.each do |conference|
       # event pages
@@ -27,7 +27,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
       end
 
       tag_pages.add(events)
-      feed_builder.add(conference, events)
+      #feed_builder.add(conference, events)
     end
 
     raise "duplicate location in conferences" if location_pages.duplicate?
@@ -38,7 +38,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
     # build connecting folder items
     location_pages.apply(item_builder)
 
-    feed_builder.apply
+    #feed_builder.apply
 
     item_builder.items
   end

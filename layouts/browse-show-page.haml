@@ -77,18 +77,24 @@
                   %a{href: recording.torrent_url}
                     = recording.filename + '.torrent'
 
-      %span
-        Views: #{@item[:event].view_count}
+      %ul.metadata
+        %li
+          %span.fa.fa-clock-o
+          = recording_length(@item[:event].recordings.downloaded)
+        %li
+          %span.fa.fa-calendar-o
+          = date(@item[:event])
+        %li
+          %span.fa.fa-eye
+          = @item[:event].view_count
+        %li
+          %span.fa.fa-external-link
+          %a{href: @item[:event].link}
+            = URI.parse(@item[:event].link).host
 
       %p.meta.top-space
         / index
         %b About:
-        %a{href: @item[:event].link} 
-          = h @item[:event].title
-
-        %span.small
-          from 
-          = date(@item[:event])
 
       %p.description
 

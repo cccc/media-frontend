@@ -10,6 +10,12 @@ html {
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;
+  
+  /* poor support - but for the future! */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 body {
@@ -84,6 +90,11 @@ p {
     height: 1.8em;
     padding-top: 6px;
   }
+  
+  .fa {
+    min-width: 20px;
+    font-size: 1.3em;
+  }
 }
 
 /* breadcrumb */
@@ -108,6 +119,9 @@ p {
   margin-bottom: $padding-large-vertical;
   .btn-lg {
     margin: $padding-small-vertical $padding-small-horizontal;
+  }
+  .fa {
+    font-size: 1.3em;
   }
 }
 
@@ -165,6 +179,21 @@ h1 + .news-item {
   }
 }
 
+ul.metadata {
+  list-style: none;
+  padding: $padding-small-vertical 0;
+  text-align: center;
+  border-bottom: 1px solid $gray;
+  li {
+    display: inline-block;
+    min-width: 24.5%;
+    padding: $padding-small-vertical $padding-small-horizontal;
+  }
+  .fa {
+    margin-right: $padding-xs-horizontal;
+  }
+}
+
 /* footer */
 footer {
   padding: 0.7em;
@@ -172,12 +201,6 @@ footer {
   color: $gray-light;
   background-color: $gray-dark;
   text-align: center;
-}
-
-/* icons */
-.fa {
-  min-width: 20px;
-  font-size: 1.3em;
 }
 
 /* links */
