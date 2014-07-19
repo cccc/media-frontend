@@ -92,13 +92,19 @@
           %a{href: @item[:event].link}
             = URI.parse(@item[:event].link).host
 
-      %p.meta.top-space
-        / index
-        %b About:
+      - if @item[:event].description.present?
+        %h3 About
+        %p.description
+          = @item[:event].description
 
-      %p.description
-
-        = yield
+      - if @item[:event].tags.present?
+        %h3 Tags
+        - @item[:event].tags.each do |tag|
+          -# TODO: move generation of this link out of view
+          %a.label.label-default(href="/browse/tags/#{tag}.html")
+            = tag
+          
+      
 
     = render '/partials/footer'
 

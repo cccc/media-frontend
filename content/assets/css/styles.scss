@@ -61,6 +61,18 @@ p {
   max-width: $max-width;
 }
 
+.label {
+  border-radius: $border-radius-base;
+  padding-top: 0.3em;
+  padding-bottom: 0.1em;
+  font-size: 14px;
+  font-weight: normal;
+  
+  & + .label {
+    margin-left: 2px;
+  }
+}
+
 /* navigation bar */
 .navbar {
   border: none;
