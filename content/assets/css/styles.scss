@@ -103,7 +103,7 @@ p {
   font-size: 16px;
   ol {
     max-width: $max-width;
-    line-height: 0.9em;
+    padding: $padding-small-vertical $padding-large-horizontal;
     margin-bottom: 0;
     li + li:before {
       font-family: FontAwesome;
