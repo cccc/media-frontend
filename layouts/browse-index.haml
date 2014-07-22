@@ -8,23 +8,27 @@
   %body
     = render '/partials/navbar'
 
-    %div.container.top-space
+    .container-fluid.top-space
 
       - if @item[:folders].present?
-        - @item[:folders].each_slice(4) do |folders|
-          %div.row
-            - folders.each do |folder|
-              %div.col-xs-6.col-md-3
-                %a.thumbnail{href: h(folder.url)}
-                  - if folder.conference
-                    %img{src: folder.conference.logo_url, alt: 'conference logo'}
-                    %div.caption
-                      = folder.conference.title
-                      (#{Event.recorded_at(folder.conference).to_a.count})
-                  - else
-                    %img{src: '/images/folder.png', alt: 'folder'}
-                    %div.caption
-                      = folder.name
+        - @item[:folders].each do |folder|
+          - if folder.conference
+            %a.thumbnail.conference{href: h(folder.url)}
+              .header
+                %span.fa.fa-video-camera
+                = Event.recorded_at(folder.conference).to_a.count
+              %img{src: folder.conference.logo_url, alt: 'conference logo'}
+              .caption
+                = folder.conference.title
+          - else
+            %a.thumbnail.folder{href: h(folder.url)}
+              .header
+                %span.fa.fa-th
+                -# TODO: add number of child items instead of 42
+                42
+              .fa.fa-folder
+              .caption
+                = folder.name
 
       = yield
 

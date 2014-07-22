@@ -354,6 +354,69 @@ a.inverted {
     100%  { -moz-transform:translate(0, 0); }
 }
 
+/* browse folders and conferences */
+.thumbnail {
+  display: inline-block;
+  text-align: center;
+  font-size: 16px;
+  min-width: 130px;
+  margin: 5px;
+  
+  .header {
+    text-align: left;
+  }
+  
+  &:hover {
+    text-decoration: none;
+  }
+  
+  &.folder {
+    background-color: $brand-primary;
+    color: white;
+      
+    .header {
+      margin-bottom: $padding-large-vertical;
+    }
+    
+    .fa.fa-folder {
+      font-size: 40px;
+    }
+    
+    &:hover {
+      background-color: $gray-dark;
+    }
+    
+    .caption {
+      color: white;
+      margin-bottom: $padding-large-vertical;
+    }
+  }
+  
+  &.conference {
+    color: $gray-dark;
+    
+    img {
+      height: 100px;
+      margin-bottom: $padding-small-vertical;
+    }
+    
+    .caption {
+      color: white;
+      background-color: $gray-dark;
+      -webkit-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    &:hover {
+      color: $brand-primary;
+      .caption {
+        background-color: $brand-primary;
+      }
+    }
+  }
+}
+
 .thumbnail .icons {
   position: absolute;
   padding: 5px;
