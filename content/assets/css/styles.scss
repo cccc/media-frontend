@@ -420,7 +420,7 @@ a.inverted {
 /* events overview */
 .event-previews {
   .event-preview {
-    max-width: 30%;
+    width: 30%;
     margin: 15px $padding-xs-horizontal;
     float: left;
     text-align: center;
@@ -499,7 +499,7 @@ a.inverted {
   /* events overview */
   .event-previews {
     .event-preview {
-      max-width: 47%;
+      width: 47%;
     
       &:nth-child(3n+1) {
         clear: none;
@@ -595,7 +595,7 @@ a.inverted {
   /* events overview */
   .event-previews {
     .event-preview {
-      max-width: 100%;
+      width: 100%;
       float: none;
       clear: both;
       margin: 0;
