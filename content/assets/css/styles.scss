@@ -445,6 +445,9 @@ a.inverted {
         padding-right: $padding-xs-horizontal;
         padding-left: $padding-xs-horizontal;
       }
+      .fa {
+        color: $gray-dark;
+      }
     }
     
     .caption {

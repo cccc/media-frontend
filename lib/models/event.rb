@@ -38,4 +38,22 @@ class Event < ActiveRecord::Base
     read_attribute(:tags).compact
   end
 
+  def persons_text
+    if self.persons.length == 0
+      'n/a'
+    elsif self.persons.length == 1
+      self.persons[0]
+    else
+      persons = self.persons[0..-3] + [self.persons[-2..-1].join(' and ')]
+      persons.join(', ')
+    end
+  end
+  
+  def persons_icon
+    if self.persons.length <= 1
+      'fa-user'
+    else
+      'fa-group'
+    end
+  end
 end

@@ -17,17 +17,9 @@
         %h2
           = h @item[:event].subtitle
       
-      - if @item[:event].persons.present?
-        %p.persons
-          - if @item[:event].persons.length == 1
-            %span.fa.fa-user
-            by
-            = @item[:event].persons[0]
-          - else
-            %span.fa.fa-group
-            by
-            - persons = @item[:event].persons[0..-3] + [@item[:event].persons[-2..-1].join(' and ')]
-            = persons.join(', ')
+      %p.persons
+        %span.fa{class: @item[:event].persons_icon}
+        = @item[:event].persons_text
 
       %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
         %li.active

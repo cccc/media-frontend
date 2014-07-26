@@ -47,8 +47,9 @@
                   %li
                     %span.fa.fa-calendar-o
                     = date(event)
-                  - if event.persons.present?
-                    %li.persons= h event.persons.join(', ')
+                  %li.persons
+                    %span.fa{class: event.persons_icon}
+                    = event.persons_text
                 %h3= h event.title
 
       = yield
