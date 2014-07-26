@@ -421,6 +421,7 @@ a.inverted {
 .event-previews {
   .event-preview {
     width: 30%;
+    width: calc(33.33% - 10px);
     margin: 15px $padding-xs-horizontal;
     float: left;
     text-align: center;
@@ -481,8 +482,17 @@ a.inverted {
   }
 }
 
-#top {
+.events-header {
   clear: both;
+  img {
+    float: left;
+    max-height: 40px;
+    margin-right: $padding-small-horizontal;
+  }
+  #sorting {
+    margin: $padding-large-vertical 0;
+    float: right;
+  }
 }
 
 /* Font classes - Tags */
@@ -500,6 +510,7 @@ a.inverted {
   .event-previews {
     .event-preview {
       width: 47%;
+      width: calc(50% - 10px);
     
       &:nth-child(3n+1) {
         clear: none;

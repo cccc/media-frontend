@@ -11,24 +11,19 @@
 
     .container-fluid
 
-      %img{src: @item[:conference].logo_url}
-      
-      %h1= @item[:conference].acronym
-      - if @item[:conference_title] and not item[:conference].acronym == @item[:conference].title
-        %h2= h @item[:conference].title
+      .events-header
+        %img{src: @item[:conference].logo_url}
         
-      #sorting
-        .list
-          .text
-            sort by
-          %ul.pagination.pagination-sm
-            - %w{date duration name rand()}.each do |sorting|
-              - if @item[:sorting] == sorting
-                %li.active
-                  %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
-              - else
-                %li
-                  %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
+        %h1= @item[:conference].acronym
+        - if @item[:conference].title and not item[:conference].acronym == @item[:conference].title
+          %h2= h @item[:conference].title
+        
+        #sorting.btn-group.btn-group-sm.btn-group-justified
+          - %w{name duration date rand()}.each do |sorting|
+            - if @item[:sorting] == sorting
+              %a.btn.btn-primary.active{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
+            - else
+              %a.btn.btn-primary{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
 
       - if @item[:events].present?
         .event-previews
@@ -53,12 +48,6 @@
                 %h3= h event.title
 
       = yield
-
-      #top
-        #col-md-4
-          %ul.pagination.pagination-sm
-            %li
-              %a{ href: '#' } Top ↑
 
     = render '/partials/footer'
     %script(src="/assets/js/jquery.min.js")
