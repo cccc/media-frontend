@@ -16,6 +16,10 @@ class Event < ActiveRecord::Base
     .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 }) 
     .group(:"events.id")
   }
+  
+  def title
+    read_attribute(:title).strip
+  end
 
   def url
     "/browse/#{self.conference.webgen_location}/#{self.slug}.html"
