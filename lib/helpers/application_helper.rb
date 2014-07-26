@@ -18,7 +18,7 @@ module ApplicationHelper
 
   def recording_length_minutes(recording)
     if recording.length > 0
-      "(#{recording.length / 60}min)"
+      "#{recording.length / 60} min"
     end
   end
 

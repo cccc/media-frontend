@@ -9,49 +9,47 @@
   %body
     = render '/partials/navbar'
 
-    %div.container.top-space
+    .container-fluid
 
-      %div.row
-        %div.col-md-2
-          %img{src: @item[:conference].logo_url}
-        %div.col-md-6
-          %h3= @item[:conference].acronym
-          - if @item[:conference_title] and not item[:conference].acronym == @item[:conference].title
-            %h2= h @item[:conference].title
-        #sorting.col-md-4
-          .list
-            .text
-              sort by
-            %ul.pagination.pagination-sm
-              - %w{date duration name rand()}.each do |sorting|
-                - if @item[:sorting] == sorting
-                  %li.active
-                    %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
-                - else
-                  %li
-                    %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
+      %img{src: @item[:conference].logo_url}
+      
+      %h1= @item[:conference].acronym
+      - if @item[:conference_title] and not item[:conference].acronym == @item[:conference].title
+        %h2= h @item[:conference].title
+        
+      #sorting
+        .list
+          .text
+            sort by
+          %ul.pagination.pagination-sm
+            - %w{date duration name rand()}.each do |sorting|
+              - if @item[:sorting] == sorting
+                %li.active
+                  %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
+              - else
+                %li
+                  %a{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
 
       - if @item[:events].present?
-        -# Build event overview
-        - @item[:events].each_slice(4) do |blocks|
-          %div.row
-            - blocks.each do |event|
-              - recordings = event.recordings.downloaded
-              %div.col-xs-6.col-md-3
-                %div.thumbnail
-                  %a{href: h(event.url)}
-                    %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
-                  %div.icons
-                    = video_quality_icon(recordings) if recordings.present?
-                    = audio_ready_icon_link(recordings) if recordings.present?
-                  %div.caption
-                    %h3= h event.title
-                    %p
-                      - if event.persons.present?
-                        = h event.persons.join(', ')
-                      %br
-                        %span.small= date(event)
-                        %span.small= recording_length(recordings)
+        .event-previews
+          -# Build event overview
+          - @item[:events].each do |event|
+            - recordings = event.recordings.downloaded
+            .event-preview
+              %a{href: h(event.url)}
+                %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
+                %span.fa.fa-circle-o-notch.fa-spin
+              .caption
+                %ul.metadata
+                  %li
+                    %span.fa.fa-clock-o
+                    = recording_length(recordings)
+                  %li
+                    %span.fa.fa-calendar-o
+                    = date(event)
+                  - if event.persons.present?
+                    %li.persons= h event.persons.join(', ')
+                %h3= h event.title
 
       = yield
 

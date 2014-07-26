@@ -417,49 +417,70 @@ a.inverted {
   }
 }
 
-.thumbnail .icons {
-  position: absolute;
-  padding: 5px;
-  top: 5px;
-  left: 60px;
-  min-width: 32px;
-  min-height: 43px;
-  height: auto;
-  z-index: 20;
-}
-
-.thumbnail-spinner {
-  position: absolute;
-  top: 7px;
-  right: 60px;
-  height: 18px;
-  width: 18px;
-  z-index: 100;
-}
-
-#sorting {
-  text-align: right;
-
-  .list {
-    float: right;
-
-    ul {
-      margin-bottom: 0px;
-      margin-top: 0px;
+/* events overview */
+.event-previews {
+  .event-preview {
+    max-width: 30%;
+    margin: 15px $padding-xs-horizontal;
+    float: left;
+    text-align: center;
+    max-height: calc(100% - 100px);
+    
+    & > a {
+      display: block;
+      .video-thumbnail {
+        max-width: 100%;
+      }
+      &:hover {
+        .fa-spin {
+          display: block;
+        }
+      }
     }
-  }
-
-  .text {
-    padding-left: 5px;
-    display: table;
+    
+    .metadata {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      li {
+        padding-right: $padding-xs-horizontal;
+        padding-left: $padding-xs-horizontal;
+      }
+    }
+    
+    .caption {
+      h3 {
+        line-height: 1.05em;
+        margin-top: $padding-small-vertical;
+      }
+      .persons {
+        display: block;
+        @include text-overflow();
+      }
+    }
+    
+    .fa-spin {
+      display: none;
+      position: relative;
+      bottom: 1.5em;
+      margin-bottom: -1em;
+      pointer-events: none;
+      color: white;
+      text-shadow: 0 0 5px #000;
+    }
+    
+    a:hover {
+      text-decoration: none;
+    }
+    
+    &:nth-child(3n+1) {
+      clear: both;
+    }
   }
 }
 
 #top {
-  text-align: right;
+  clear: both;
 }
-
-
 
 /* Font classes - Tags */
 .tag-cloud .xtiny { font-size: 0.75em; text-decoration:none; }
@@ -468,6 +489,25 @@ a.inverted {
 .tag-cloud .large { font-size: 1.5em; text-decoration:none; }
 .tag-cloud .xlarge { font-size: 1.75em; font-weight:bold; }
 
+
+/* and now for medium screens: */
+@media all and (min-width: $screen-sm-min) and (max-width: $container-desktop) {
+  
+  /* events overview */
+  .event-previews {
+    .event-preview {
+      max-width: 47%;
+    
+      &:nth-child(3n+1) {
+        clear: none;
+      }
+      &:nth-child(2n+1) {
+        clear: both;
+      }
+    }
+  }
+  
+}
 
 /* and now for small screens: */
 @media all and (max-width: $screen-xs-max) {
@@ -532,6 +572,12 @@ a.inverted {
     }
   }
   
+  /* events overview */
+  .event-preview {
+    /* one column layout */
+    width: 100%;
+  }
+  
   /* tabs */
   .nav.nav-tabs.nav-justified > li {
     a {
@@ -540,6 +586,49 @@ a.inverted {
     }
     &.active > a {
       background-color: $gray;
+    }
+  }
+  
+  /* events overview */
+  .event-previews {
+    .event-preview {
+      max-width: 100%;
+      float: none;
+      clear: both;
+      margin: 0;
+        
+      & > a:hover .fa-spin{
+        display: none;
+      }
+      
+      .video-thumbnail {
+        max-height: 100px;
+        max-width: initial;
+        float: left;
+      }
+      
+      .caption {
+        background-color: #fff;
+        h3 {
+          width: 100%;
+          float: left;
+          padding: $padding-small-vertical;
+          margin: 2px 0 $padding-large-vertical 0;
+          background-color: $gray-dark;
+          color: #fff;
+          font-size: 17px;
+          line-height: 1.2;
+        }
+      }
+      
+      .metadata {
+        border: none;
+        padding-top: 1.5em;
+        li {
+          display: block;
+          padding: $padding-xs-vertical $padding-xs-horizontal;
+        }
+      }
     }
   }
 }
