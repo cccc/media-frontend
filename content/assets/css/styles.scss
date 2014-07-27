@@ -441,10 +441,12 @@ a.inverted {
     
     .metadata {
       margin-bottom: 0;
+      margin-top: $padding-small-vertical;
+      padding-top: 0;
       padding-bottom: 0;
+      border: none;
       li {
-        padding-right: $padding-xs-horizontal;
-        padding-left: $padding-xs-horizontal;
+        padding: $padding-xs-vertical $padding-xs-horizontal;
       }
       .fa {
         color: $gray-dark;
@@ -453,8 +455,8 @@ a.inverted {
     
     .caption {
       h3 {
-        line-height: 1.05em;
         margin-top: $padding-small-vertical;
+        color: black;
       }
       .persons {
         display: block;
@@ -507,18 +509,8 @@ a.inverted {
 @media all and (min-width: $screen-sm-min) and (max-width: $container-desktop) {
   
   /* events overview */
-  .event-previews {
-    .event-preview {
-      width: 47%;
-      width: calc(50% - 10px);
-    
-      &:nth-child(3n+1) {
-        clear: none;
-      }
-      &:nth-child(2n+1) {
-        clear: both;
-      }
-    }
+  .event-previews .event-preview h3 {
+    font-size: 17px;
   }
   
 }
@@ -616,31 +608,24 @@ a.inverted {
       }
       
       .video-thumbnail {
-        max-height: 100px;
-        max-width: initial;
-        float: left;
+        width: 29%;
+        float: right;
+        margin-top: $padding-small-vertical;
       }
       
       .caption {
-        background-color: #fff;
+        width: 68%;
+        float: left;
         h3 {
-          width: 100%;
-          float: left;
           padding: $padding-small-vertical;
-          margin: 2px 0 $padding-large-vertical 0;
-          background-color: $gray-dark;
-          color: #fff;
+          margin: 2px 0 20px 0;
           font-size: 17px;
-          line-height: 1.2;
         }
       }
       
       .metadata {
-        border: none;
-        padding-top: 1.5em;
         li {
           display: block;
-          padding: $padding-xs-vertical $padding-xs-horizontal;
         }
       }
     }
