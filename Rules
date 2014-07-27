@@ -34,7 +34,7 @@ compile '*' do
     when /scss/
       filter :sass, Compass.sass_engine_options
     when 'haml'
-      filter :haml, { :ugly => true, autoclose: ['<source>'], format: :xhtml }
+      filter :haml, { :ugly => true, format: :html5 }
       layout 'default'
       filter :relativize_paths, :type => :html
     else
@@ -93,4 +93,4 @@ route '*' do
   end
 end
 
-layout '*', :haml, {:ugly => true, :autoclose => ['<source>', '<audio>', '<video>'], format: :xhtml}
+layout '*', :haml, {:ugly => true, format: :html5}
