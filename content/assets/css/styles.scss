@@ -426,16 +426,20 @@ a.inverted {
     float: left;
     text-align: center;
     max-height: calc(100% - 100px);
+    display: block;
     
-    & > a {
-      display: block;
-      .video-thumbnail {
-        max-width: 100%;
+    .video-thumbnail {
+      max-width: 100%;
+      
+      &:hover + .fa-spin {
+        display: block;
       }
-      &:hover {
-        .fa-spin {
-          display: block;
-        }
+    }
+    
+    &:hover, &:focus, &:active {
+      text-decoration: none;
+      .caption h3 {
+        color: $link-color;
       }
     }
     
@@ -447,8 +451,6 @@ a.inverted {
       border: none;
       li {
         padding: $padding-xs-vertical $padding-xs-horizontal;
-      }
-      .fa {
         color: $gray-dark;
       }
     }
@@ -472,10 +474,6 @@ a.inverted {
       pointer-events: none;
       color: white;
       text-shadow: 0 0 5px #000;
-    }
-    
-    a:hover {
-      text-decoration: none;
     }
     
     &:nth-child(3n+1) {
@@ -602,15 +600,14 @@ a.inverted {
       float: none;
       clear: both;
       margin: 0;
-        
-      & > a:hover .fa-spin{
-        display: none;
-      }
       
       .video-thumbnail {
         width: 29%;
         float: right;
         margin-top: $padding-small-vertical;
+        &:hover + .fa-spin {
+          display: none;
+        }
       }
       
       .caption {
