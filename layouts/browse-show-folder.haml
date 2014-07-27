@@ -1,10 +1,10 @@
 !!! 5
-%html
+%html{lang: 'en'}
   %head
+    = render '/partials/header'
     %title
       C3TV -
       = h @item[:title]
-    = render '/partials/header'
     %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed for this folder", href: "podcast.xml"}
   %body
     = render '/partials/navbar'
@@ -12,7 +12,7 @@
     .container-fluid
 
       .events-header
-        %img{src: @item[:conference].logo_url}
+        %img{src: @item[:conference].logo_url, alt: 'conference logo'}
         
         %h1= @item[:conference].acronym
         - if @item[:conference].title and not item[:conference].acronym == @item[:conference].title

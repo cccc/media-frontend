@@ -50,6 +50,10 @@ data_sources:
     # The path where layouts should be mounted. The layouts root behaves the
     # same as the items root, but applies to layouts rather than items.
     layouts_root: /
+    
+    # nanoc defaults to environment input encoding
+    # for the sake of windows users use utf-8 *everywhere*
+    encoding: utf-8
 
     # Whether to allow periods in identifiers. When turned off, everything
     # past the first period is considered to be the extension, and when
