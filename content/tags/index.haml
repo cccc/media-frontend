@@ -2,6 +2,8 @@
 title: Browse by tags
 ---
 
-%div.container.top-space
-  - tag_cloud.each do |tag|
-    = tag
+%div.container-fluid
+  %h1 Browse by tags
+  .tag-cloud
+    - tag_cloud.each do |tag|
+      = tag

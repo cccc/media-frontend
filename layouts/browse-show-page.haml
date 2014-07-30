@@ -101,9 +101,7 @@
       - if @item[:event].tags.present?
         %h3 Tags
         - @item[:event].tags.each do |tag|
-          -# TODO: move generation of this link out of view
-          %a.label.label-default(href="/browse/tags/#{tag.strip}.html")
-            = tag
+          = link_for(tag)
           
       
 

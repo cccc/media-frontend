@@ -11,7 +11,7 @@ module TaggingHelper
 
   # link to tag page
   def link_for(tag, prefix: '/browse/tags/', css: '')
-    %[<a href="#{h prefix}#{h tag}.html" rel="tag" class="#{css}">#{h tag}</a>]
+    %[<a href="#{h prefix}#{h tag}.html" rel="tag" class="#{css} label label-default">#{h tag}</a>]
   end
 
   # 

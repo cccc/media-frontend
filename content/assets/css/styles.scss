@@ -62,15 +62,14 @@ p {
 }
 
 .label {
+  display: inline-block;
   border-radius: $border-radius-base;
   padding-top: 0.3em;
   padding-bottom: 0.1em;
   font-size: 14px;
   font-weight: normal;
-  
-  & + .label {
-    margin-left: 2px;
-  }
+  margin-right: 2px;
+  margin-bottom: $padding-small-vertical;
 }
 
 /* navigation bar */
@@ -496,9 +495,10 @@ a.inverted {
 }
 
 /* Font classes - Tags */
-.tag-cloud .xtiny { font-size: 0.75em; text-decoration:none; }
-.tag-cloud .tiny { font-size: 1.0em; font-weight:lighter; }
-.tag-cloud .normal{ font-size: 1.25em; text-decoration:none; }
+.tag-cloud { margin-top: 1.5em; }
+.tag-cloud .xtiny { font-size: 0.9em; text-decoration:none; }
+.tag-cloud .tiny { font-size: 1.1em; font-weight:lighter; }
+.tag-cloud .normal{ font-size: 1.3em; text-decoration:none; }
 .tag-cloud .large { font-size: 1.5em; text-decoration:none; }
 .tag-cloud .xlarge { font-size: 1.75em; font-weight:bold; }
 
