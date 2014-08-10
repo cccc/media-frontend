@@ -39,7 +39,7 @@ class Event < ActiveRecord::Base
   end
 
   def tags
-    read_attribute(:tags).compact
+    read_attribute(:tags).compact.collect { |x| x.strip }
   end
 
   def persons_text
