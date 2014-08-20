@@ -43,3 +43,11 @@ Import a database dump
 
    guard
 
+# JRuby
+
+export JRUBY_OPTS="--2.0 -J-Xmn512m -J-Xms2048m -J-Xmx2048m -J-server"
+
+
+~/.jrubyrc
+
+  compat.version=2.0
