@@ -66,6 +66,7 @@ The following data is collected and saved for an undefined duration:
   <th>Name</th>
   <th>Location</th>
   <th>Last Scan</th>
+  <th>Files</th>
   </tr>
   {{#each mirrors}}
   {{#if this.status_baseurl}}
@@ -75,7 +76,8 @@ The following data is collected and saved for an undefined duration:
   {{/if}}
   <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
   <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
-  <td>{{this.last_scan }}</td>
+  <td>{{this.last_scan}}</td>
+  <td>{{this.nfiles}}</td>
   </tr>
   {{/each}}
   </table>
