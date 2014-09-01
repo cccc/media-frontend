@@ -419,17 +419,15 @@ a.inverted {
 /* events overview */
 .event-previews {
   .event-preview {
-    width: 30%;
-    width: calc(33.33% - 10px);
-    margin: 15px $padding-xs-horizontal;
-    float: left;
-    text-align: center;
-    max-height: calc(100% - 100px);
+    margin: 16px 0;
     display: block;
+    clear: both;
+    height: 120px;
     
     .video-thumbnail {
-      max-width: 100%;
-      
+      float: left;
+      height: 120px;
+      width: 160px;
       &:hover + .fa-spin {
         display: block;
       }
@@ -443,40 +441,34 @@ a.inverted {
     }
     
     .metadata {
-      margin-bottom: 0;
-      margin-top: $padding-small-vertical;
-      padding-top: 0;
-      padding-bottom: 0;
+      text-align: left;
       border: none;
       li {
-        padding: $padding-xs-vertical $padding-xs-horizontal;
+        padding: $padding-xs-vertical;
+        padding-right: $padding-xs-horizontal;
         color: $gray-dark;
+        min-width: inherit;
       }
     }
     
     .caption {
+      margin-left: 160px;
+      padding-left: $padding-large-horizontal;
       h3 {
-        margin-top: $padding-small-vertical;
+        margin-top: 0;
         color: black;
-      }
-      .persons {
-        display: block;
-        @include text-overflow();
       }
     }
     
     .fa-spin {
       display: none;
+      float: left;
       position: relative;
-      bottom: 1.5em;
-      margin-bottom: -1em;
+      top: 55px;
+      right: 85px;
       pointer-events: none;
       color: white;
       text-shadow: 0 0 5px #000;
-    }
-    
-    &:nth-child(3n+1) {
-      clear: both;
     }
   }
 }
@@ -507,8 +499,10 @@ a.inverted {
 @media all and (min-width: $screen-sm-min) and (max-width: $container-desktop) {
   
   /* events overview */
-  .event-previews .event-preview h3 {
-    font-size: 17px;
+  .event-previews .event-preview {
+    h3 {
+      font-size: 17px;
+    }
   }
   
 }
@@ -596,34 +590,35 @@ a.inverted {
   /* events overview */
   .event-previews {
     .event-preview {
-      width: 100%;
-      float: none;
-      clear: both;
-      margin: 0;
+      height: auto;
       
       .video-thumbnail {
-        width: 29%;
-        float: right;
-        margin-top: $padding-small-vertical;
+        margin-top: 1.5em;
+        height: 90px;
+        width: 120px;
         &:hover + .fa-spin {
           display: none;
         }
       }
       
       .caption {
-        width: 68%;
-        float: left;
+        margin-left: 120px;
+        padding-left: $padding-small-horizontal;
         h3 {
-          padding: $padding-small-vertical;
-          margin: 2px 0 20px 0;
+          height: 90px;
+          vertical-align: middle;
+          display: table-cell;
+          margin-top: 0;
           font-size: 17px;
         }
       }
-      
       .metadata {
-        li {
-          display: block;
-        }
+        position: relative;
+        left: -130px;
+        padding: 0;
+        margin-bottom: 3px;
+        white-space: nowrap;
+        margin-bottom: $padding-small-vertical;
       }
     }
   }
