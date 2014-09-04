@@ -85,7 +85,7 @@ p {
     padding: 0.2em;
     height: 1.8em;
     max-width: 2em;
-    &:hover {
+    &:hover, &:focus, &:active {
       color: $brand-primary;
       background-color: #fff;
       border-color: #fff;
@@ -153,10 +153,10 @@ h1 + .news-item {
       padding: $padding-large-vertical 0 0 0;
       margin-bottom: 0;
       border: none;
-      &:hover {
+      &:hover, &:focus, &:active {
         background-color: #fff;
       }
-      &:hover, &:focus {
+      &:hover, &:focus, &:active {
         border: none;
       }
     }
@@ -209,7 +209,7 @@ h1 + .news-item {
       color: #000;
       background-color: #fff;
     }
-    a:hover {
+    a:hover, a:focus, a:active {
       text-decoration: none;
     }
   }
@@ -365,7 +365,7 @@ a.inverted {
     text-align: left;
   }
   
-  &:hover {
+  &:hover, &:focus, &:active {
     text-decoration: none;
   }
   
@@ -381,7 +381,7 @@ a.inverted {
       font-size: 40px;
     }
     
-    &:hover {
+    &:hover, &:focus, &:active {
       background-color: $gray-dark;
     }
     
@@ -407,7 +407,7 @@ a.inverted {
       transition: all 0.2s ease-in-out;
     }
     
-    &:hover {
+    &:hover, &:focus, &:active {
       color: $brand-primary;
       .caption {
         background-color: $brand-primary;
