@@ -417,7 +417,7 @@ a.inverted {
 }
 
 /* events overview */
-.event-previews {
+.event-previews, .event-previews-tags {
   .event-preview {
     margin: 16px 0;
     display: block;
@@ -484,6 +484,24 @@ a.inverted {
     margin: $padding-large-vertical 0;
     float: right;
   }
+}
+
+/* event overview for tags */
+.event-previews-tags .event-preview {
+    height: auto;
+    
+    .conference-logo {
+      float: left;
+      width: 100px;
+      height: auto;
+    }
+    .caption {
+      margin-left: 100px;
+    }
+    
+    .metadata {
+      margin-bottom: 0;
+    }
 }
 
 /* Font classes - Tags */
@@ -620,6 +638,19 @@ a.inverted {
         white-space: nowrap;
         margin-bottom: $padding-small-vertical;
       }
+    }
+  }
+  
+  /* event overview for tags */
+  .event-previews-tags .event-preview {
+    h3 {
+      font-size: 17px;
+    }
+    .conference-logo {
+      width: 60px;
+    }
+    .caption {
+      margin-left: 60px;
     }
   }
 }
