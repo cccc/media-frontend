@@ -32,7 +32,6 @@
             - recordings = event.recordings.downloaded
             %a.event-preview{href: h(event.url)}
               %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
-              %span.fa.fa-circle-o-notch.fa-spin
               .caption
                 %ul.metadata
                   %li
@@ -51,4 +50,3 @@
     = render '/partials/footer'
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")
-    %script(src="/assets/js/thumbnails.js")

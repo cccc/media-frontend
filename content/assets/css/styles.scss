@@ -428,9 +428,6 @@ a.inverted {
       float: left;
       height: 120px;
       width: 160px;
-      &:hover + .fa-spin {
-        display: block;
-      }
     }
     
     &:hover, &:focus, &:active {
@@ -461,17 +458,6 @@ a.inverted {
         margin-top: 0;
         color: black;
       }
-    }
-    
-    .fa-spin {
-      display: none;
-      float: left;
-      position: relative;
-      top: 55px;
-      right: 85px;
-      pointer-events: none;
-      color: white;
-      text-shadow: 0 0 5px #000;
     }
   }
 }
@@ -617,9 +603,6 @@ a.inverted {
         margin-top: 1.5em;
         height: 90px;
         width: 120px;
-        &:hover + .fa-spin {
-          display: none;
-        }
       }
       
       .caption {
