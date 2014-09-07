@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   scope :recorded_at, ->(conference) {
     joins(:recordings, :conference)
     .where(conferences: { id: conference })
-    .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 }) 
+    .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
     .group(:"events.id")
   }
 
@@ -23,11 +23,6 @@ class Event < ActiveRecord::Base
 
   def poster_url
     File.join(Settings.staticURL, 'media', self.conference.images_path, self.poster_filename) if self.poster_filename
-  end
-
-  # TODO thumbnail.js expects this to be equal thumb_url.gsub(/.jpg$/, '.gif')
-  def gif_url
-    File.join Settings.staticURL, 'media', self.conference.images_path, self.gif_filename
   end
 
   def thumb_url
