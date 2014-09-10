@@ -217,6 +217,7 @@ h1 + .news-item {
       margin-right: $padding-small-horizontal;
       color: #000;
       background-color: #fff;
+      min-width: 4em;
     }
     a:hover, a:focus, a:active {
       text-decoration: none;
