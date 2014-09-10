@@ -22,7 +22,7 @@
         = @item[:event].persons_text
 
       %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
-        %li.active
+        %li
           %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
         %li 
           %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
@@ -124,3 +124,22 @@
         }
       });
       $('audio').mediaelementplayer();
+      
+      // activate tab via hash and default to video
+      function setTabToHash() {
+        var activeTab = $('.nav-tabs a[href=' + window.location.hash + ']')
+          .tab('show');
+        console.log('hash: ' + window.location.hash);
+        if (activeTab.length === 0) {
+          window.location.hash = '#video';
+        }
+      }
+      setTabToHash();
+
+      // change hash on tab change
+      $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+      });
+      
+      // adjust tabs when hash changes
+      window.onhashchange = setTabToHash;

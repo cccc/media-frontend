@@ -170,6 +170,15 @@ h1 + .news-item {
 .tab-content {
   background-color: $gray-dark;
   
+  .tab-pane {
+    display: block;
+  }
+  .tab-pane:not(:target) {
+    // hide unselected tab panes
+    // browser not supporting this selector will show all panes
+    display: none;
+  }
+  
   #video {
     text-align: center;
     .video {
