@@ -281,14 +281,14 @@ a.inverted {
   .carousel-inner {
     height: 100%;
   }
-  .item .preview {
+  .item:hover {
+    text-decoration: none;
+  }
+  .item img {
     height: 190px;
     display: inline-block;
     margin-top: 12px;
     border: 1px solid $transparent-white;
-    & > img {
-      height: 100%;
-    }
   }
   .titlebar {
     width: 100%;
@@ -300,7 +300,8 @@ a.inverted {
   .carousel-caption {
     position: relative;
     top: 0;
-    height: 112px;
+    height: 90px;
+    overflow: hidden;
     left: initial;
     right: initial;
     padding: 0;
@@ -533,7 +534,7 @@ a.inverted {
   /* promoted videos */
   .promoted {
     height: 230px;
-    .item .preview {
+    .item img {
       height: 120px;
     }
     .titlebar {
