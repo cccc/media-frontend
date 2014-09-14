@@ -1,9 +1,12 @@
 %div.promoted
   .titlebar
-  - Event.promoted(4).each do |event|
-    %article.item
-      %a.preview{href: h(event.url)}
-        %img{src: h(event.thumb_url), alt: event.title, title: event.title}
-      %h2.title= event.title
-      - if event.subtitle.present?
-        %h3.subtitle= event.subtitle 
+  .carousel.slide{'data-ride' => 'carousel'}
+    .carousel-inner
+      - Event.promoted(4).each_with_index do |event, i|
+        %article.item{'class' => (i == 0 and 'active')}
+          %a.preview{href: h(event.url)}
+            %img{src: h(event.thumb_url), alt: event.title, title: event.title}
+          .carousel-caption
+            %h2.title= event.title
+            - if event.subtitle.present?
+              %h3.subtitle= event.subtitle 
