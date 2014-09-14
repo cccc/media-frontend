@@ -10,7 +10,7 @@ class ItemBuilder
       @items << Nanoc3::Item.new(
         "",
         {
-          title: conference.acronym, layout: 'browse-show-folder',
+          title: conference_title(conference), layout: 'browse-show-folder',
           conference: conference, events: sorting_events(events, sorting),
           sorting: sorting
         },
@@ -104,6 +104,14 @@ class ItemBuilder
   end
 
   private
+
+  def conference_title(conference)
+    if conference.title.present?
+      conference.title
+    else
+      conference.acronym
+    end
+  end
 
   def get_path(*parts)
     raise "nil found in item path" if parts.any? { |p| p.nil? }
