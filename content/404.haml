@@ -1,0 +1,47 @@
+---
+title: 404 - Page not found
+---
+%script(src='/assets/js/purl.min.js')
+%script(src='/assets/js/search.js')
+
+.search
+  %form{class: 'initial'}
+    %h1 404 - media.ccc.de - Search
+    %input.text{type: 'text', maxlength: '255', size: '17', name: 'q', placeholder: 'Search…'}
+    %input.submit{type: 'submit', value: 'Go'}
+
+  %section.results.initial
+    .statistics
+      Results
+      %span.start #
+      to
+      %span.end #
+      of
+      %span.total #
+      Results (in
+      %span.runtime #
+      ms)
+
+    %ol
+      %li.no-results No results
+      %li.template.quality-high
+        %a.event-link{:href => ''}
+        %a.event-search{'data-titletpl' => 'Search for &quot;%&quot;', :href => ''}
+        %span.conference
+          %a.conference-link{:href => ''}
+          %a.conference-search{'data-titletpl' => 'Search for &quot;%&quot;', :href => ''}
+        %ul.persons
+          %li.template
+            %a.person-link{:href => ''}
+    %ul.paging
+      %li.prev
+        %a{:href => ''} prev
+      %li.prefix M
+      %li.page.template
+        %a{:href => '#'}
+          e
+          .number 1
+      %li.postfix dia.ccc.de
+      %li.next
+        %a{:href => ''} next
+

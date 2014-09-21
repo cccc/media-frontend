@@ -1,0 +1,216 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('../icomoon/fonts/icomoon.eot?-blb5lu');
+  src: url('../icomoon/fonts/icomoon.eot?#iefix-blb5lu') format('embedded-opentype'), url('../icomoon/fonts/icomoon.woff?-blb5lu') format('woff'), url('../icomoon/fonts/icomoon.ttf?-blb5lu') format('truetype'), url('../icomoon/fonts/icomoon.svg?-blb5lu#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.search {
+  padding-bottom: 50px;
+}
+.search form.initial {
+  width: 450px;
+  margin: 50px auto;
+  border: 1px solid silver;
+  padding: 30px;
+}
+.search form.initial,
+.search form.initial h1 {
+  text-align: center;
+}
+.search .results ol > li {
+  list-style-position: inside;
+  padding: 10px 10px 20px 10px;
+  font-size: 35px;
+}
+.search .results ol > li a,
+.search .results ol > li ul {
+  font-size: 16px;
+}
+.search .paging {
+  overflow: hidden;
+  margin: 50px 0 0 150px;
+}
+.search .paging li {
+  font-size: 18px;
+}
+.search .paging li.page a {
+  width: 1.2em;
+  display: block;
+  text-decoration: none;
+}
+.search .paging li.page a:hover .number {
+  text-decoration: underline;
+}
+.search .paging .postix {
+  padding-left: 4px;
+}
+.search .paging .next,
+.search .paging .prev {
+  visibility: hidden;
+}
+.search .paging .next.visible,
+.search .paging .prev.visible {
+  visibility: visible;
+}
+.search .paging .next {
+  margin-left: 30px;
+}
+.search .paging .prev {
+  margin-right: 30px;
+}
+body {
+  background-color: #d9e3ec;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.search h1 {
+  color: #777777;
+  font-size: 22px;
+  line-height: 20px;
+  font-weight: normal;
+  padding: 15px 15px;
+}
+.search .fullsize h1 {
+  background-color: #95b1ca;
+  border-bottom: 1px solid #e7e7e7;
+  margin-top: 0;
+}
+.search form.initial {
+  background-color: #95b1ca;
+  border-color: #e7e7e7;
+  border-radius: 4px;
+}
+.search input {
+  outline: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  display: inline-block;
+  vertical-align: middle;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.search form input[type=submit] {
+  margin: 10px 0;
+}
+.search form input[type=text] {
+  margin: 10px 0 10px 20px;
+}
+.search .results {
+  margin: 0 20px;
+}
+.search .results ol > li {
+  border-bottom: 1px solid #95b1ca;
+}
+.search .results ol > li a {
+  color: black;
+  text-decoration: none;
+}
+.search .results ol > li a:hover {
+  text-decoration: underline;
+}
+.search .results ol > li ul > li {
+  list-style-type: square;
+}
+.search .results ol > li ul > li,
+.search .results ol > li ul > li a {
+  color: #428bca;
+}
+.search .results ol > li .conference {
+  font-size: 18px;
+}
+.search .results ol > li .conference::before {
+  content: '(';
+}
+.search .results ol > li .conference::after {
+  content: ')';
+}
+.search .results ol > li .conference a::before {
+  font-size: 14px;
+}
+.search .results ol > li .conference,
+.search .results ol > li .conference a {
+  color: #428bca;
+}
+.search .results ol > li .event-link {
+  font-size: 21px;
+}
+.search .results ol > li .persons {
+  padding-left: 70px;
+}
+.search .results ol > li:last-child {
+  border-bottom-style: none;
+}
+.search .results .statistics {
+  font-size: 12px;
+  color: #333;
+  margin: 0 0 30px 10px;
+}
+.search .paging li a {
+  color: #428bca;
+}
+.search .paging li a .number {
+  color: black;
+}
+.search .paging li.active a {
+  color: red;
+}
+.search {
+  padding-bottom: 30px;
+}
+.search form input.text {
+  width: 250px;
+}
+.search .results.initial {
+  display: none;
+}
+.search .results .paging {
+  display: none;
+}
+.search .results .paging.visible {
+  display: block;
+}
+.search .results .template {
+  display: none;
+}
+.search .results .event-search,
+.search .results .conference-search {
+  font-size: 0;
+}
+.search .results .event-search:before,
+.search .results .conference-search:before {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e601";
+}
+.search .results .event-search::before,
+.search .results .conference-search::before {
+  font-size: 16px;
+}
+.search .results .no-results {
+  list-style-type: none;
+}
+.search .paging li {
+  display: block;
+  text-align: center;
+  float: left;
+  list-style-type: none;
+}
