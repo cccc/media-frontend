@@ -36,7 +36,6 @@ compile '*' do
     when 'haml'
       filter :haml, { :ugly => true, autoclose: ['<source>'], format: :xhtml }
       layout 'default'
-      filter :relativize_paths, :type => :html
     else
       nil
     end
@@ -46,7 +45,7 @@ end
 #
 # Routes
 #
- 
+
 # Assets
 route '/assets/**/_*' do
   # _mixed.scss
