@@ -81,7 +81,7 @@ end
 route '*' do
   if item.binary?
     item.identifier.chop + '.' + item[:extension]
-  elsif %w{/about/}.include? item.identifier
+  elsif %w{/about/ /404/}.include? item.identifier
     # HAML pages in root except index.html
     item.identifier.chop + '.html'
   elsif %w{xml rdf atom}.include? item[:extension]
