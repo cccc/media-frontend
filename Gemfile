@@ -5,7 +5,7 @@ gem 'haml'
 gem 'compass'
 gem 'bootstrap-sass'
 
-gem 'activerecord', '>= 3.0'
+gem 'activerecord', '< 4.0'
 gem 'nokogiri'
 gem 'guard'
 gem 'guard-nanoc'
