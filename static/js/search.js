@@ -9,7 +9,7 @@ $(function() {
 		$template = $results.find('> ol > li.template').detach(),
 		$noresults = $results.find('> ol > li.no-results').detach(),
 		baseUrl = window.location.protocol+'//'+window.location.host+window.location.pathname,
-		baseTitleTpl = $('title').data('titletpl'),
+		baseTitleTpl = $search.data('titletpl'),
 		pageNr = 0,
 		perPage = 15;
 
@@ -34,84 +34,16 @@ $(function() {
 			window.history.pushState({}, title, '?' + (displayPage > 0 ? 'p='+displayPage+'&' : '') + 'q='+encodeURIComponent(term));
 
 		$input.blur();
+		$('#media-search input[name=q]').val(term);
 		$.ajax({
 			dataType: $.support.cors ? 'json' : 'jsonp',
-			url: 'http://178.62.143.243:9200/media/event/_search/',
+			url: 'http://koeln.media.ccc.de/search/api/term',
 			type: 'post',
-			data: JSON.stringify({
-				query: {
-					function_score: {
-						query: {
-							bool: {
-								disable_coord: true,
-								should: [
-									{
-										multi_match: {
-											query: lterm,
-											fields: [
-												'event.title^4',
-												'event.subtitle^3',
-												'event.persons^3',
-												'conference.acronym^2',
-												'conference.title^2',
-												'event.description^1'
-											],
-											type: 'best_fields',
-											operator: 'or',
-											fuzziness: 1
-										},
-									},
-									{
-										prefix: {
-											'event.title': {
-												value: lterm,
-												boost: 12
-											}
-										}
-									},
-									{
-										prefix: {
-											'event.subtitle': {
-												value: lterm,
-												boost: 3
-											}
-										}
-									},
-									{
-										prefix: {
-											'conference.acronym': {
-												value: lterm,
-												boost: 2
-											}
-										}
-									},
-									{
-										prefix: {
-											'conference.persons': {
-												value: lterm,
-												boost: 1
-											}
-										}
-									}
-								]
-							}
-						},
-						boost: 1.2,
-						functions: [
-							{
-								"gauss": {
-									"event.date": {
-										"scale": "96w",
-										"decay": 0.5
-									}
-								}
-							}
-						]
-					}
-				},
-				from: displayPage * perPage,
-				size: perPage
-			}),
+			data: {
+				term: lterm,
+				displayPage: displayPage * perPage,
+				perPage: perPage
+			},
 			success: function(res) {
 				var
 					conferenceSearchBase = $template.find('.conference-search').data('titletpl'),
