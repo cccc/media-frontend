@@ -1,0 +1,57 @@
+@import 'fonts';
+@import 'positioning';
+@import 'colors';
+
+.search {
+	form {
+		input.text {
+			width: 250px;
+		}
+	}
+
+	.results {
+		&.initial {
+			display: none;
+		}
+
+		ol {
+			padding: 0;
+		}
+
+		.paging {
+			display: none;
+			&.visible {
+				display: block;
+			}
+		}
+		.template { display: none; }
+
+		.conference {
+			white-space: nowrap;
+		}
+
+		.event-search,
+		.conference-search {
+			font-size: 0;
+
+			&::before {
+				font-size: 16px;
+			}
+		}
+
+		.no-results {
+			list-style-type: none;
+		}
+	}
+
+	.paging {
+		li {
+			display: block;
+			text-align: center;
+			float: left;
+			list-style-type: none;
+		}
+	}
+
+	padding-bottom: 30px;
+}
