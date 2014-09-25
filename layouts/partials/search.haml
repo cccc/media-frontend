@@ -1,0 +1,50 @@
+
+.search{"data-titletpl" => '"#" - Search - media.ccc.de'}
+  %form.initial
+    %h1= @title
+    %input.text{:name => "q", :placeholder => "Search…", :type => "text"}
+    %input.submit{:type => "submit", :value => "Go"}
+
+  %section.results.initial
+    .statistics
+      Results
+      %span.start #
+
+      to
+      %span.end #
+
+      of
+      %span.total #
+
+      Results (in
+      %span.runtime #
+      ms)
+
+    %ol
+      %li.no-results No results
+
+      %li.template.quality-high
+        %a.event-link{:href => ""}
+        %a.event-search.glyphicon.glyphicon-search{"data-titletpl" => 'Search for "%"', :href => ""}
+        %span.conference
+          %a.conference-link{:href => ""}
+          %a.conference-search.glyphicon.glyphicon-search{"data-titletpl" => 'Search for "%"', :href => ""}
+
+        %ul.persons
+          %li.template
+            %a.person-link{:href => ""}
+
+
+    %ul.paging
+      %li.prev
+        %a{:href => ""} prev
+      %li.prefix M
+
+      %li.page.template
+        %a{:href => "#"}
+          e
+          .number 1
+
+      %li.postfix dia.ccc.de
+      %li.next
+        %a{:href => ""} next

@@ -13,11 +13,10 @@
             %a{href: '/podcast.xml'}
               %img{src: '/images/rss_logo.png', alt: 'Feeds', title: 'Subscribe to the video feed'}
       %div.navbar-right
-        %form.navbar-form{role: 'search', action: '//www.duckduckgo.com/', method: 'get', id: 'duck-duck-go-search'}
+        %form.navbar-form{role: 'search', action: '/search/', method: 'get', id: 'media-search'}
           %div.form-group
-            %input.form-control{type: 'hidden', name: 'sites', value: 'media.ccc.de'}
-            %input.form-control{type: 'text', maxlength: '255', size: '17', name: 'q', placeholder: 'Search…'}
-          %button.btn.btn-default{type: 'submit', value: 'DuckDuckGo'} Go
+            %input.form-control{type: 'text', size: '17', name: 'q', placeholder: 'Search…'}
+          %button.btn.btn-default{type: 'submit'} Go
 
 - unless @item.identifier.starts_with? '/browse/tags'
   - trail = breadcrumbs_trail
