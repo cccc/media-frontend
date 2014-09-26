@@ -56,11 +56,16 @@ class ItemBuilder
       folder.conference = res.first unless res.nil? or res.empty?
       folders << folder
     }
+    
+    title = path
+    if path == "/" 
+      title = "Browse by category"
+    end
 
     @items << Nanoc3::Item.new(
       "",
       {
-        title: path, layout: 'browse-index',
+        title: title, layout: 'browse-index',
         folders: folders
       },
       get_path(path),

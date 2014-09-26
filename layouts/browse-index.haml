@@ -8,7 +8,8 @@
   %body
     = render '/partials/navbar'
 
-    .container-fluid.top-space
+    .container-fluid
+      %h1 Browse by category
 
       - if @item[:folders].present?
         - @item[:folders].each do |folder|
