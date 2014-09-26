@@ -41,7 +41,7 @@ $(function() {
 			type: 'post',
 			data: {
 				term: lterm,
-				displayPage: displayPage * perPage,
+				displayPage: displayPage,
 				perPage: perPage
 			},
 			success: function(res) {
