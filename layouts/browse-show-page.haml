@@ -91,7 +91,7 @@
         %li
           %span.fa.fa-external-link
           %a{href: @item[:event].link}
-            = URI.parse(@item[:event].link).host
+            = parse_url_host(@item[:event])
 
       - if @item[:event].description.present?
         %h3 About
