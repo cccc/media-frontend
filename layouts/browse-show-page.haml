@@ -18,8 +18,9 @@
           = h @item[:event].subtitle
       
       %p.persons
-        %span.fa{class: @item[:event].persons_icon}
-        = @item[:event].persons_text
+        %a{href: '/search/?q=' + h(@item[:event].persons_text)}
+          %span.fa{class: @item[:event].persons_icon}
+          = @item[:event].persons_text
 
       %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
         %li
