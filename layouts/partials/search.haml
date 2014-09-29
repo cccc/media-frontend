@@ -20,7 +20,11 @@
       ms)
 
     %ol.event-previews-search
-      %li.no-results = No results
+      %li.no-results
+        Unfortunately your search did not return any results. Maybe you can find what you're looking for by
+        %a{href: 'tags/'} browsing the tags
+        or
+        %a{href: 'browse/'} by category.
       %li.template
         %a.event-preview{href: '#event.url'}
           %img.conference-logo{src: '#event.conference.logo_url', alt: '#event.conference.title'}
@@ -46,7 +50,7 @@
 
       %li.page.template
         %a{:href => "#"}
-          e
+          .letter e
           .number 1
 
       %li.postfix dia.ccc.de
