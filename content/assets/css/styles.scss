@@ -2,7 +2,6 @@
 @import "fonts";
 @import "variables";
 @import "bootstrap";
-@import "search/search";
 
 $max-width: $container-lg;
 
@@ -386,7 +385,7 @@ a.inverted {
 }
 
 /* events overview */
-.event-previews, .event-previews-tags {
+.event-previews, .event-previews-tags, .event-previews-search {
   .event-preview {
     margin: 16px 0;
     display: block;
@@ -445,9 +444,14 @@ a.inverted {
 }
 
 /* event overview for tags */
-.event-previews-tags .event-preview {
+.event-previews-tags .event-preview,
+.event-previews-search .event-preview {
     height: auto;
     
+    /* search results numbering */
+    h3 .number::after {
+      content: '.';
+    }
     .conference-logo {
       float: left;
       width: 100px;
@@ -460,6 +464,15 @@ a.inverted {
     .metadata {
       margin-bottom: 0;
     }
+}
+
+/* search results listing */
+ol.event-previews-search {
+  list-style-type: none;
+  &, >li {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 /* Font classes - Tags */
@@ -593,8 +606,9 @@ a.inverted {
     }
   }
   
-  /* event overview for tags */
-  .event-previews-tags .event-preview {
+  /* event overview for searches & tags */
+  .event-previews-tags .event-preview,
+  .event-previews-search .event-preview {
     h3 {
       font-size: 17px;
     }
