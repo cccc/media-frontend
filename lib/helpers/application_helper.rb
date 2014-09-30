@@ -85,5 +85,11 @@ module ApplicationHelper
     date.strftime("%Y-%m-%d %H:%M") if date
   end
 
-
+  def parse_url_host(urlish)
+    begin
+      URI.parse(@item[:event].link).host()
+    rescue URI::InvalidURIError
+      return ""
+    end
+  end
 end
