@@ -48,12 +48,15 @@ $(function() {
 				var
 					conferenceSearchBase = $template.find('.conference-search').data('titletpl'),
 					eventSearchBase = $template.find('.event-search').data('titletpl'),
+					$h1 = $search.find('form h1'),
 					$list = $results
 						.find('> ol')
 						.attr('start', displayPage * perPage + 1)
 						.find('> li')
 							.remove()
 						.end();
+
+				$h1.text($h1.data('resulttpl').replace('#', $input.val()));
 
 				$statistics
 					.find('.start')

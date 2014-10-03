@@ -1,6 +1,7 @@
 .search.container-fluid{"data-titletpl" => '"#" - Search - media.ccc.de'}
   %form.initial
-    %h1= @title
+    %h1{"data-resulttpl" => 'Search for "#"'}
+      = @title
     %input.text{:name => "q", :placeholder => "Search…", :type => "text"}
     %input.submit{:type => "submit", :value => "Go"}
 
