@@ -29,7 +29,7 @@ end
 
 
 route '/images/logos/*' do
-  item.identifier.chop + '.png'
+  item.identifier.chop.chomp(item[:extension]) + 'png'
 end
 
 compile '/images/logos/*' do
