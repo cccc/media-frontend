@@ -27,6 +27,17 @@ compile '/browse/*' do
   end
 end
 
+
+route '/images/logos/*' do
+  item.identifier.chop + '.png'
+end
+
+compile '/images/logos/*' do
+  if item.binary?
+    filter :logo
+  end
+end
+
 # /
 compile '*' do
   unless item.binary?
