@@ -9,7 +9,7 @@ class Conference < ActiveRecord::Base
     if self.logo
       File.join '/images/logos', self.images_path, self.logo
     else
-      "#{Settings.staticURL}/images/folder.png"
+      File.join '/images/logos/unknown.png'
     end
   end
 
