@@ -131,7 +131,7 @@ $(function() {
 							.end()
 							.find('img.conference-logo')
 								.attr('alt', hit._source.conference.title)
-								.attr('src', hit._source.conference.logo)
+								.attr('src', hit._source.conference.logo.replace('http://static.media.ccc.de/media/', '/images/logos/'))
 							.end()
 							/*.find('a.conference-url')
 								.attr('href', hit._source.conference.frontend_link)
