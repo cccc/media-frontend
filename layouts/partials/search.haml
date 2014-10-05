@@ -1,6 +1,7 @@
 .search.container-fluid{"data-titletpl" => '"#" - Search - media.ccc.de'}
   %form.initial
-    %h1= @title
+    %h1{"data-resulttpl" => 'Search for "#"'}
+      = @title
     %input.text{:name => "q", :placeholder => "Search…", :type => "text"}
     %input.submit{:type => "submit", :value => "Go"}
 
@@ -45,7 +46,7 @@
 
     %ul.paging
       %li.prev
-        %a{:href => ""} prev
+        %a.fa.fa-chevron-left{:href => ""}
       %li.prefix M
 
       %li.page.template
@@ -55,4 +56,4 @@
 
       %li.postfix dia.ccc.de
       %li.next
-        %a{:href => ""} next
+        %a.fa.fa-chevron-right{:href => ""}
