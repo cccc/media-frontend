@@ -447,6 +447,7 @@ a.inverted {
 .event-previews-tags .event-preview,
 .event-previews-search .event-preview {
     height: auto;
+    overflow: hidden;
     
     /* search results numbering */
     h3 .number::after {
