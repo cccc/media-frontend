@@ -113,7 +113,18 @@ $(function() {
 				}
 				else {
 					jQuery.each(res.hits.hits, function(idx, hit) {
-						var quality = hit._score * 100 / res.hits.max_score;
+						var
+							quality = hit._score * 100 / res.hits.max_score,
+							logourl = hit._source.conference.logo;
+
+						if(logourl) {
+							logourl = logourl.replace('http://static.media.ccc.de/media/', '/images/logos/');
+							logourl = logourl.substr(0, logourl.lastIndexOf('.')) + '.png';
+						}
+						else {
+							logourl = '/images/logos/unknown.png';
+						}
+
 
 						var $item = $template
 							.clone()
@@ -134,7 +145,7 @@ $(function() {
 							.end()
 							.find('img.conference-logo')
 								.attr('alt', hit._source.conference.title)
-								.attr('src', hit._source.conference.logo.replace('http://static.media.ccc.de/media/', '/images/logos/'))
+								.attr('src', logourl)
 							.end()
 							/*.find('a.conference-url')
 								.attr('href', hit._source.conference.frontend_link)
