@@ -7,12 +7,11 @@ class Thumbnailize < Nanoc::Filter
     system(
       'gm',
       'convert',
-      '-size',       '100x100',
       filename,
-      '-resize',     '100x100',
+      '-resize',     'x100',
       '-background', 'white',
       '-gravity',    'Center',
-      '-extent',     '100x100',
+      '-extent',     'x100',
       '+profile',    '*',
       output_filename
     )
