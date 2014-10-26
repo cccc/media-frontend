@@ -323,11 +323,13 @@ a.inverted {
 
 /* browse folders and conferences */
 .thumbnail {
-  display: inline-block;
+  display: block;
+  float: left;
   text-align: center;
   font-size: 16px;
   min-width: 130px;
   margin: 5px;
+  height: 135px;
   
   .header {
     text-align: left;
@@ -347,6 +349,7 @@ a.inverted {
     
     .fa.fa-folder {
       font-size: 40px;
+      padding: 10px 0;
     }
     
     &:hover, &:focus, &:active {
@@ -355,7 +358,6 @@ a.inverted {
     
     .caption {
       color: white;
-      margin-bottom: $padding-large-vertical;
     }
   }
   
@@ -363,8 +365,8 @@ a.inverted {
     color: $gray-dark;
     
     img {
-      height: 100px;
-      margin-bottom: $padding-small-vertical;
+      height: 64px;
+      margin: $padding-small-vertical auto;
     }
     
     .caption {
