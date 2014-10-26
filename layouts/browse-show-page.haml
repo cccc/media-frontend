@@ -1,95 +1,112 @@
 !!! 5
-%html
+%html{lang: 'en'}
   %head
+    = render '/partials/header'
     %title
       C3TV -
       = h @item[:title]
-    = render '/partials/header'
     %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
   %body
     = render '/partials/navbar'
-    %div.container
 
-      %h3
+    %div.container-fluid
+
+      %h1
         =  h @item[:event].title
       - if @item[:event].subtitle
-        %h4
+        %h2
           = h @item[:event].subtitle
+      
+      %p.persons
+        %a{href: '/search/?q=' + h(@item[:event].persons_text)}
+          %span.fa{class: @item[:event].persons_icon}
+          = @item[:event].persons_text
 
-      - if @item[:video_recordings].present?
-        .row.col-md-12
-          - r = @item[:video_recordings].first
-          %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
-            - @item[:video_recordings].each do |recording|
-              %source{type: recording.mime_type, src: h(recording.url)}
-            %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
-              %param{ name: 'allowFullScreen', value: 'true' }
-              %param{ name: 'flashvars', value: "controls=true&file=#{flash(@item[:video_recordings])}" }
+      %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
+        %li
+          %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
+        %li 
+          %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
+        %li
+          %a{href: '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+          
+      .tab-content
+        #video.tab-pane.active
+          - if @item[:video_recordings].present?
+            - r = @item[:video_recordings].first
+            %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
+              - @item[:video_recordings].each do |recording|
+                %source{type: recording.mime_type, src: h(recording.url)}
+              %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
+                %param{ name: 'allowFullScreen', value: 'true' }
+                %param{ name: 'flashvars', value: "controls=true&file=#{flash(@item[:video_recordings])}" }
 
-      - if @item[:audio_recordings].present?
-        .row.col-md-12
-          .audio-player{style: @item[:video_recordings].present? ? 'display: none' : ''}
-            %audio.audio{controls: 'true'}
+        #audio.tab-pane
+          - if @item[:audio_recordings].present?
+            %audio.audio{controls: 'controls'}
               - @item[:audio_recordings].each do |recording|
                 %source{type: recording.mime_type, src: h(recording.url)}
-            %span.small
-              audio only 
 
-      %span
-        Views: #{@item[:event].view_count}
-        %a{href: "#", onclick: "$('.file-list').toggle()"} toggle file list
-      - if @item[:audio_recordings].present? and @item[:video_recordings].present?
-        %span
-          |
-          %a{href: "#", onclick: "$('.audio-player').toggle()"} toggle audio player
-
-      %p.meta.top-space
-        / index
-        %b About:
-        %a{href: @item[:event].link} 
-          = h @item[:event].title
-
-        %span.small
-          from 
-          = date(@item[:event])
-
-      .file-list{style: 'display: none'}
-        %p
-          %b Directory: 
+        #download.tab-pane
+          %h3 Video
+          %ul
+            - @item[:video_recordings].each do |recording|
+              %li
+                -# TODO: move following line to helper
+                %span.label.filetype= recording.mime_type.split('/')[1]
+                %a{href: recording.url}
+                  %span.fa.fa-download
+                  http download
+                %a{href: recording.torrent_url}
+                  %span.fa.fa-download
+                  torrent
+          
+          %h3 Audio
+          %ul
+            - @item[:audio_recordings].each do |recording|
+              %li
+                -# TODO: move following line to helper
+                .label.filetype= recording.mime_type.split('/')[1]
+                %a{href: recording.url}
+                  %span.fa.fa-download
+                  http download
+                %a{href: recording.torrent_url}
+                  %span.fa.fa-download
+                  torrent
+          
+          %h3 Parent directory
           %a{href: @item[:conference].recordings_url}
+            %span.fa.fa-folder-open
             = @item[:conference].recordings_path
 
-          %div.row
-            %ul.col-md-6
-              - @item[:video_recordings].each do |recording|
-                %li
-                  %a{href: recording.url}
-                    = recording.filename
-                %li
-                  %a{href: recording.torrent_url}
-                    = recording.filename + '.torrent'
-            %ul.col-md-6
-              - @item[:audio_recordings].each do |recording|
-                %li
-                  %a{href: recording.url}
-                    = recording.filename
-                %li
-                  %a{href: recording.torrent_url}
-                    = recording.filename + '.torrent'
+      %ul.metadata
+        %li
+          %span.fa.fa-clock-o
+          = recording_length(@item[:event].recordings.downloaded)
+        %li
+          %span.fa.fa-calendar-o
+          = date(@item[:event])
+        %li
+          %span.fa.fa-eye
+          = @item[:event].view_count
+        %li
+          %span.fa.fa-external-link
+          %a{href: @item[:event].link}
+            = parse_url_host(@item[:event])
 
-      %p.description
+      - if @item[:event].description.present?
+        %h3 About
+        %p.description
+          = @item[:event].description
 
-        = yield
-
+      - if @item[:event].tags.present?
+        %h3 Tags
+        - @item[:event].tags.each do |tag|
+          = link_for(tag)
           
-      - if @item[:event].persons.present?
-        %p.persons
-          %b Persons
-          %ul
-            - @item[:event].persons.each do |person|
-              %li= h person
+      
 
-      = render '/partials/footer'
+    = render '/partials/footer'
 
     %script(src='/assets/js/jquery.min.js')
     %script(src='/assets/js/bootstrap.min.js')
@@ -108,3 +125,22 @@
         }
       });
       $('audio').mediaelementplayer();
+      
+      // activate tab via hash and default to video
+      function setTabToHash() {
+        var activeTab = $('.nav-tabs a[href=' + window.location.hash + ']')
+          .tab('show');
+        console.log('hash: ' + window.location.hash);
+        if (activeTab.length === 0) {
+          window.location.hash = '#video';
+        }
+      }
+      setTabToHash();
+
+      // change hash on tab change
+      $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+      });
+      
+      // adjust tabs when hash changes
+      window.onhashchange = setTabToHash;

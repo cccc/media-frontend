@@ -1,36 +1,17 @@
 !!! 5
-%html
+%html{lang: 'en'}
   %head
-    %meta(charset='utf-8')
+    = render '/partials/header'
     %title
       C3TV -
       = @item[:title]
-    = render '/partials/header'
     %script(src="/assets/js/jquery.min.js")
     %script(src="/assets/js/bootstrap.min.js")
     %script(src="/assets/js/purl.min.js")
     %script(src="/assets/js/search.js")
   %body
     = render '/partials/navbar'
+    = yield
 
-    %div.container
-
-      .row
-        %div.col-md-9.top-space
-          = yield
-
-        %div.col-md-3.top-space
-          %div
-            %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
-              Browse
-          %br
-
-          %div.panel.tag-cloud
-            %div.panel-heading
-              %h3.panel-title Tags
-            %div.panel-body
-              - tag_cloud.each do |tag|
-                = tag
-
-      = render '/partials/footer'
+    = render '/partials/footer'
 

@@ -16,6 +16,10 @@ class Event < ActiveRecord::Base
     .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
     .group(:"events.id")
   }
+  
+  def title
+    read_attribute(:title).strip
+  end
 
   def url
     "/browse/#{self.conference.webgen_location}/#{self.slug}.html"
@@ -30,7 +34,25 @@ class Event < ActiveRecord::Base
   end
 
   def tags
-    read_attribute(:tags).compact
+    read_attribute(:tags).compact.collect { |x| x.strip }
   end
 
+  def persons_text
+    if self.persons.length == 0
+      'n/a'
+    elsif self.persons.length == 1
+      self.persons[0]
+    else
+      persons = self.persons[0..-3] + [self.persons[-2..-1].join(' and ')]
+      persons.join(', ')
+    end
+  end
+  
+  def persons_icon
+    if self.persons.length <= 1
+      'fa-user'
+    else
+      'fa-group'
+    end
+  end
 end

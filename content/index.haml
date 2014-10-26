@@ -2,16 +2,23 @@
 title: home
 ---
 
-%div.row
-  - Event.promoted(4).each do |event|
-    %div.col-xs-6.col-md-3
-      %a.thumbnail{href: h(event.url)}
-        %img{src: h(event.thumb_url), alt: event.title, title: event.title}
+= render '/partials/promoted'
 
-%h2 CCC-TV News
+%div.container-fluid
+  .row.browse-button-bar
+    %a.btn.btn-primary.btn-lg{role: 'button', href: '/tags'}
+      %span.fa.fa-tags
+      Browse by tag
+      
+    %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
+      %span.fa.fa-th
+      Browse by category
 
-- News.recent(10).each do |news|
-  %div.news-item
-    %h3= h news.header
-    %span= news.body
-   
+  %h1 News
+
+  - News.recent(10).each do |news|
+    %article.news-item
+      %h2
+        %span.date= news.date_formatted
+        = news.title
+      =news.body

@@ -3,93 +3,95 @@ title: about media.ccc.de
 ---
 %script(src="/assets/js/handlebars.min-latest.js")
 
-%h1 About media.ccc.de
+%div.container
 
-%p
-  This site offers a wide variety of video material distributed by the Chaos Computer Club converted for your convenience to the Adobe Flash format for on-line viewing. Links to other resources are provided as well.
+  %h1 About media.ccc.de
 
-%p
-  If you are anyhow related to the Chaos Computer Club and would like us to convert and publish your video material on this website, feel free to contact us.
+  %p
+    This site offers a wide variety of video material distributed by the Chaos Computer Club converted for your convenience to the Adobe Flash format for on-line viewing. Links to other resources are provided as well.
 
-  Whilst we hope you find the provided video material interesting and informative we can give no assurances or warranty regarding its quality. The opinions expressed in the video material do not necessarily state or reflect those of the Chaos Computer Club.
+  %p
+    If you are anyhow related to the Chaos Computer Club and would like us to convert and publish your video material on this website, feel free to contact us.
 
-%b Contact: 
-%a{href: 'mailto: media@koeln.ccc.de'} media@koeln.ccc.de
+    Whilst we hope you find the provided video material interesting and informative we can give no assurances or warranty regarding its quality. The opinions expressed in the video material do not necessarily state or reflect those of the Chaos Computer Club.
 
-%h2 Licenses
+  %b Contact:
+  %a{href: 'mailto:media@koeln.ccc.de'} media@koeln.ccc.de
 
-The license displayed in the actual video file applies. If there is no license encoded in the video file we suggest you ask the 
-organizers of the recordings event.
+  %h2 Licenses
 
-%h2 Privacy Policy
+  The license displayed in the actual video file applies. If there is no license encoded in the video file we suggest you ask the
+  organizers of the recordings event.
 
-%p
-  While browsing through the website normally we do not save any information wich could be used to identify a person. The log files are anonymized before they are saved and we do not have a de-anonymized version of the them. The anonymized log-files may be used to plot usage statistics.
+  %h2 Privacy Policy
 
-The following data is collected and saved for an undefined duration:
+  %p
+    While browsing through the website normally we do not save any information wich could be used to identify a person. The log files are anonymized before they are saved and we do not have a de-anonymized version of the them. The anonymized log-files may be used to plot usage statistics.
 
-%ul
-  %li Date and time,
-  %li the visited pages,
-  %li status codes the webserver answered with,
-  %li your browser and operating system,
-  %li and the referring URL
+  The following data is collected and saved for an undefined duration:
 
-%p
-  If a connection to port 80 fails, an error log will be created. It contains the IP address of the host causing the error and the website containing the faulty hyperlink. This error log will only be used to fix the error and will not be used in any other way.
+  %ul
+    %li Date and time,
+    %li the visited pages,
+    %li status codes the webserver answered with,
+    %li your browser and operating system,
+    %li and the referring URL
 
-%p
-  Video and audio files are often provided by mirrors and are not covered by this policy.
+  %p
+    If a connection to port 80 fails, an error log will be created. It contains the IP address of the host causing the error and the website containing the faulty hyperlink. This error log will only be used to fix the error and will not be used in any other way.
 
-%h2 cdn.media.ccc.de
+  %p
+    Video and audio files are often provided by mirrors and are not covered by this policy.
 
-%p
-  :markdown
-    The website is basically a frontend for all files stored on [cdn.media.ccc.de](//cdn.media.ccc.de).
-    If you'd rather use a torrent you can append '.torrent' to any large file, this will provide a torrent with
-    http seeds appropiate for your location.
+  %h2 cdn.media.ccc.de
 
-%h3 Current Mirrors
+  %p
+    :markdown
+      The website is basically a frontend for all files stored on [cdn.media.ccc.de](//cdn.media.ccc.de).
+      If you'd rather use a torrent you can append '.torrent' to any large file, this will provide a torrent with
+      http seeds appropiate for your location.
 
-#status
+  %h3 Current Mirrors
+
+  #status
 
 
-%h2 Imprint
+  %h2 Imprint
 
-%p
-  :markdown
-    Please see [ccc.de](//ccc.de/de/imprint).
+  %p
+    :markdown
+      Please see [ccc.de](//ccc.de/de/imprint).
 
-%script#status-template{type: 'text/x-handlebars-template'}
-  <table class="table table-striped table-condensed">
-  <tr>
-  <th>Name</th>
-  <th>Location</th>
-  <th>Last Scan</th>
-  <th>Files</th>
-  </tr>
-  {{#each mirrors}}
-  {{#if this.status_baseurl}}
-  <tr>
-  {{else}}
-  <tr class='warning'>
-  {{/if}}
-  <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
-  <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
-  <td>{{this.last_scan}}</td>
-  <td>{{this.nfiles}}</td>
-  </tr>
-  {{/each}}
-  </table>
+  %script#status-template{type: 'text/x-handlebars-template'}
+    <table class="table table-striped table-condensed">
+    <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Last Scan</th>
+    <th>Files</th>
+    </tr>
+    {{#each mirrors}}
+    {{#if this.status_baseurl}}
+    <tr>
+    {{else}}
+    <tr class='warning'>
+    {{/if}}
+    <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
+    <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
+    <td>{{this.last_scan}}</td>
+    <td>{{this.nfiles}}</td>
+    </tr>
+    {{/each}}
+    </table>
 
-:javascript
-  $(document).ready(function() {
-    var source = $('#status-template').html();
-    var template = Handlebars.compile(source);
-    var target = $('#status');
-    $.get("//api.media.ccc.de/public/mirrors", function(data,status,xhr){
-      var html = template(data);
-      target.html(html);
+  :javascript
+    $(document).ready(function() {
+      var source = $('#status-template').html();
+      var template = Handlebars.compile(source);
+      var target = $('#status');
+      $.get("//api.media.ccc.de/public/mirrors", function(data,status,xhr){
+        var html = template(data);
+        target.html(html);
+      });
     });
-  });
 

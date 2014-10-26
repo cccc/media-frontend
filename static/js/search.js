@@ -37,22 +37,26 @@ $(function() {
 		$('#media-search input[name=q]').val(term);
 		$.ajax({
 			dataType: $.support.cors ? 'json' : 'jsonp',
-			url: 'http://koeln.media.ccc.de/search/api/term',
+			url: window.location.protocol+'//koeln.media.ccc.de/search/api/term',
 			type: 'post',
 			data: {
 				term: lterm,
-				displayPage: displayPage * perPage,
+				displayPage: displayPage,
 				perPage: perPage
 			},
 			success: function(res) {
 				var
 					conferenceSearchBase = $template.find('.conference-search').data('titletpl'),
 					eventSearchBase = $template.find('.event-search').data('titletpl'),
+					$h1 = $search.find('form h1'),
 					$list = $results
 						.find('> ol')
+						.attr('start', displayPage * perPage + 1)
 						.find('> li')
 							.remove()
 						.end();
+
+				$h1.text($h1.data('resulttpl').replace('#', $input.val()));
 
 				$statistics
 					.find('.start')
@@ -108,9 +112,20 @@ $(function() {
 					$noresults.appendTo($list);
 				}
 				else {
-					$results.find('> ol').attr('start', displayPage * perPage + 1)
 					jQuery.each(res.hits.hits, function(idx, hit) {
-						var quality = hit._score * 100 / res.hits.max_score;
+						var
+							quality = hit._score * 100 / res.hits.max_score,
+							logourl = hit._source.conference.logo;
+
+						if(logourl.match(/\.(png|jpg|jpeg|gif)$/)) {
+							logourl = logourl.replace('http://static.media.ccc.de/media/', '/images/logos/');
+							logourl = logourl.substr(0, logourl.lastIndexOf('.')) + '.png';
+						}
+						else {
+							logourl = '/images/logos/unknown.png';
+						}
+
+
 						var $item = $template
 							.clone()
 							.appendTo($list)
@@ -122,40 +137,34 @@ $(function() {
 								'nonsense'
 							)
 							.removeClass('template')
-							.find('.conference-link')
-								.text(jQuery.trim(hit._source.conference.title))
-								.attr('title', hit._source.conference.title)
+							.find('h3 .number')
+								.text(displayPage * perPage + 1 + idx)
+							.end()
+							.find('h3 .t')
+								.text(hit._source.event.title)
+							.end()
+							.find('img.conference-logo')
+								.attr('alt', hit._source.conference.title)
+								.attr('src', logourl)
+							.end()
+							/*.find('a.conference-url')
 								.attr('href', hit._source.conference.frontend_link)
-							.end()
-							.find('.conference-search')
-								.text(jQuery.trim(hit._source.conference.acronym))
-								.attr('title', conferenceSearchBase.replace('%', hit._source.conference.title))
-								.attr('href', baseUrl+'?q='+encodeURIComponent(hit._source.conference.title))
-							.end()
-							.find('.event-link')
-								.text(jQuery.trim(hit._source.event.title))
+							.end()*/
+							.find('a.event-preview')
 								.attr('href', hit._source.event.frontend_link)
 							.end()
-							.find('.event-search')
-								.text(jQuery.trim(hit._source.event.title))
-								.attr('title', eventSearchBase.replace('%', hit._source.event.title))
-								.attr('href', baseUrl+'?q='+encodeURIComponent(hit._source.event.title))
-							.end();
-
-						var
-							$persons = $item.find('ul.persons'),
-							$personTemplate = $persons.find('li.template').detach();
-
-						jQuery.each(hit._source.event.persons, function(idx, person) {
-							$personTemplate
-								.clone()
-								.removeClass('template')
-								.find('.person-link')
-									.text(person)
-									.attr('href', baseUrl+'?q='+encodeURIComponent(person))
+							.find('.recording_length .t')
+								.text(Math.round(parseInt(hit._source.event.length) / 60)+' min')
+							.end()
+							.find('.date .t')
+								.text(hit._source.event.date)
+							.end()
+							.find('.persons .t')
+								.text(personnames(hit._source.event.persons))
+								.find('span.fa')
+									.addClass(hit._source.event.persons > 1 ? 'fa-group' : 'fa-user')
 								.end()
-								.appendTo($persons);
-						});
+							.end();
 					});
 				}
 
@@ -202,4 +211,15 @@ $(function() {
 			.find('input.submit')
 			.trigger('click', ['param', param.p]);
 	}
+
+	function personnames(persons) {
+		if(persons.length == 0) {
+			return 'n/a';
+		} else if(persons.length < 3) {
+			return persons.slice(0, 2).join(' and ')
+		} else {
+			return persons.slice(0, -2).join(', ') + ', ' + persons.slice(-2).join(' and ')
+		}
+}
+
 });

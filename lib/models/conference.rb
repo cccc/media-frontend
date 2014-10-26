@@ -7,9 +7,9 @@ class Conference < ActiveRecord::Base
 
   def logo_url
     if self.logo
-      File.join Settings.staticURL, 'media', self.images_path, self.logo
+      File.join '/images/logos', self.images_path, File.basename(self.logo, File.extname(self.logo))+'.png'
     else
-      "#{Settings.staticURL}/images/folder.png"
+      File.join '/images/logos/unknown.png'
     end
   end
 

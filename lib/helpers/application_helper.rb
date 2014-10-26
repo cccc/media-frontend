@@ -18,33 +18,14 @@ module ApplicationHelper
 
   def recording_length_minutes(recording)
     if recording.length > 0
-      "(#{recording.length / 60}min)"
-    end
-  end
-
-  def audio_ready_icon_link(recordings)
-    if recordings.audio.present?
-      recording = recordings.audio.first
-      %'<a class="audio-icon icon" href="#{recording.url}"><img src="/images/audio_ready_icon.png" alt="audio-only version available, too"/></a>'
-    end
-  end
-
-  def video_quality_icon(recordings)
-    if recordings.video.present?
-      recording = recordings.max { |a,b| (a.width.to_i || 0) <=> (b.width.to_i || 0) }
-      return unless recording and recording.width and recording.height
-      if recording.width >= 1280 and recording.height >= 720
-        %'<img class="icon" src="/images/hd_ready_icon.png" alt="720p resolution"/>'
-      elsif recording.width >= 704 and recording.height >= 480
-        %'<img class="icon" src="/images/dvd_ready_icon.png" alt="dvd resolution"/>'
-      end
+      "#{recording.length / 60} min"
     end
   end
 
   def flash(recordings)
     url = recordings.select { |recording| recording.mime_type == 'video/mp4' }.first.try(:url)
     if url.present?
-      h(url) 
+      h(url)
     elsif recordings.present?
       h(recordings.first.url)
     else
@@ -85,5 +66,11 @@ module ApplicationHelper
     date.strftime("%Y-%m-%d %H:%M") if date
   end
 
-
+  def parse_url_host(urlish)
+    begin
+      URI.parse(@item[:event].link).host()
+    rescue URI::InvalidURIError
+      return ""
+    end
+  end
 end

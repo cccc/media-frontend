@@ -1,34 +1,34 @@
 !!! 5
-%html
+%html{lang: 'en'}
   %head
+    = render '/partials/header'
     %title
       C3TV -
       = h @item[:title]
-    = render '/partials/header'
   %body
     = render '/partials/navbar'
-    %div.container
+
+    .container-fluid
+      %h1 Browse by category
 
       - if @item[:folders].present?
-        - @item[:folders].each_slice(4) do |folders|
-          %div.row
-            - folders.each do |folder|
-              %div.col-xs-6.col-md-3
-                %a.thumbnail{href: h(folder.url)}
-                  - if folder.conference
-                    %img{src: folder.conference.logo_url, alt: 'conference logo'}
-                    %div.caption
-                      = folder.conference.title
-                      (#{Event.recorded_at(folder.conference).to_a.count})
-                  - else
-                    %img{src: '/images/folder.png', alt: 'folder'}
-                    %div.caption
-                      = folder.name
+        - @item[:folders].each do |folder|
+          - if folder.conference
+            %a.thumbnail.conference{href: h(folder.url)}
+              .header
+                %span.fa.fa-video-camera
+                = Event.recorded_at(folder.conference).to_a.count
+              %img{src: folder.conference.logo_url, alt: 'conference logo'}
+              .caption
+                = folder.conference.title
+          - else
+            %a.thumbnail.folder{href: h(folder.url)}
+              .header
+                %span.fa.fa-th
+              .fa.fa-folder
+              .caption
+                = folder.name
 
       = yield
 
-      = render '/partials/footer'
-
-    %script(src="/assets/js/jquery.min.js")
-    %script(src="/assets/js/bootstrap.min.js")
-
+    = render '/partials/footer'
