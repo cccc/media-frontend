@@ -28,7 +28,7 @@
         %li 
           %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
         %li
-          %a{href: @item[:event].download_url, 'data-target' => 'download', role: 'tab', 'data-toggle' => 'tab'} Download
+          %a{href: @item[:event].download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
           
       .tab-content
         #video.tab-pane.active
@@ -99,7 +99,7 @@
       
       // activate tab via hash and default to video
       function setTabToHash() {
-        var activeTab = $('.nav-tabs a[href=' + window.location.hash + '], .nav-tabs a[data-target=' + window.location.hash.substr(1) + ']')
+        var activeTab = $('.nav-tabs a[href=' + window.location.hash + '], .nav-tabs a[data-target=' + window.location.hash + ']')
           .tab('show');
 
         if (activeTab.length === 0) {
