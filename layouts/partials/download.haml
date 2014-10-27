@@ -1,0 +1,30 @@
+%h3 Video
+%ul
+  - @item[:video_recordings].each do |recording|
+    %li
+      -# TODO: move following line to helper
+      %span.label.filetype= recording.mime_type.split('/')[1]
+      %a{href: recording.url}
+        %span.fa.fa-download
+        http download
+      %a{href: recording.torrent_url}
+        %span.fa.fa-download
+        torrent
+
+%h3 Audio
+%ul
+  - @item[:audio_recordings].each do |recording|
+    %li
+      -# TODO: move following line to helper
+      .label.filetype= recording.mime_type.split('/')[1]
+      %a{href: recording.url}
+        %span.fa.fa-download
+        http download
+      %a{href: recording.torrent_url}
+        %span.fa.fa-download
+        torrent
+
+%h3 Parent directory
+%a{href: @item[:conference].recordings_url}
+  %span.fa.fa-folder-open
+  = @item[:conference].recordings_path

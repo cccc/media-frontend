@@ -25,6 +25,10 @@ class Event < ActiveRecord::Base
     "/browse/#{self.conference.webgen_location}/#{self.slug}.html"
   end
 
+  def download_url
+    "/browse/#{self.conference.webgen_location}/#{self.slug}/download/#download"
+  end
+
   def poster_url
     File.join(Settings.staticURL, 'media', self.conference.images_path, self.poster_filename) if self.poster_filename
   end

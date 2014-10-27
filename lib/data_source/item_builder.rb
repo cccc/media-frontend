@@ -41,6 +41,23 @@ class ItemBuilder
     )
 
     @items << event_item
+
+
+    event_download_item = Nanoc3::Item.new(
+      description,
+      {
+        title: event.title, layout: 'browse-download-page',
+        tags: event.tags.map { |t| t.strip },
+        conference: event.conference,
+        event: event,
+        video_recordings: event.recordings.downloaded.video,
+        audio_recordings: event.recordings.downloaded.audio
+      },
+      get_path(event.conference.webgen_location, event.slug)+'download/',
+      binary: false
+    )
+
+    @items << event_download_item
   end
 
   def create_browse_item(path, childs)
