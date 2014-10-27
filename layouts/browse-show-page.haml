@@ -28,7 +28,7 @@
         %li 
           %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
         %li
-          %a{href: '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+          %a{href: @item[:event].download_url, 'data-target' => 'download', role: 'tab', 'data-toggle' => 'tab'} Download
           
       .tab-content
         #video.tab-pane.active
@@ -48,36 +48,7 @@
                 %source{type: recording.mime_type, src: h(recording.url)}
 
         #download.tab-pane
-          %h3 Video
-          %ul
-            - @item[:video_recordings].each do |recording|
-              %li
-                -# TODO: move following line to helper
-                %span.label.filetype= recording.filetype
-                %a{href: recording.url}
-                  %span.fa.fa-download
-                  http download
-                %a{href: recording.torrent_url}
-                  %span.fa.fa-download
-                  torrent
-          
-          %h3 Audio
-          %ul
-            - @item[:audio_recordings].each do |recording|
-              %li
-                -# TODO: move following line to helper
-                .label.filetype= recording.mime_type.split('/')[1]
-                %a{href: recording.url}
-                  %span.fa.fa-download
-                  http download
-                %a{href: recording.torrent_url}
-                  %span.fa.fa-download
-                  torrent
-          
-          %h3 Parent directory
-          %a{href: @item[:conference].recordings_url}
-            %span.fa.fa-folder-open
-            = @item[:conference].recordings_path
+          = render '/partials/download'
 
       %ul.metadata
         %li
@@ -128,9 +99,9 @@
       
       // activate tab via hash and default to video
       function setTabToHash() {
-        var activeTab = $('.nav-tabs a[href=' + window.location.hash + ']')
+        var activeTab = $('.nav-tabs a[href=' + window.location.hash + '], .nav-tabs a[data-target=' + window.location.hash.substr(1) + ']')
           .tab('show');
-        console.log('hash: ' + window.location.hash);
+
         if (activeTab.length === 0) {
           window.location.hash = '#video';
         }
