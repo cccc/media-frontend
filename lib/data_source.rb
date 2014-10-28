@@ -14,7 +14,7 @@ class MediaBackendDataSource < Nanoc3::DataSource
     location_pages = LocationPages.new
     feed_builder = FeedBuilder.new(item_builder)
 
-    Conference.all.each do |conference|
+    Conference.order("created_at desc").all.each do |conference|
       # event pages
       events = conference.events.select { |event| event.recordings.downloaded.any? }
 
