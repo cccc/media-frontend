@@ -27,7 +27,7 @@
         - trail[1..-2].each_with_index do |item, i|
           %li
             %a.inverted{href: item.identifier}
-              = item.identifier.sub(trail[i].identifier, '').gsub('/','')
+              = item.identifier.sub(trail[i].identifier, '').gsub('/','').gsub(/[\-_]/,' ')
         %li.active
           - if @item[:sorting] == '' || @item[:sorting] == nil
             - if trail[-1][:event].present?

@@ -14,7 +14,7 @@
       .events-header
         %img{src: @item[:conference].logo_url, alt: 'conference logo'}
 
-        %h1= @item[:conference].acronym
+        %h1= @item[:conference].acronym.gsub(/[\-_]/,' ')
         - if @item[:conference].title and not item[:conference].acronym == @item[:conference].title
           %h2= h @item[:conference].title
 
