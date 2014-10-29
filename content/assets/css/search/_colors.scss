@@ -54,14 +54,6 @@ $hl:     #777777;
 			a {
 				color: black;
 				text-decoration: none;
-
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-
-			ul > li {
-				list-style-type: square;
 			}
 
 			.conference {
