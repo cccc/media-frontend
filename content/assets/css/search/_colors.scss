@@ -18,17 +18,9 @@ $link:   #428bca;
 		margin-top: 0;
 	}
 
-	form.initial {
-		h1 {
-		}
-
-		background-color: $medium;
-		border-color: $border;
-		border-radius: 4px;
-	}
-
-	input {
+	input.text {
 		outline: none;
+		float: left;
 
 		padding: 6px 12px;
 		font-size: 14px;
@@ -39,6 +31,10 @@ $link:   #428bca;
 
 		color: #555;
 		background-color: #fff;
+		border: 1px solid #ccc;
+	}
+
+	button {
 		border: 1px solid #ccc;
 	}
 

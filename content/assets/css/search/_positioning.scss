@@ -5,9 +5,13 @@
 		h1 { display: none; }
 		&.initial {
 			width: 450px;
-			margin: 0 auto;
+			margin: 50px auto;
 			border: 1px solid silver;
 			padding: 30px;
+
+			input.text {
+				width: 90%;
+			}
 
 			&, h1 {
 				display: block;

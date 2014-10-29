@@ -4,8 +4,13 @@
 
 .search {
 	form {
+		margin: 50px 20px;
 		input.text {
 			width: 250px;
+			height: 26px;
+		}
+		button {
+			height: 26px;
 		}
 	}
 

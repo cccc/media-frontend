@@ -17,7 +17,7 @@ $(function() {
 		.find('input.text')
 		.focus()
 	.end()
-	.on('click', 'input.submit', function(e, triggerOrigin, displayPage) {
+	.on('click', '.submit', function(e, triggerOrigin, displayPage) {
 		e.preventDefault();
 		var
 			$submit = $(this),
@@ -208,7 +208,7 @@ $(function() {
 			.find('input.text')
 			.val(param.q)
 		.end()
-			.find('input.submit')
+			.find('.submit')
 			.trigger('click', ['param', param.p]);
 	}
 

@@ -1,9 +1,12 @@
 .search.container-fluid{"data-titletpl" => '"#" - Search - media.ccc.de'}
-  %form.initial
+  %form.initial{role: 'search'}
     %h1{"data-resulttpl" => 'Search for "#"'}
       = @title
-    %input.text{:name => "q", :placeholder => "Search…", :type => "text"}
-    %input.submit{:type => "submit", :value => "Go"}
+
+    %input.form-control.text{type: 'search', size: '17', name: 'q', placeholder: 'Search…'}
+    %span.input-group-btn
+      %button.btn.btn-default.submit{type: 'submit'}
+        %span.fa.fa-search
 
   %section.results.initial
     .statistics
