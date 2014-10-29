@@ -1,7 +1,7 @@
 $border: #e7e7e7;
 $medium: #95b1ca;
 $hl:     #777777;
-$link:   #428bca;
+
 
 .search {
 	h1 {
@@ -62,9 +62,6 @@ $link:   #428bca;
 
 			ul > li {
 				list-style-type: square;
-				&, a {
-					color: $link;
-				}
 			}
 
 			.conference {
@@ -74,10 +71,6 @@ $link:   #428bca;
 
 				a::before {
 					font-size: 14px;
-				}
-
-				&, a {
-					color: $link;
 				}
 			}
 
@@ -106,7 +99,7 @@ $link:   #428bca;
 	.paging {
 		li {
 			a {
-				color: $link;
+
 				.number { color: black; }
 			}
 
