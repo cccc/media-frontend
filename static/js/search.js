@@ -150,7 +150,7 @@ $(function() {
 							/*.find('a.conference-url')
 								.attr('href', hit._source.conference.frontend_link)
 							.end()*/
-							.find('a.event-preview')
+							.find('a.conference-url')
 								.attr('href', hit._source.event.frontend_link)
 							.end()
 							.find('.recording_length .t')

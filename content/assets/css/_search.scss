@@ -1,43 +1,41 @@
-@import '../variables';
+@import "variables";
 
 .search {
 	padding-bottom: 50px;
 
 	form {
-		h1 { display: none; }
-		&.initial {
-			width: 450px;
-			margin: 50px auto;
-			border: 1px solid silver;
-			padding: 30px;
-
-			input.text {
-				width: 90%;
-			}
-
-			&, h1 {
-				display: block;
-				text-align: center;
-			}
-		}
+		margin-bottom: 30px;
 	}
 
-	.results ol > li {
-		list-style-position: inside;
-		padding: 20px 10px 20px 10px;
-		font-size: 35px;
-		line-height: 19px;
+	input.text {
+		outline: none;
+		float: left;
 
-		> ul {
-			margin-top: 15px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.428571429;
+
+		vertical-align: middle;
+		width: 50%;
+		height: 28px;
+		border: 1px solid #ccc;
+	}
+
+	button {
+		border: 1px solid #ccc;
+		height: 28px;
+	}
+
+	.results {
+		&.initial {
+			display: none;
 		}
 
-		a, ul {
-			font-size: 16px;
-		}
+		.template { display: none; }
 	}
 
 	.paging {
+		display: none;
 		overflow: hidden;
 		margin: 50px 0 0 150px;
 
@@ -46,11 +44,16 @@
 			padding-left: 0 !important;
 		}
 
-		li {
-			font-size: 18px;
+		&.visible {
+			display: block;
 		}
 
-		li.page {
+		li {
+			display: block;
+			text-align: center;
+			float: left;
+			list-style-type: none;
+			font-size: 18px;
 		}
 
 		li.page a {
