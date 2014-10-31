@@ -158,9 +158,9 @@ $(function() {
 							.end()
 							.find('.persons .t')
 								.html(personlinks(hit._source.event.persons))
-								.find('span.fa')
-									.addClass(hit._source.event.persons > 1 ? 'fa-group' : 'fa-user')
-								.end()
+							.end()
+							.find('.persons.fa')
+								.addClass(hit._source.event.persons.length > 1 ? 'fa-group' : 'fa-user')
 							.end();
 					});
 				}

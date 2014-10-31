@@ -32,19 +32,6 @@
 		}
 
 		.template { display: none; }
-		a { color: black; }
-
-		.event-preview:hover {
-			li, a {
-				color: black !important;
-			}
-		}
-
-		.event-preview a:hover {
-			color: $brand-primary !important;
-			text-decoration: none;
-		}
-
 	}
 
 	.paging {
