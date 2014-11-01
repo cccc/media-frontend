@@ -17,7 +17,7 @@ $(function() {
 		.find('input.text')
 		.focus()
 	.end()
-	.on('click', 'input.submit', function(e, triggerOrigin, displayPage) {
+	.on('click', '.submit', function(e, triggerOrigin, displayPage) {
 		e.preventDefault();
 		var
 			$submit = $(this),
@@ -150,7 +150,7 @@ $(function() {
 							/*.find('a.conference-url')
 								.attr('href', hit._source.conference.frontend_link)
 							.end()*/
-							.find('a.event-preview')
+							.find('a.conference-url')
 								.attr('href', hit._source.event.frontend_link)
 							.end()
 							.find('.recording_length .t')
@@ -208,7 +208,7 @@ $(function() {
 			.find('input.text')
 			.val(param.q)
 		.end()
-			.find('input.submit')
+			.find('.submit')
 			.trigger('click', ['param', param.p]);
 	}
 
