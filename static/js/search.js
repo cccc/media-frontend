@@ -147,9 +147,6 @@ $(function() {
 								.attr('alt', hit._source.conference.title)
 								.attr('src', logourl)
 							.end()
-							/*.find('a.conference-url')
-								.attr('href', hit._source.conference.frontend_link)
-							.end()*/
 							.find('a.conference-url')
 								.attr('href', hit._source.event.frontend_link)
 							.end()
@@ -160,10 +157,10 @@ $(function() {
 								.text(hit._source.event.date)
 							.end()
 							.find('.persons .t')
-								.text(personnames(hit._source.event.persons))
-								.find('span.fa')
-									.addClass(hit._source.event.persons > 1 ? 'fa-group' : 'fa-user')
-								.end()
+								.html(personlinks(hit._source.event.persons))
+							.end()
+							.find('.persons.fa')
+								.addClass(hit._source.event.persons.length > 1 ? 'fa-group' : 'fa-user')
 							.end();
 					});
 				}
@@ -212,14 +209,29 @@ $(function() {
 			.trigger('click', ['param', param.p]);
 	}
 
-	function personnames(persons) {
+	function personlinks(persons) {
 		if(persons.length == 0) {
 			return 'n/a';
 		} else if(persons.length < 3) {
-			return persons.slice(0, 2).join(' and ')
+			return linkify_personnames(persons).join(' and ')
 		} else {
-			return persons.slice(0, -2).join(', ') + ', ' + persons.slice(-2).join(' and ')
+			return linkify_personnames(persons.slice(0, -2)).join(', ') + ', ' + linkify_personnames(persons.slice(-2)).join(' and ')
 		}
-}
+	}
+
+	function linkify_personnames(personnames)
+	{
+		for (var i = 0; i < personnames.length; i++) {
+			personnames[i] = $('<a />')
+				.attr({
+					href: baseUrl+'?q='+encodeURIComponent(personnames[i]),
+					title: 'Search for "'+personnames[i]+'"'
+				})
+				.text(personnames[i])
+				.prop('outerHTML');
+		};
+
+		return personnames;
+	}
 
 });

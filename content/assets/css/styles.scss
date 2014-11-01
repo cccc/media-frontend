@@ -399,12 +399,10 @@ a.inverted {
       width: 160px;
     }
     
-    &:hover, &:focus, &:active {
-      text-decoration: none;
-      .caption h3 {
-        color: $link-color;
-      }
-      .metadata li {
+    a {
+      color: black;
+      &:hover, &:focus, &:active {
+        text-decoration: none;
         color: $link-color;
       }
     }
