@@ -84,7 +84,7 @@
     %script(src='/assets/js/mediaelement-and-player.min.js')
 
     :javascript
-      var stamp = window.location.hash.split('@')[1];
+      var stamp = window.location.hash.split('&t=')[1];
       $('video').mediaelementplayer({
         usePluginFullScreen: true,
 
@@ -101,7 +101,15 @@
             $.post("http://api.media.ccc.de/public/recordings/count", {event_id: #{@item[:event].id},src: mediaElement.src});
           }, false);
           mediaElement.addEventListener('pause', function() {
-            window.location.hash = '#video@'+Math.round(mediaElement.currentTime);
+            var hash = '#video&t='+Math.round(mediaElement.currentTime);;
+            if(window.history && window.history.replaceState) {
+              // set new hash without adding an entry into the browser history
+              window.history.replaceState(null, "", hash);
+            }
+            else {
+              // classic fallback
+              window.location.hash = hash;
+            }
           }, false);
         },
         pause: function(mediaElement) {
@@ -112,7 +120,7 @@
       
       // activate tab via hash and default to video
       function setTabToHash() {
-        var hash = window.location.hash.split('@')[0]; // split video-stamp of the hash
+        var hash = window.location.hash.split('&')[0]; // split video-stamp of the hash
         var activeTab = $('.nav-tabs a[href=' + hash + '], .nav-tabs a[data-target=' + hash + ']')
           .tab('show');
 
