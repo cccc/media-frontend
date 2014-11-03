@@ -1,10 +1,10 @@
 class Recording < ActiveRecord::Base
   belongs_to :event
 
-  HTML5 = ['audio/ogg', 'audio/mpeg', 'video/mp4', 'video/ogg', 'video/webm']
+  HTML5 = ['audio/ogg', 'audio/mpeg', 'audio/opus', 'video/mp4', 'video/ogg', 'video/webm']
 
   scope :downloaded, -> { where(state: 'downloaded') }
-  scope :audio, -> { where(mime_type: ['audio/ogg', 'audio/mpeg']) }
+  scope :audio, -> { where(mime_type: ['audio/ogg', 'audio/mpeg', 'audio/opus']) }
   scope :video, -> { where(mime_type: ['video/mp4', 'vnd.voc/h264-lq', 'vnd.voc/h264-hd', 'video/ogg', 'video/webm']) }
 
   def url

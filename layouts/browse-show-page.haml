@@ -23,16 +23,18 @@
           = @item[:event].persons_text
 
       %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
-        %li
-          %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
-        %li 
-          %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
+        - if @item[:video_recordings].present?
+          %li
+            %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
+        - if @item[:audio_recordings].present?
+          %li
+            %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
         %li
           %a{href: @item[:event].download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
           
       .tab-content
-        #video.tab-pane.active
-          - if @item[:video_recordings].present?
+        - if @item[:video_recordings].present?
+          #video.tab-pane.active
             - r = @item[:video_recordings].first
             %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
               - @item[:video_recordings].each do |recording|
@@ -41,8 +43,8 @@
                 %param{ name: 'allowFullScreen', value: 'true' }
                 %param{ name: 'flashvars', value: "controls=true&file=#{flash(@item[:video_recordings])}" }
 
-        #audio.tab-pane
-          - if @item[:audio_recordings].present?
+        - if @item[:audio_recordings].present?
+          #audio.tab-pane
             %audio.audio{controls: 'controls'}
               - @item[:audio_recordings].each do |recording|
                 %source{type: recording.mime_type, src: h(recording.url)}
