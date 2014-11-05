@@ -9,7 +9,7 @@ title: home
     %a.btn.btn-primary.btn-lg{role: 'button', href: '/tags'}
       %span.fa.fa-tags
       Browse by tag
-      
+
     %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
       %span.fa.fa-th
       Browse by category
@@ -22,3 +22,7 @@ title: home
         %span.date= news.date_formatted
         = news.title
       =news.body
+
+/
+  = Time.now
+  = `git rev-parse HEAD`
