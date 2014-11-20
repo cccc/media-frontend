@@ -195,7 +195,7 @@ $(function() {
 	.on('click', '.paging a', function(e) {
 		e.preventDefault();
 		$search
-			.find('input.submit')
+			.find('.submit')
 			.trigger('click', ['param', $(this).data('page')]);
 	});
 
