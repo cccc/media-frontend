@@ -64,7 +64,7 @@ class FeedBuilder
   private
 
   def cache_key(identifier, *models)
-    Digest::SHA1.hexdigest([identifier, models.flatten.map { |m| m.updated_at.to_i }].join(';'))
+    identifier.to_s + '_' + Digest::SHA1.hexdigest([models.flatten.map { |m| m.updated_at.to_i }].join(';'))
   end
 
 end

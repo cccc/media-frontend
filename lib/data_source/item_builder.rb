@@ -73,9 +73,9 @@ class ItemBuilder
       folder.conference = res.first unless res.nil? or res.empty?
       folders << folder
     }
-    
+
     title = path
-    if path == "/" 
+    if path == "/"
       title = "Browse by category"
     end
 
@@ -95,6 +95,7 @@ class ItemBuilder
       "",
       {
         title: tag, layout: 'browse-show-tags',
+        tag: true,
         events: events
       },
       get_path('tags', tag),
