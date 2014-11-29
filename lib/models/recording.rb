@@ -21,6 +21,8 @@ class Recording < ActiveRecord::Base
       'MP4 (LQ)'
     when 'vnd.voc/h264-hd'
       'MP4 (HD)'
+    when 'audio/mpeg'
+      'MP3'
     else
       mime_type.split('/')[1]
     end

@@ -4,7 +4,7 @@
     - @item[:video_recordings].each do |recording|
       %li
         -# TODO: move following line to helper
-        %span.label.filetype= recording.mime_type.split('/')[1]
+        %span.label.filetype= recording.filetype
         %a{href: recording.url}
           %span.fa.fa-download
           http download
@@ -18,7 +18,7 @@
     - @item[:audio_recordings].each do |recording|
       %li
         -# TODO: move following line to helper
-        .label.filetype= recording.mime_type.split('/')[1]
+        .label.filetype= recording.filetype
         %a{href: recording.url}
           %span.fa.fa-download
           http download
