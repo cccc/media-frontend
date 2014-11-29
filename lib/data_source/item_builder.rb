@@ -6,7 +6,7 @@ class ItemBuilder
   attr_reader :items
 
   def create_conference_item(conference, events)
-    ['', 'name', 'duration', 'rand()', 'date'].each do |sorting|
+    ['', 'name', 'duration', 'date'].each do |sorting|
       @items << Nanoc3::Item.new(
         "",
         {
@@ -146,8 +146,6 @@ class ItemBuilder
       events.sort_by{ |e| e.title }
     when 'duration'
       events.sort_by{ |e| e.recordings.downloaded.first.length.nil? ? 0 : e.recordings.downloaded.first.length }.reverse
-    when 'rand()'
-      events.shuffle
     when 'date'
       events.sort_by{ |e| date(e) }
     else
