@@ -88,6 +88,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (< 4.0)
   activerecord-jdbcsqlite3-adapter
+  activesupport (< 4.0)
   adsf
   bootstrap-sass
   compass

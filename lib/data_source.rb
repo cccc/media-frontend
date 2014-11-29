@@ -1,4 +1,5 @@
 require 'active_record'
+require 'active_support/all'
 
 class MediaBackendDataSource < Nanoc3::DataSource
 

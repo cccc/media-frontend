@@ -6,6 +6,7 @@ gem 'compass'
 gem 'bootstrap-sass'
 
 gem 'activerecord', '< 4.0'
+gem 'activesupport', '< 4.0'
 gem 'nokogiri'
 gem 'guard'
 gem 'guard-nanoc'
