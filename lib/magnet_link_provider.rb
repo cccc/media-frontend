@@ -25,7 +25,8 @@ class MagnetLinkProvider
 
   def download_uri(url)
     content = ''
-    uri = URI(url)
+    url = url.gsub(/ /, '%20')
+    uri = URI(URI.escape(url))
     if uri.scheme == 'file'
       File.open(uri.path, 'r:UTF-8') { |f| content = f.read }
     else
