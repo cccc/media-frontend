@@ -12,7 +12,16 @@ class FeedBuilder
         channel_summary: "This feed contains all events from #{conference.acronym}"
       }
     end
-    @item_builder.create_folder_feed_item(conference, xml)
+    @item_builder.create_folder_feed_item(conference, content: xml)
+
+    # broadcatching
+    xml = @cache.fetch(cache_key(:broadcatching, conference, events)) do
+      Feeds::BroadcatchingGenerator.generate events, config: {
+        title: conference.title,
+        channel_summary: "This feed contains all torrents from #{conference.acronym}"
+      }
+    end
+    @item_builder.create_folder_feed_item(conference, content: xml, identifier: 'broadcatching', extension: 'rss')
   end
 
   def apply

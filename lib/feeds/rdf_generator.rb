@@ -28,7 +28,7 @@ module Feeds
 
           events.each do |event|
 
-            recording = preferred_recording(event, %w{video/webm video/mp4})
+            recording = event.preferred_recording(%w{video/webm video/mp4})
             next if recording.nil?
 
             fill_item(maker.items.new_item, event, recording)

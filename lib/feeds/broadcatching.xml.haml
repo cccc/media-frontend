@@ -1,0 +1,21 @@
+!!! XML
+%rss{version: '2.0', 'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'}
+  %channel
+    %title= config['channel_title']
+    %link= config['base_url']
+    %description= config['channel_description']
+    %language= 'en-us, de-de'
+    %pubDate= Time.now
+    %lastBuildDate= Time.now
+    %docs http://blogs.law.harvard.edu/tech/rss
+    - events.each do |event|
+      %item
+        %title= "<![CDATA[#{get_item_title(event)}]]>"
+        %link= event.magnet_uri
+        %pubDate= event.date.to_s || event.created_at.to_s
+        %category= "<![CDATA[#{event.try(:tags).join(', ')}]]>"
+        %dc:creator= "<![CDATA[#{event.persons.join(', ')}]]>"
+        %guid= event.preferred_recording.try(:url)
+        %torrent{'xmlns' => 'http://xmlns.ezrss.it/0.1/'}
+          %infoHash= event.magnet_info_hash
+          %magnetURI= "<![CDATA[#{event.magnet_uri}]]>"

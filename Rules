@@ -65,7 +65,7 @@ end
 
 route '/assets/css/*/' do
   if item[:extension] == 'scss'
-    item.identifier.chop + '.css' 
+    item.identifier.chop + '.css'
   else
     item.identifier.chop
   end
@@ -80,7 +80,7 @@ route '/browse/*' do
     item.identifier.chop + '.' + 'html'
   elsif item[:layout] == 'browse-show-tags'
     item.identifier.chop + '.' + 'html'
-  elsif item[:extension] == 'xml'
+  elsif %w{rss xml}.include? item[:extension]
     # podcast.xml
     item.identifier.chop + '.' + item[:extension]
   else

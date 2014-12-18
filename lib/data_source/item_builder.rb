@@ -115,13 +115,13 @@ class ItemBuilder
     )
   end
 
-  def create_folder_feed_item(conference, content)
+  def create_folder_feed_item(conference, content: '', identifier: 'podcast', extension: 'xml')
     @items << Nanoc3::Item.new(
       content,
       {
-        extension: 'xml'
+        extension: extension
       },
-      get_path(conference.webgen_location, 'podcast'),
+      get_path(conference.webgen_location, identifier),
       binary: false
     )
   end

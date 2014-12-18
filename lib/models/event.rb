@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
     .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
     .group(:"events.id")
   }
-  
+
   def title
     read_attribute(:title).strip
   end
@@ -75,4 +75,34 @@ class Event < ActiveRecord::Base
       'fa-group'
     end
   end
+
+  def magnet_uri
+    _, link = torrent_magnet_data
+    link
+  end
+
+  def magnet_info_hash
+    hash, _ = torrent_magnet_data
+    hash
+  end
+
+  def preferred_recording(order=%w{video/mp4 video/webm video/ogg video/flv})
+    recordings = recordings_by_mime_type
+    return if recordings.empty?
+    order.each { |mt|
+      return recordings[mt] if recordings.has_key?(mt)
+    }
+    recordings.first[1]
+  end
+
+  private
+
+  def recordings_by_mime_type
+    Hash[recordings.downloaded.map { |r| [r.mime_type, r] }]
+  end
+
+  def torrent_magnet_data
+    @magnet ||= MagnetLinkProvider.instance.fetch preferred_recording
+  end
+
 end

@@ -16,7 +16,7 @@ module Feeds
     def get_item_title(event)
       conference = event.conference
       title = ''
-      if conference.title.present? 
+      if conference.title.present?
         title = conference.title
       elsif conference.acronym.present?
         title = conference.acronym
@@ -42,22 +42,6 @@ module Feeds
       description << "event on media: #{url}\n"
 
       description.join
-    end
-
-
-    def preferred_recording(event, order=%w{video/mp4 video/webm video/ogg video/flv})
-      recordings = recordings_by_mime_type(event)
-      return if recordings.empty?
-      order.each { |mt|
-        return recordings[mt] if recordings.has_key?(mt)
-      }
-      recordings.first[1]
-    end
-
-    private
-
-    def recordings_by_mime_type(event)
-      Hash[event.recordings.map { |r| [r.mime_type, r] }]
     end
 
   end

@@ -28,7 +28,7 @@ module Feeds
 
           events.each do |event|
 
-            recording = preferred_recording(event)
+            recording = event.preferred_recording
             next if recording.nil?
 
             fill_item(maker.items.new_item, event, recording)
@@ -91,12 +91,7 @@ module Feeds
         item.enclosure.length = 0
         item.enclosure.type = recording.mime_type
       end
-
-      def get_item_event_id(path, pattern)
-        m = path.match(pattern)
-        return if m.nil?
-        m[1]
-      end
     end
+
   end
 end
