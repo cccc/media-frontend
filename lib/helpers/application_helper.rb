@@ -2,6 +2,14 @@ module ApplicationHelper
   require 'nanoc/helpers/html_escape'
   include Nanoc::Helpers::HTMLEscape
 
+  def event_page_or_folder(item)
+    return if @item.identifier.include? '/tags/'
+    trail = breadcrumbs_trail
+    return unless trail.count > 2 or @item.identifier.include? '/browse/'
+    trail = trail[0..-2] if @item.identifier.include? '/download/'
+    yield trail
+  end
+
   def keywords
     if @item[:event] and @item[:event].tags
      [ @item[:event].tags, Settings.header['keywords']].join(', ')
