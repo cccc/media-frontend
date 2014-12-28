@@ -2,8 +2,13 @@ class MagnetLinkProvider
   include Singleton
 
   def fetch(recording)
-    magnet = download(recording).chomp
-    [magnet[20..59], magnet.to_s]
+		begin
+			magnet = download(recording).chomp
+			[magnet[20..59], magnet.to_s]
+		rescue OpenURI::HTTPError => ex
+			STDERR.puts "Failed to download URL #{recording.url} for #{recording.inspect}: #{ex.message}"
+			[nil,nil]
+		end
   end
 
   private
