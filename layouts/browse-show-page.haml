@@ -127,7 +127,16 @@
           .tab('show');
 
         if (activeTab.length === 0) {
-          window.location.hash = '#video';
+          var hash = '#video';
+          if(window.history && window.history.replaceState) {
+            // set new hash without adding an entry into the browser history
+            console.log('window.history.replaceState');
+            window.history.replaceState(null, "", hash);
+          }
+          else {
+            // classic fallback
+            window.location.hash = hash;
+          }
         }
       }
       setTabToHash();
