@@ -399,10 +399,10 @@ a.inverted {
       width: 160px;
     }
     
-    a {
-      color: black;
-      &:hover, &:focus, &:active {
-        text-decoration: none;
+    color: black;
+    &:hover, &:focus, &:active {
+      text-decoration: none;
+      .caption h3, .metadata li {
         color: $link-color;
       }
     }
@@ -675,3 +675,5 @@ a.inverted {
     }
   }
 }
+
+.mejs-overlay-loading { background: none !important; }
