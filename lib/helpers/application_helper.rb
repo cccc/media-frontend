@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def flash(recordings)
-    url = recordings.select { |recording| recording.mime_type == 'video/mp4' }.first.try(:url)
+    url = recordings.select { |recording| recording.display_mime_type == 'video/mp4' }.first.try(:url)
     if url.present?
       h(url)
     elsif recordings.present?

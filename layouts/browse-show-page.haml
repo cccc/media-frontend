@@ -16,7 +16,7 @@
       - if @item[:event].subtitle
         %h2
           = h @item[:event].subtitle
-      
+
       %p.persons
         %a{href: '/search/?q=' + h(@item[:event].persons_text)}
           %span.fa{class: @item[:event].persons_icon}
@@ -31,14 +31,14 @@
             %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
         %li
           %a{href: @item[:event].download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
-          
+
       .tab-content
         - if @item[:video_recordings].present?
           #video.tab-pane.active
             - r = @item[:video_recordings].first
             %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
               - @item[:video_recordings].each do |recording|
-                %source{type: recording.mime_type, src: h(recording.url)}
+                %source{type: recording.display_mime_type, src: h(recording.url)}
               %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
                 %param{ name: 'allowFullScreen', value: 'true' }
                 %param{ name: 'flashvars', value: "controls=true&file=#{flash(@item[:video_recordings])}" }
@@ -47,7 +47,7 @@
           #audio.tab-pane
             %audio.audio{controls: 'controls'}
               - @item[:audio_recordings].each do |recording|
-                %source{type: recording.mime_type, src: h(recording.url)}
+                %source{type: recording.display_mime_type, src: h(recording.url)}
 
         #download.tab-pane
           = render '/partials/download'
@@ -76,8 +76,8 @@
         %h3 Tags
         - @item[:event].tags.each do |tag|
           = link_for(tag)
-          
-      
+
+
 
     = render '/partials/footer'
 
@@ -119,7 +119,7 @@
         }
       });
       $('audio').mediaelementplayer();
-      
+
       // activate tab via hash and default to video
       function setTabToHash() {
         var hash = window.location.hash.split('&')[0]; // split video-stamp of the hash
@@ -136,6 +136,6 @@
       $('.nav-tabs a').on('shown.bs.tab', function (e) {
         window.location.hash = e.target.hash;
       });
-      
+
       // adjust tabs when hash changes
       window.onhashchange = setTabToHash;

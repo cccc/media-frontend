@@ -1,7 +1,7 @@
 class Recording < ActiveRecord::Base
   belongs_to :event
 
-  HTML5 = ['audio/ogg', 'audio/mpeg', 'audio/opus', 'video/mp4', 'video/ogg', 'video/webm']
+  HTML5 = ['audio/ogg', 'audio/mpeg', 'audio/opus', 'video/mp4', 'video/ogg', 'video/webm', 'vnd.voc/h264-lq', 'vnd.voc/h264-hd']
 
   scope :downloaded, -> { where(state: 'downloaded') }
   scope :audio, -> { where(mime_type: ['audio/ogg', 'audio/mpeg', 'audio/opus']) }
@@ -13,6 +13,17 @@ class Recording < ActiveRecord::Base
 
   def torrent_url
     url + '.torrent'
+  end
+
+  def display_mime_type
+    case mime_type
+    when 'vnd.voc/h264-lq'
+      'video/mp4'
+    when 'vnd.voc/h264-hd'
+      'video/mp4'
+    else
+      mime_type
+    end
   end
 
   def filetype

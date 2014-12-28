@@ -89,7 +89,7 @@ module Feeds
 
         item.enclosure.url = recording.url
         item.enclosure.length = 0
-        item.enclosure.type = recording.mime_type
+        item.enclosure.type = recording.display_mime_type
       end
     end
 
