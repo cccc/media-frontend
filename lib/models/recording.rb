@@ -1,11 +1,12 @@
 class Recording < ActiveRecord::Base
   belongs_to :event
 
-  HTML5 = ['audio/ogg', 'audio/mpeg', 'audio/opus', 'video/mp4', 'video/ogg', 'video/webm', 'vnd.voc/h264-lq', 'vnd.voc/h264-hd']
+  HTML5 = %w[audio/ogg audio/mpeg audio/opus video/mp4 video/ogg video/webm vnd.voc/h264-lq vnd.voc/h264-hd]
+  PREFERRED_VIDEO = %w[vnd.voc/h264-hd vnd.voc/h264-lg video/mp4 video/webm video/ogg]
 
   scope :downloaded, -> { where(state: 'downloaded') }
-  scope :audio, -> { where(mime_type: ['audio/ogg', 'audio/mpeg', 'audio/opus']) }
-  scope :video, -> { where(mime_type: ['video/mp4', 'vnd.voc/h264-lq', 'vnd.voc/h264-hd', 'video/ogg', 'video/webm']) }
+  scope :audio, -> { where(mime_type: %w[audio/ogg audio/mpeg audio/opus]) }
+  scope :video, -> { where(mime_type: %w[video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd video/ogg video/webm]) }
 
   def url
     File.join self.event.conference.recordings_url, self.folder || '', self.filename

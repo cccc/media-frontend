@@ -86,7 +86,7 @@ class Event < ActiveRecord::Base
     hash
   end
 
-  def preferred_recording(order=%w{video/mp4 video/webm video/ogg video/flv})
+  def preferred_recording(order=Recording::PREFERRED_VIDEO)
     recordings = recordings_by_mime_type
     return if recordings.empty?
     order.each { |mt|
