@@ -1,0 +1,3 @@
+- @item[:conference].mime_types do |mime_type, mime_type_name|
+  %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed #{Recording.humanized_mime_type(mime_type)} for this folder", href: "podcast-#{mime_type_name}.xml"}
+  %link{rel: "alternate", type: "application/rss+xml", title: "Torrent feed #{Recording.humanized_mime_type(mime_type)} for this folder", href: "broadcatching-#{mime_type_name}.rss"}

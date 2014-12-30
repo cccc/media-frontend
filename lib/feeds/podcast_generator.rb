@@ -2,9 +2,9 @@
 module Feeds
   module PodcastGenerator
 
-    def self.generate(events, config: {})
+    def self.generate(events: [], query: :preferred_recording, config: {})
       rss = PodcastGenerator::UpdatesITS.new config
-      rss.generate events
+      rss.generate events, query
     end
 
     class UpdatesITS
@@ -21,14 +21,15 @@ module Feeds
       attr_reader :config
       attr_writer :config
 
-      def generate(events)
+      def generate(events, query)
         rss = RSS::Maker.make("2.0") do |maker|
 
           create_channel(maker)
 
+
           events.each do |event|
 
-            recording = event.preferred_recording
+            recording = event.public_send query, mime_type: @config[:mime_type]
             next if recording.nil?
 
             fill_item(maker.items.new_item, event, recording)

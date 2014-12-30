@@ -9,13 +9,15 @@
     %lastBuildDate= Time.now
     %docs http://blogs.law.harvard.edu/tech/rss
     - events.each do |event|
-      %item
-        %title= "<![CDATA[#{get_item_title(event)}]]>"
-        %link= "#{event.preferred_recording.try(:url)}?torrent"
-        %pubDate= event.date.to_s || event.created_at.to_s
-        %category= "<![CDATA[#{event.try(:tags).join(', ')}]]>"
-        %dc:creator= "<![CDATA[#{event.persons.join(', ')}]]>"
-        %guid= event.preferred_recording.try(:url)
-        %torrent{'xmlns' => 'http://xmlns.ezrss.it/0.1/'}
-          %infoHash= event.magnet_info_hash
-          %magnetURI= "<![CDATA[#{event.magnet_uri}]]>"
+      - recording = event.public_send query, mime_type: config[:mime_type]
+      - if recording
+        %item
+          %title= "<![CDATA[#{get_item_title(event)}]]>"
+          %link= "#{recording.try(:url)}?torrent"
+          %pubDate= event.date.to_s || event.created_at.to_s
+          %category= "<![CDATA[#{event.try(:tags).join(', ')}]]>"
+          %dc:creator= "<![CDATA[#{event.persons.join(', ')}]]>"
+          %guid= recording.try(:url)
+          %torrent{'xmlns' => 'http://xmlns.ezrss.it/0.1/'}
+            %infoHash= recording.magnet_info_hash
+            %magnetURI= "<![CDATA[#{recording.magnet_uri}]]>"

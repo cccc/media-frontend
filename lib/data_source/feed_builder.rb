@@ -6,29 +6,37 @@ class FeedBuilder
   end
 
   def add(conference, events)
-    xml = @cache.fetch(cache_key(:conference, conference, events)) do
-      Feeds::PodcastGenerator.generate events, config: {
-        title: conference.title,
-        channel_summary: "This feed contains all events from #{conference.acronym}"
-      }
+    conference.mime_types do |mime_type, mime_type_name|
+      name = "podcast-#{mime_type_name}"
+      xml = @cache.fetch(cache_key(name, conference, events)) do
+        Feeds::PodcastGenerator.generate events: events, query: :by_mime_type, config: {
+          mime_type: mime_type,
+          title: "#{conference.title} (#{mime_type_name})",
+          channel_summary: "This feed contains all events from #{conference.acronym} as #{mime_type_name}"
+        }
+      end
+      @item_builder.create_folder_feed_item(conference, identifier: name, content: xml)
     end
-    @item_builder.create_folder_feed_item(conference, content: xml)
 
     # broadcatching
-    xml = @cache.fetch(cache_key(:broadcatching, conference, events)) do
-      Feeds::BroadcatchingGenerator.generate events, config: {
-        title: conference.title,
-        channel_summary: "This feed contains all torrents from #{conference.acronym}"
-      }
+    conference.mime_types do |mime_type, mime_type_name|
+      name = "broadcatching-#{mime_type_name}"
+      xml = @cache.fetch(cache_key(name, conference, events)) do
+        Feeds::BroadcatchingGenerator.generate events: events, query: :by_mime_type, config: {
+          mime_type: mime_type,
+          title: "#{conference.title} (#{mime_type_name})",
+          channel_summary: "This feed contains all torrents for #{mime_type_name} from #{conference.acronym}"
+        }
+      end
+      @item_builder.create_folder_feed_item(conference, identifier: name, content: xml, extension: 'rss')
     end
-    @item_builder.create_folder_feed_item(conference, content: xml, identifier: 'broadcatching', extension: 'rss')
   end
 
   def apply
     # rss 1.0 last 100 feed
     events = Event.recent(100)
     xml = @cache.fetch(cache_key(:events100, events)) do
-      Feeds::RDFGenerator.generate events, config: {
+      Feeds::RDFGenerator.generate events: events, config: {
         title: 'last 100 events feed',
         channel_summary: "This feed the most recent 100 events"
       }
@@ -38,7 +46,7 @@ class FeedBuilder
     # podcast_recent
     events = Event.newer(Time.now.ago(2.years))
     xml = @cache.fetch(cache_key(:events_two_years, events)) do
-      Feeds::PodcastGenerator.generate events, config: {
+      Feeds::PodcastGenerator.generate events: events, config: {
         title: 'recent events feed',
         channel_summary: "This feed contains events from the last two years"
       }
@@ -48,7 +56,7 @@ class FeedBuilder
     # podcast_archive
     events = Event.older(Time.now.ago(2.years))
     xml = @cache.fetch(cache_key(:events_older, events)) do
-      Feeds::PodcastGenerator.generate events, config: {
+      Feeds::PodcastGenerator.generate events: events, config: {
         title: 'archive feed',
         channel_summary: "This feed contains events older than two years"
       }

@@ -6,11 +6,16 @@
         ccc-tv
 
     .nav.navbar-form.navbar-right.button-wrapper
-      %a.form-control.btn.btn-default{href: '/podcast.xml'}
-        %span.fa.fa-rss
-      - event_page_or_folder(@item) do |trail|
-        %a.form-control.btn.btn-default{href: 'broadcatching.rss'}
-          %span.fa.fa-tumblr
+      - if @item[:conference] and Recording.recorded_at(@item[:conference]).count > 0
+        %a.form-control.btn.btn-default{href: "podcast-#{@item[:conference].preferred_mime_type}.xml"}
+          %span.fa.fa-rss
+        %a.form-control.btn.btn-default{href: "broadcatching-#{@item[:conference].preferred_mime_type}.rss"}
+          %span.fa.fa-magnet
+      - else
+        %a.form-control.btn.btn-default{href: '/podcast.xml'}
+          %span.fa.fa-rss
+
+          %span.fa.fa-magnet
       %a.form-control.btn.btn-default{href: '/about.html'}
         %span.fa.fa-info
     %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}

@@ -76,17 +76,7 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def magnet_uri
-    _, link = torrent_magnet_data
-    link
-  end
-
-  def magnet_info_hash
-    hash, _ = torrent_magnet_data
-    hash
-  end
-
-  def preferred_recording(order=Recording::PREFERRED_VIDEO)
+  def preferred_recording(order: Recording::PREFERRED_VIDEO, mime_type: nil)
     recordings = recordings_by_mime_type
     return if recordings.empty?
     order.each { |mt|
@@ -95,14 +85,14 @@ class Event < ActiveRecord::Base
     recordings.first[1]
   end
 
+  def by_mime_type(order: nil, mime_type: 'video/mp4')
+    recordings.downloaded.by_mime_type(mime_type).first
+  end
+
   private
 
   def recordings_by_mime_type
     Hash[recordings.downloaded.map { |r| [r.mime_type, r] }]
-  end
-
-  def torrent_magnet_data
-    @magnet ||= MagnetLinkProvider.instance.fetch preferred_recording
   end
 
 end

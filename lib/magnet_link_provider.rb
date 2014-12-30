@@ -6,7 +6,7 @@ class MagnetLinkProvider
 			magnet = download(recording).chomp
 			[magnet[20..59], magnet.to_s]
 		rescue OpenURI::HTTPError => ex
-			STDERR.puts "Failed to download URL #{recording.url} for #{recording.inspect}: #{ex.message}"
+			STDERR.puts "Failed to download URL #{recording.url} : #{ex.message}"
 			[nil,nil]
 		end
   end

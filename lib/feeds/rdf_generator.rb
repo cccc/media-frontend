@@ -2,7 +2,7 @@
 module Feeds
   module RDFGenerator
 
-    def self.generate(events, config: {})
+    def self.generate(events: [], config: {})
       rss = RDFGenerator::UpdatesRDF.new config
       rss.generate events
     end
@@ -28,7 +28,7 @@ module Feeds
 
           events.each do |event|
 
-            recording = event.preferred_recording(%w{video/webm video/mp4})
+            recording = event.preferred_recording(order: %w{video/webm video/mp4})
             next if recording.nil?
 
             fill_item(maker.items.new_item, event, recording)

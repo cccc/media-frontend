@@ -2,9 +2,9 @@
 module Feeds
   module BroadcatchingGenerator
 
-    def self.generate(events, config: {})
+    def self.generate(events: [], query: :preferred_recording, config: {})
       rss = BroadcatchingGenerator::TorrentRSS.new config
-      rss.generate events
+      rss.generate events, query
     end
 
     class TorrentRSS
@@ -17,10 +17,10 @@ module Feeds
       attr_reader :config
       attr_writer :config
 
-      def generate(events)
+      def generate(events, query)
         template = File.read('lib/feeds/broadcatching.xml.haml')
         haml_engine = Haml::Engine.new(template)
-        output = haml_engine.render(self, events: events, config: @config)
+        output = haml_engine.render(self, events: events, query: query, config: @config)
         output
       end
     end

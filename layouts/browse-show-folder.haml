@@ -5,8 +5,7 @@
     %title
       C3TV -
       = h @item[:title]
-    %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed for this folder", href: "podcast.xml"}
-    %link{rel: "alternate", type: "application/rss+xml", title: "Torrent feed for this folder", href: "broadcatching.rss"}
+    = render '/partials/folder-feeds'
   %body
     = render '/partials/navbar'
 
