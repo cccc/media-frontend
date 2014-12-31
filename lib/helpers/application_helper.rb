@@ -10,6 +10,23 @@ module ApplicationHelper
     yield trail
   end
 
+  def video_tag_sources(recordings, order=Recording::WEB_PREFERRED_VIDEO)
+    scores = {}
+    recordings.select { |r| order.include? r.mime_type }.each { |r|
+      pos = order.index r.mime_type
+      fail r.mime_type unless pos
+      if scores.has_key? r.display_mime_type
+        scores[r.display_mime_type] = pos unless scores[r.display_mime_type] < pos
+      else
+        scores[r.display_mime_type] = pos
+      end
+    }
+    scores.map { |_, pos|
+      mime_type = order[pos]
+      recordings.detect { |r| r.mime_type == mime_type }
+    }
+  end
+
   def keywords
     if @item[:event] and @item[:event].tags
      [ @item[:event].tags, Settings.header['keywords']].join(', ')

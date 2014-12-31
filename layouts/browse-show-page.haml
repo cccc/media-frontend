@@ -36,9 +36,8 @@
       .tab-content
         - if @item[:video_recordings].present?
           #video.tab-pane.active
-            - r = @item[:video_recordings].first
             %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
-              - @item[:video_recordings].each do |recording|
+              - video_tag_sources(@item[:video_recordings]).each do |recording|
                 %source{type: recording.display_mime_type, src: h(recording.url)}
               %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
                 %param{ name: 'allowFullScreen', value: 'true' }

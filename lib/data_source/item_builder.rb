@@ -42,7 +42,6 @@ class ItemBuilder
 
     @items << event_item
 
-
     event_download_item = Nanoc3::Item.new(
       description,
       {

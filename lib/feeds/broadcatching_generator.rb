@@ -2,7 +2,7 @@
 module Feeds
   module BroadcatchingGenerator
 
-    def self.generate(events: [], query: :preferred_recording, config: {})
+    def self.generate(events: [], query: nil, config: {})
       rss = BroadcatchingGenerator::TorrentRSS.new config
       rss.generate events, query
     end

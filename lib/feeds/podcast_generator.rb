@@ -2,7 +2,7 @@
 module Feeds
   module PodcastGenerator
 
-    def self.generate(events: [], query: :preferred_recording, config: {})
+    def self.generate(events: [], query: nil, config: {})
       rss = PodcastGenerator::UpdatesITS.new config
       rss.generate events, query
     end

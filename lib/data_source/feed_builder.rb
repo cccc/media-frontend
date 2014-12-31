@@ -46,7 +46,7 @@ class FeedBuilder
     # podcast_recent
     events = Event.newer(Time.now.ago(2.years))
     xml = @cache.fetch(cache_key(:events_two_years, events)) do
-      Feeds::PodcastGenerator.generate events: events, config: {
+      Feeds::PodcastGenerator.generate events: events, query: :preferred_recording, config: {
         title: 'recent events feed',
         channel_summary: "This feed contains events from the last two years"
       }
@@ -56,7 +56,7 @@ class FeedBuilder
     # podcast_archive
     events = Event.older(Time.now.ago(2.years))
     xml = @cache.fetch(cache_key(:events_older, events)) do
-      Feeds::PodcastGenerator.generate events: events, config: {
+      Feeds::PodcastGenerator.generate events: events, query: :preferred_recording, config: {
         title: 'archive feed',
         channel_summary: "This feed contains events older than two years"
       }

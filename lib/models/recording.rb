@@ -3,17 +3,37 @@ class Recording < ActiveRecord::Base
 
   HTML5 = %w[audio/ogg audio/mpeg audio/opus video/mp4 video/ogg video/webm vnd.voc/h264-lq vnd.voc/h264-sd vnd.voc/webm-hd vnd.voc/h264-hd]
   PREFERRED_VIDEO = %w[vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg]
+  WEB_PREFERRED_VIDEO = %w[vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg]
 
   scope :downloaded, -> { where(state: 'downloaded') }
   scope :by_mime_type, ->(mime_type) { where(mime_type: mime_type) }
   scope :audio, -> { where(mime_type: %w[audio/ogg audio/mpeg audio/opus]) }
-  scope :video, -> { where(mime_type: %w[video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm]) }
+  scope :video, -> { where(mime_type: %w[vnd.voc/mp4-web vnd.voc/webm-web video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm]) }
   scope :recorded_at, ->(conference) { joins(event: :conference).where(events: {'conference_id' => conference} ) }
 
   class << self
 
     def mime_type_slug(mime_type)
       humanized_mime_type(mime_type).to_param.downcase
+    end
+
+    def display_mime_type(mime_type)
+      case mime_type
+      when 'vnd.voc/h264-lq'
+        'video/mp4'
+      when 'vnd.voc/h264-sd'
+        'video/mp4'
+      when 'vnd.voc/h264-hd'
+        'video/mp4'
+      when 'vnd.voc/mp4-web'
+        'video/mp4'
+      when 'vnd.voc/webm-hd'
+        'video/webm'
+      when 'vnd.voc/webm-web'
+        'video/webm'
+      else
+        mime_type
+      end
     end
 
     def humanized_mime_type(mime_type)
@@ -44,14 +64,7 @@ class Recording < ActiveRecord::Base
   end
 
   def display_mime_type
-    case mime_type
-    when 'vnd.voc/h264-lq'
-      'video/mp4'
-    when 'vnd.voc/h264-hd'
-      'video/mp4'
-    else
-      mime_type
-    end
+    Recording.display_mime_type(mime_type)
   end
 
   def filetype
