@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   scope :recorded_at, ->(conference) {
     joins(:recordings, :conference)
     .where(conferences: { id: conference })
-    .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
+    .where(recordings: { state: 'downloaded', mime_type: MimeType::HTML5 })
     .group(:"events.id")
   }
 
@@ -76,7 +76,7 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def preferred_recording(order: Recording::PREFERRED_VIDEO, mime_type: nil)
+  def preferred_recording(order: MimeType::PREFERRED_VIDEO, mime_type: nil)
     recordings = recordings_by_mime_type
     return if recordings.empty?
     order.each { |mt|

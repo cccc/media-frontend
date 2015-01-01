@@ -3,16 +3,16 @@ class Conference < ActiveRecord::Base
 
   def mime_types
     Recording.recorded_at(self).pluck(:mime_type).uniq.map { |mime_type|
-      yield mime_type, Recording.mime_type_slug(mime_type)
+      yield mime_type, MimeType.mime_type_slug(mime_type)
     }
   end
 
   def preferred_mime_type
     available = Recording.recorded_at(self).pluck(:mime_type).uniq
-    Recording::PREFERRED_VIDEO.each { |mime_type|
-      return Recording.mime_type_slug(mime_type) if available.include? mime_type
+    MimeType::PREFERRED_VIDEO.each { |mime_type|
+      return MimeType.mime_type_slug(mime_type) if available.include? mime_type
     }
-    return Recording.mime_type_slug(available.first)
+    return MimeType.mime_type_slug(available.first)
   end
 
   def recordings_url

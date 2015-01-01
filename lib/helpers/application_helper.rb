@@ -10,7 +10,7 @@ module ApplicationHelper
     yield trail
   end
 
-  def video_tag_sources(recordings, order=Recording::WEB_PREFERRED_VIDEO)
+  def video_tag_sources(recordings, order=MimeType::WEB_PREFERRED_VIDEO)
     scores = {}
     recordings.select { |r| order.include? r.mime_type }.each { |r|
       pos = order.index r.mime_type
