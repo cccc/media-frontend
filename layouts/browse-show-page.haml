@@ -7,11 +7,11 @@
       = h @item[:title]
     = render '/partials/folder-feeds'
     %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
+    != "<link href='#{oembed_url(@item.identifier)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
   %body
     = render '/partials/navbar'
 
     %div.container-fluid
-
       %h1
         =  h @item[:event].title
       - if @item[:event].subtitle

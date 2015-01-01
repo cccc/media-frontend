@@ -2,6 +2,10 @@ module ApplicationHelper
   require 'nanoc/helpers/html_escape'
   include Nanoc::Helpers::HTMLEscape
 
+  def oembed_url(identifier)
+    Settings.oembedURL + identifier[0..-2] + '.html&format=json'
+  end
+
   def event_page_or_folder(item)
     return if @item.identifier.include? '/tags/'
     trail = breadcrumbs_trail
