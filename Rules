@@ -27,6 +27,13 @@ compile '/browse/*' do
   end
 end
 
+compile 'sitemap' do
+  filter :haml
+end
+
+route 'sitemap' do
+  item.identifier.chop + '.xml'
+end
 
 route '/images/logos/*' do
   item.identifier.chop.chomp(item[:extension]) + 'png'
