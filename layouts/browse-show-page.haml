@@ -36,12 +36,7 @@
       .tab-content
         - if @item[:video_recordings].present?
           #video.tab-pane.active
-            %video.video{controls: 'controls', poster: h(@item[:event].poster_url), width: aspect_ratio_width, height: aspect_ratio_height}
-              - video_tag_sources(@item[:video_recordings]).each do |recording|
-                %source{type: recording.display_mime_type, src: h(recording.url)}
-              %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
-                %param{ name: 'allowFullScreen', value: 'true' }
-                %param{ name: 'flashvars', value: "controls=true&file=#{flash(@item[:video_recordings])}" }
+            = render '/partials/videoplayer'
 
         - if @item[:audio_recordings].present?
           #audio.tab-pane
@@ -85,36 +80,10 @@
     %script(src='/assets/js/bootstrap.min.js')
     %script(src='/assets/js/mediaelement-and-player.min.js')
 
-    :javascript
-      var stamp = window.location.hash.split('&t=')[1];
-      $('video').mediaelementplayer({
-        usePluginFullScreen: true,
+    = render '/partials/videoplayer_js'
 
-        pluginPath: '/assets/',
-        enableAutosize: true,
-        success: function (mediaElement) {
-          mediaElement.addEventListener('canplay', function () {
-            if(stamp) {
-              mediaElement.setCurrentTime(stamp);
-              stamp = null;
-            }
-          });
-          mediaElement.addEventListener('playing', function () {
-            $.post("http://api.media.ccc.de/public/recordings/count", {event_id: #{@item[:event].id},src: mediaElement.src});
-          }, false);
-          mediaElement.addEventListener('pause', function() {
-            var hash = '#video&t='+Math.round(mediaElement.currentTime);;
-            if(window.history && window.history.replaceState) {
-              // set new hash without adding an entry into the browser history
-              window.history.replaceState(null, "", hash);
-            }
-            else {
-              // classic fallback
-              window.location.hash = hash;
-            }
-          }, false);
-        }
-      });
+    :javascript
+
       $('audio').mediaelementplayer();
 
       // activate tab via hash and default to video

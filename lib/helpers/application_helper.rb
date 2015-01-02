@@ -3,7 +3,7 @@ module ApplicationHelper
   include Nanoc::Helpers::HTMLEscape
 
   def oembed_url(identifier)
-    Settings.oembedURL + identifier[0..-2] + '.html&format=json'
+    Settings.oembedURL + identifier[0..-2] + '.html'
   end
 
   def event_page_or_folder(item)

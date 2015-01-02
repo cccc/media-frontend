@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
   end
 
   def download_url
-    "/browse/#{self.conference.webgen_location}/#{self.slug}/download/#download"
+    "/browse/#{self.conference.webgen_location}/#{self.slug}/download.html#download"
   end
 
   def poster_url

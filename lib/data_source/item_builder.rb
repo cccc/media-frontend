@@ -26,37 +26,26 @@ class ItemBuilder
       description = event.description
     end
 
-    event_item = Nanoc3::Item.new(
+    @items << Nanoc3::Item.new(
       description,
-      {
-        title: event.title, layout: 'browse-show-page',
-        tags: event.tags.map { |t| t.strip },
-        conference: event.conference,
-        event: event,
-        video_recordings: event.recordings.downloaded.video,
-        audio_recordings: event.recordings.downloaded.audio
-      },
+      event_attributes(event).merge(layout: 'browse-show-page'),
       get_path(event.conference.webgen_location, event.slug),
       binary: false
     )
 
-    @items << event_item
-
-    event_download_item = Nanoc3::Item.new(
+    @items << Nanoc3::Item.new(
       description,
-      {
-        title: event.title, layout: 'browse-download-page',
-        tags: event.tags.map { |t| t.strip },
-        conference: event.conference,
-        event: event,
-        video_recordings: event.recordings.downloaded.video,
-        audio_recordings: event.recordings.downloaded.audio
-      },
+      event_attributes(event).merge(layout: 'browse-download-page'),
       get_path(event.conference.webgen_location, event.slug)+'download/',
       binary: false
     )
 
-    @items << event_download_item
+    @items << Nanoc3::Item.new(
+      description,
+      event_attributes(event).merge(layout: 'browse-oembed-page'),
+      get_path(event.conference.webgen_location, event.slug)+'oembed/',
+      binary: false
+    )
   end
 
   def create_browse_item(path, childs)
@@ -126,6 +115,17 @@ class ItemBuilder
   end
 
   private
+
+  def event_attributes(event)
+    {
+      title: event.title,
+      tags: event.tags.map { |t| t.strip },
+      conference: event.conference,
+      event: event,
+      video_recordings: event.recordings.downloaded.video,
+      audio_recordings: event.recordings.downloaded.audio
+    }
+  end
 
   def conference_title(conference)
     if conference.title.present?

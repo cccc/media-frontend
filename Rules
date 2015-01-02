@@ -83,9 +83,7 @@ passthrough '/images/*'
 
 # AR datasource
 route '/browse/*' do
-  if item[:layout] == 'browse-show-page'
-    item.identifier.chop + '.' + 'html'
-  elsif item[:layout] == 'browse-show-tags'
+  if %w{browse-show-page browse-download-page browse-oembed-page browse-show-tags}.include? item[:layout]
     item.identifier.chop + '.' + 'html'
   elsif %w{rss xml}.include? item[:extension]
     # podcast.xml
