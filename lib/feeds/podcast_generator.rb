@@ -80,6 +80,7 @@ module Feeds
         # FIXME decode, redcloth, whatever
         description = get_item_description(event)
         item.description = description
+        item.itunes_duration = Time.at(recording.length).utc.strftime "%H:%M:%S"
         item.itunes_summary = description
         item.itunes_explicit = "No"
         item.pubDate = event.created_at.to_s
@@ -89,7 +90,7 @@ module Feeds
         item.pubDate = event.date.to_s if event.date.present?
 
         item.enclosure.url = recording.url
-        item.enclosure.length = 0
+        item.enclosure.length = recording.size || 0
         item.enclosure.type = recording.display_mime_type
       end
     end
