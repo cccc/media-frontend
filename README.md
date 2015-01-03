@@ -10,6 +10,10 @@ ruby 2.1
 
 ### Instructions
 
+The logo filter requires graphicmagic
+
+    aptitude install graphicsmagick
+
 Install required ruby packages with bundler:
 
     gem install bundler
