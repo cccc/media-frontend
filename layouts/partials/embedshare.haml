@@ -4,54 +4,42 @@
 %h3 Share with others
 %ul
   %li
-    %a{:id => "btnTweet", :href => "#"}
+    %a{:id => "btnTweet", :href => twitter_url(@item[:title], page_url(@item)) }
       via Twitter
   %li
-    %a{:id => "btnFacebook", :href => "#"}
+    %a{:id => "btnFacebook",
+       :href => facebook_url(@item[:title], page_url(@item)) }
       via Facebook
   %li
-    %a{:id => "btnGPlus", :href => "#"}
+    %a{:id => "btnGPlus", :href => googleplus_url(@item[:title], page_url(@item)) }
       via Google+
   %li
-    %a{:id => "btnAppNet", :href => "#"}
+    %a{:id => "btnAppNet", :href => appnet_url(@item[:title], page_url(@item)) }
       via App.net
   %li
-    %a{:id => "btnMail", :href => "#"}
+    %a{:id => "btnMail", :href => mail_url(@item[:title], page_url(@item)) }
       by Mail
 :javascript
   $(function () {
     $('#btnTweet').click(function (e) {
-      var encodedContent = encodeURIComponent("#{@item[:title]}: #{page_url(@item)}");
-      var url = 'http://twitter.com/home?status=' + encodedContent;
-      window.open(url, 'tweet it', 'width=550,height=420,resizable=yes');
+      window.open(this.href, 'tweet it', 'width=550,height=420,resizable=yes');
+      e.preventDefault();
     });
     $('#btnFacebook').click(function (e) {
-      var encodedTitle = encodeURIComponent("#{@item[:title]}");
-      var encodedLink = encodeURIComponent("#{page_url(@item)}");
-      var url = 'https://www.facebook.com/sharer/sharer.php?t='+encodedTitle+'&u='+encodedLink;
-      window.open(url, 'share it', 'width=550,height=420,resizable=yes');
-      return false;
+      window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
+      e.preventDefault();
     });
     $('#btnGPlus').click(function (e) {
-      var encodedTitle = encodeURIComponent("#{@item[:title]}");
-      var encodedLink = encodeURIComponent("#{page_url(@item)}");
-      var url = 'https://plus.google.com/share?title='+encodedTitle+'&url='+encodedLink;
-      window.open(url, 'plus it', 'width=550,height=420,resizable=yes');
-      return false;
+      window.open(this.href, 'plus it', 'width=550,height=420,resizable=yes');
+      e.preventDefault();
     });
     $('#btnAppNet').click(function (e) {
-      var encodedContent = encodeURIComponent("#{@item[:title]}: #{page_url(@item)}");
-      var url = 'https://alpha.app.net/intent/post?text=' + encodedContent;
-      window.open(url, 'share it', 'width=550,height=420,resizable=yes');
-      return false;
+      window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
+      e.preventDefault();
     });
     $('#btnMail').click(function (e) {
-      var encodedTitle = encodeURIComponent("#{@item[:title]}");
-      var encodedLink = encodeURIComponent("#{page_url(@item)}");
-      var url = 'mailto:?subject='+encodedTitle+'&body='+encodedTitle+': '+encodedLink;
-      tmpWin = window.open(url);
-      //$(tmpWin.document).ready( function() {tmpWin.close();})
-      return false;
+      tmpWin = window.open(this.href);
+      e.preventDefault();
     });
   });
 
