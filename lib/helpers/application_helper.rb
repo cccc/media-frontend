@@ -6,6 +6,16 @@ module ApplicationHelper
     Settings.oembedURL + identifier[0..-2] + '.html'
   end
 
+  def oembed_page_url(identifier)
+    id = identifier+"oembed/"
+    oembed = @items.find { |i| i.identifier == id }
+    Settings.baseURL + oembed.path
+  end
+
+  def page_url(identifier)
+    Settings.baseURL + identifier.path
+  end
+
   def event_page_or_folder(item)
     return if @item.identifier.include? '/tags/'
     trail = breadcrumbs_trail

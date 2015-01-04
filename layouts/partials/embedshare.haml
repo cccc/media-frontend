@@ -1,0 +1,57 @@
+%h3 Embed into your Website
+%input{:type => "text", :size=> "85", :readonly => true, 
+       :value => "<iframe width=\"853\" height=\"480\" src=\"#{oembed_page_url(@item.identifier)}\" frameborder=\"0\" allowfullscreen></iframe>"}
+%h3 Share with others
+%ul
+  %li
+    %a{:id => "btnTweet", :href => "#"}
+      via Twitter
+  %li
+    %a{:id => "btnFacebook", :href => "#"}
+      via Facebook
+  %li
+    %a{:id => "btnGPlus", :href => "#"}
+      via Google+
+  %li
+    %a{:id => "btnAppNet", :href => "#"}
+      via App.net
+  %li
+    %a{:id => "btnMail", :href => "#"}
+      by Mail
+:javascript
+  $(function () {
+    $('#btnTweet').click(function (e) {
+      var encodedContent = encodeURIComponent("#{@item[:title]}: #{page_url(@item)}");
+      var url = 'http://twitter.com/home?status=' + encodedContent;
+      window.open(url, 'tweet it', 'width=550,height=420,resizable=yes');
+    });
+    $('#btnFacebook').click(function (e) {
+      var encodedTitle = encodeURIComponent("#{@item[:title]}");
+      var encodedLink = encodeURIComponent("#{page_url(@item)}");
+      var url = 'https://www.facebook.com/sharer/sharer.php?t='+encodedTitle+'&u='+encodedLink;
+      window.open(url, 'share it', 'width=550,height=420,resizable=yes');
+      return false;
+    });
+    $('#btnGPlus').click(function (e) {
+      var encodedTitle = encodeURIComponent("#{@item[:title]}");
+      var encodedLink = encodeURIComponent("#{page_url(@item)}");
+      var url = 'https://plus.google.com/share?title='+encodedTitle+'&url='+encodedLink;
+      window.open(url, 'plus it', 'width=550,height=420,resizable=yes');
+      return false;
+    });
+    $('#btnAppNet').click(function (e) {
+      var encodedContent = encodeURIComponent("#{@item[:title]}: #{page_url(@item)}");
+      var url = 'https://alpha.app.net/intent/post?text=' + encodedContent;
+      window.open(url, 'share it', 'width=550,height=420,resizable=yes');
+      return false;
+    });
+    $('#btnMail').click(function (e) {
+      var encodedTitle = encodeURIComponent("#{@item[:title]}");
+      var encodedLink = encodeURIComponent("#{page_url(@item)}");
+      var url = 'mailto:?subject='+encodedTitle+'&body='+encodedTitle+': '+encodedLink;
+      tmpWin = window.open(url);
+      //$(tmpWin.document).ready( function() {tmpWin.close();})
+      return false;
+    });
+  });
+

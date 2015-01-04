@@ -9,6 +9,7 @@
     %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
     != "<link href='#{oembed_url(@item.identifier)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
   %body
+    %script(src='/assets/js/jquery.min.js')
     = render '/partials/navbar'
 
     %div.container-fluid
@@ -33,6 +34,9 @@
         %li
           %a{href: @item[:event].download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
 
+        %li
+          %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share
+
       .tab-content
         - if @item[:video_recordings].present?
           #video.tab-pane.active
@@ -46,6 +50,9 @@
 
         #download.tab-pane
           = render '/partials/download'
+
+        #embedshare.tab-pane
+          = render '/partials/embedshare'
 
       %ul.metadata
         %li
@@ -76,7 +83,6 @@
 
     = render '/partials/footer'
 
-    %script(src='/assets/js/jquery.min.js')
     %script(src='/assets/js/bootstrap.min.js')
     %script(src='/assets/js/mediaelement-and-player.min.js')
 
