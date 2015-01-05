@@ -21,24 +21,8 @@
       by Mail
 :javascript
   $(function () {
-    $('#btnTweet').click(function (e) {
-      window.open(this.href, 'tweet it', 'width=550,height=420,resizable=yes');
-      e.preventDefault();
-    });
-    $('#btnFacebook').click(function (e) {
+    $('#btnTweet, #btnFacebook, #btnGPlus, #btnAppNet').on('click', function (e) {
       window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
-      e.preventDefault();
-    });
-    $('#btnGPlus').click(function (e) {
-      window.open(this.href, 'plus it', 'width=550,height=420,resizable=yes');
-      e.preventDefault();
-    });
-    $('#btnAppNet').click(function (e) {
-      window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
-      e.preventDefault();
-    });
-    $('#btnMail').click(function (e) {
-      tmpWin = window.open(this.href);
       e.preventDefault();
     });
   });
