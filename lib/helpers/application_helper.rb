@@ -1,9 +1,41 @@
 module ApplicationHelper
+  require 'uri'
   require 'nanoc/helpers/html_escape'
   include Nanoc::Helpers::HTMLEscape
 
+  def twitter_url(title, url)
+    "http://twitter.com/home?status="+URI.encode_www_form_component(title+": "+url)
+  end
+
+  def facebook_url(title, url)
+    "https://www.facebook.com/sharer/sharer.php?t="+URI.encode_www_form_component(title)+"&u="+URI.encode_www_form_component(url)
+  end
+
+  def googleplus_url(title, url)
+    "https://plus.google.com/share?title="+URI.encode_www_form_component(title)+"&url="+URI.encode_www_form_component(url)
+  end
+
+  def appnet_url(title, url)
+    "https://alpha.app.net/intent/post?text="+URI.encode_www_form_component(title+": "+url)
+  end
+
+  def mail_url(title, url)
+    content = title+': '+url
+    URI::MailTo.build('', [['Subject', title], ['Body', content]]).to_s
+  end
+
   def oembed_url(identifier)
     Settings.oembedURL + identifier[0..-2] + '.html'
+  end
+
+  def oembed_page_url(identifier)
+    id = identifier+"oembed/"
+    oembed = @items.find { |i| i.identifier == id }
+    Settings.baseURL + oembed.path
+  end
+
+  def page_url(identifier)
+    Settings.baseURL + identifier.path
   end
 
   def event_page_or_folder(item)
