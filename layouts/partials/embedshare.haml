@@ -1,5 +1,5 @@
 %h3 Embed into your Website
-%input{:type => "text", :size=> "85", :readonly => true, 
+%input{:type => "text", :size=> "85", :readonly => true, :id => "txtShareFrame",
        :value => "<iframe width=\"853\" height=\"480\" src=\"#{oembed_page_url(@item.identifier)}\" frameborder=\"0\" allowfullscreen></iframe>"}
 %h3 Share with others
 %ul
@@ -20,10 +20,13 @@
     %a{:id => "btnMail", :href => mail_url(@item[:title], page_url(@item)) }
       by Mail
 :javascript
-  $(function () {
+  $(function() {
     $('#btnTweet, #btnFacebook, #btnGPlus, #btnAppNet').on('click', function (e) {
       window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
       e.preventDefault();
+    });
+    $("#txtShareFrame").on('focus', function() {
+      $(this).select();
     });
   });
 
