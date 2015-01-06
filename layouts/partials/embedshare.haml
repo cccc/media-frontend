@@ -5,19 +5,24 @@
 %ul
   %li
     %a{:id => "btnTweet", :href => twitter_url(@item[:title], page_url(@item)) }
+      %i{:class => "fa-twitter"}
       via Twitter
   %li
     %a{:id => "btnFacebook",
        :href => facebook_url(@item[:title], page_url(@item)) }
+      %i{:class => "fa-facebook-square"}
       via Facebook
   %li
     %a{:id => "btnGPlus", :href => googleplus_url(@item[:title], page_url(@item)) }
+      %i{:class => "fa-google-plus"}
       via Google+
   %li
     %a{:id => "btnAppNet", :href => appnet_url(@item[:title], page_url(@item)) }
+      %i{:class => "fa-adn"}
       via App.net
   %li
     %a{:id => "btnMail", :href => mail_url(@item[:title], page_url(@item)) }
+      %i{:class => "fa-envelope"}
       by Mail
 :javascript
   $(function() {

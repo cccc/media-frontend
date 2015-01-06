@@ -58,6 +58,11 @@ p {
   }
 }
 
+i {
+  font-style: normal;
+  font-family: FontAwesome;
+}
+
 .container, .container-fluid {
   max-width: $max-width;
 }
@@ -250,6 +255,9 @@ h1 + .news-item {
     }
     a:hover, a:focus, a:active {
       text-decoration: none;
+    }
+    i {
+      color: #d87500;
     }
   }
 }
