@@ -20,8 +20,9 @@ module ApplicationHelper
   end
 
   def mail_url(title, url)
-    content = title+': '+url
-    URI::MailTo.build('', [['Subject', title], ['Body', content]]).to_s
+    content = URI.encode_www_form_component(title+': '+url)
+    subject = URI.encode_www_form_component(title)
+    URI::MailTo.build(['', [['Subject', subject], ['Body', content]]]).to_s
   end
 
   def oembed_url(identifier)
