@@ -225,6 +225,12 @@ h1 + .news-item {
 
   #embedshare {
     padding: $padding-large-horizontal;
+    input {
+      border: 1px solid #d87500;
+      color: #d87500;
+      border-width: 1px;
+      background-color: #555;
+    }
     h3 {
       color: $gray-light;
       &:first-child {
