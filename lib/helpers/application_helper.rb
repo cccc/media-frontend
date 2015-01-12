@@ -47,6 +47,11 @@ module ApplicationHelper
     yield trail
   end
 
+  def video_download_sources(recordings)
+    skip = %w[vnd.voc/mp4-web vnd.voc/webm-web]
+    recordings.reject { |r| skip.include? r.mime_type }
+  end
+
   def video_tag_sources(recordings, order=MimeType::WEB_PREFERRED_VIDEO)
     scores = {}
     recordings.select { |r| order.include? r.mime_type }.each { |r|

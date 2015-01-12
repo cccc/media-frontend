@@ -1,9 +1,8 @@
 - if @item[:video_recordings].present?
   %h3 Video
   %ul
-    - @item[:video_recordings].each do |recording|
+    - video_download_sources(@item[:video_recordings]).each do |recording|
       %li
-        -# TODO: move following line to helper
         %span.label.filetype= recording.filetype
         %a{href: recording.url}
           %span.fa.fa-download
@@ -17,7 +16,6 @@
   %ul
     - @item[:audio_recordings].each do |recording|
       %li
-        -# TODO: move following line to helper
         .label.filetype= recording.filetype
         %a{href: recording.url}
           %span.fa.fa-download
