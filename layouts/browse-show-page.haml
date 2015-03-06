@@ -20,9 +20,17 @@
           = h @item[:event].subtitle
 
       %p.persons
-        %a{href: '/search/?q=' + h(@item[:event].persons_text)}
-          %span.fa{class: @item[:event].persons_icon}
-          = @item[:event].persons_text
+        %span.fa{class: @item[:event].persons_icon}
+          - @item[:event].persons.to_enum.with_index(1).each do |speaker, index|
+            - if (@item[:event].persons.count - 1) == index
+              %a{href: '/search/?q=' + h(speaker)}= speaker
+              and
+            - elsif @item[:event].persons.count == index 
+              %a{href: '/search/?q=' + h(speaker)}= speaker
+            - else
+              %a{href: '/search/?q=' + h(speaker)}= speaker
+              \, 
+
 
       %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
         - if @item[:video_recordings].present?
