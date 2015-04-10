@@ -25,11 +25,11 @@
             - if (@item[:event].persons.count - 1) == index
               %a{href: '/search/?q=' + h(speaker)}= speaker
               and
-            - elsif @item[:event].persons.count == index 
+            - elsif @item[:event].persons.count == index
               %a{href: '/search/?q=' + h(speaker)}= speaker
             - else
-              %a{href: '/search/?q=' + h(speaker)}= speaker
-              \, 
+              = succeed "," do
+                %a{href: '/search/?q=' + h(speaker)}= speaker
 
 
       %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
