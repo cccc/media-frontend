@@ -1,8 +1,8 @@
 {
-  "baseURL": "http://media.ccc.de",
-  "oembedURL": "http://api.media.ccc.de/public/oembed?url=http://media.ccc.de",
-  "cdnURL": "http://cdn.media.ccc.de",
-  "staticURL": "http://static.media.ccc.de",
+  "baseURL": "//media.ccc.de",
+  "oembedURL": "//api.media.ccc.de/public/oembed?url=http://media.ccc.de",
+  "cdnURL": "//cdn.media.ccc.de",
+  "staticURL": "//static.media.ccc.de",
   "header": {
     "description": "Video Streaming Portal des Chaos Computer Clubs",
     "author": "CCC",

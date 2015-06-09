@@ -118,7 +118,7 @@ $(function() {
 							logourl = hit._source.conference.logo;
 
 						if(logourl.match(/\.(png|jpg|jpeg|gif)$/)) {
-							logourl = logourl.replace('http://static.media.ccc.de/media/', '/images/logos/');
+							logourl = logourl.replace('//static.media.ccc.de/media/', '/images/logos/');
 							logourl = logourl.substr(0, logourl.lastIndexOf('.')) + '.png';
 						}
 						else {
