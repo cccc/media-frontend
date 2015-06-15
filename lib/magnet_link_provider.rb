@@ -32,6 +32,11 @@ class MagnetLinkProvider
     content = ''
     url = url.gsub(/ /, '%20')
     uri = URI(URI.escape(url))
+
+    if uri.scheme.nil?
+      uri = URI('https:' + uri.to_s)
+    end
+
     if uri.scheme == 'file'
       File.open(uri.path, 'r:UTF-8') { |f| content = f.read }
     else
