@@ -1,7 +1,7 @@
 {
   "baseURL": "//media.ccc.de",
   "oembedURL": "//api.media.ccc.de/public/oembed?url=http://media.ccc.de",
-  "cdnURL": "//cdn.media.ccc.de",
+  "cdnURL": "https:////cdn.media.ccc.de",
   "staticURL": "//static.media.ccc.de",
   "header": {
     "description": "Video Streaming Portal des Chaos Computer Clubs",
