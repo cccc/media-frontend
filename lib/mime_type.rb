@@ -1,7 +1,7 @@
 class MimeType
-  HTML5 = %w[audio/ogg audio/mpeg audio/opus video/mp4 video/ogg video/webm vnd.voc/h264-lq vnd.voc/h264-sd vnd.voc/webm-hd vnd.voc/h264-hd]
-  PREFERRED_VIDEO = %w[vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg]
-  WEB_PREFERRED_VIDEO = %w[vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg]
+  HTML5 = %w[audio/ogg audio/mpeg audio/opus video/mp4 video/ogg video/webm vnd.voc/h264-lq vnd.voc/h264-sd vnd.voc/webm-hd vnd.voc/h264-hd vnd.voc/webm-4k vnd.voc/h264-4k]
+  PREFERRED_VIDEO = %w[vnd.voc/h264-4k vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-4k vnd.voc/webm-hd video/webm video/ogg]
+  WEB_PREFERRED_VIDEO = %w[vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-4k vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-4k vnd.voc/webm-hd video/webm video/ogg]
 
   class << self
 
@@ -17,9 +17,13 @@ class MimeType
         'video/mp4'
       when 'vnd.voc/h264-hd'
         'video/mp4'
+      when 'vnd.voc/h264-4k'
+        'video/mp4'
       when 'vnd.voc/mp4-web'
         'video/mp4'
       when 'vnd.voc/webm-hd'
+        'video/webm'
+      when 'vnd.voc/webm-4k'
         'video/webm'
       when 'vnd.voc/webm-web'
         'video/webm'
@@ -36,7 +40,11 @@ class MimeType
         false
       when 'vnd.voc/h264-hd'
         true
+      when 'vnd.voc/h264-4k'
+        true
       when 'vnd.voc/webm-hd'
+        true
+      when 'vnd.voc/webm-4k'
         true
       else
         nil
@@ -51,8 +59,12 @@ class MimeType
         'MP4 (SD)'
       when 'vnd.voc/h264-hd'
         'MP4 (HD)'
+      when 'vnd.voc/h264-4k'
+        'MP4 (4k)'
       when 'vnd.voc/webm-hd'
         'WEBM (HD)'
+      when 'vnd.voc/webm-4k'
+        'WEBM (4k)'
       when 'vnd.voc/webm-web'
         'WEBM (html5)'
       when 'vnd.voc/mp4-web'
